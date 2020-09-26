@@ -20,12 +20,12 @@ namespace MinecraftClient.Commands
                     if (args[0] == "mainhand" || args[0] == "0")
                     {
                         handler.DoAnimation(0);
-                        return "Done";
+                        return "已经挥动 主手";
                     }
                     else if (args[0] == "offhand" || args[0] == "1")
                     {
                         handler.DoAnimation(1);
-                        return "Done";
+                        return "已经使用/挥动 副手";
                     }
                     else
                     {
