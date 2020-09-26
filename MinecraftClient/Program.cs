@@ -44,22 +44,24 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
+            Console.WriteLine("您正在使用汉化版MCC客户端 By XIAYM");
 
             //Build information to facilitate processing of bug reports
-            if (BuildInfo != null)
-            {
-                ConsoleIO.WriteLineFormatted("§8" + BuildInfo);
-            }
+            //if (BuildInfo != null)
+            //{
+            //    ConsoleIO.WriteLineFormatted("§8 " + BuildInfo);
+            //}
+            //禁用信息
 
             //Debug input ?
             if (args.Length == 1 && args[0] == "--keyboard-debug")
             {
-                Console.WriteLine("Keyboard debug mode: Press any key to display info");
+                Console.WriteLine("按下任意键显示debug信息..");
                 ConsoleIO.DebugReadInput();
             }
 
             //Setup ConsoleIO
-            ConsoleIO.LogPrefix = "§8[MCC] ";
+            ConsoleIO.LogPrefix = "§8[信息] ";
             if (args.Length >= 1 && args[args.Length - 1] == "BasicIO" || args.Length >= 1 && args[args.Length - 1] == "BasicIO-NoColor")
             {
                 if (args.Length >= 1 && args[args.Length - 1] == "BasicIO-NoColor")
@@ -114,14 +116,14 @@ namespace MinecraftClient
 
             if (Settings.ConsoleTitle != "")
             {
-                Settings.Username = "New Window";
+                Settings.Username = "新窗口";
                 Console.Title = Settings.ExpandVars(Settings.ConsoleTitle);
             }
 
             //Test line to troubleshoot invisible colors
             if (Settings.DebugMessages)
             {
-                ConsoleIO.WriteLineFormatted("Color test: Your terminal should display [0123456789ABCDEF]: [§00§11§22§33§44§55§66§77§88§99§aA§bB§cC§dD§eE§fF§r]");
+                ConsoleIO.WriteLineFormatted("颜色测试: 您应该显示为: [0123456789ABCDEF]: [§00§11§22§33§44§55§66§77§88§99§aA§bB§cC§dD§eE§fF§r]");
             }
 
             //Load cached sessions from disk if necessary
@@ -129,14 +131,14 @@ namespace MinecraftClient
             {
                 bool cacheLoaded = SessionCache.InitializeDiskCache();
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted(cacheLoaded ? "§8Session data has been successfully loaded from disk." : "§8No sessions could be loaded from disk");
+                    ConsoleIO.WriteLineFormatted(cacheLoaded ? "§8Session 数据已从硬盘加载!" : "§8没有 Session 数据从硬盘加载!");
             }
 
             //Asking the user to type in missing data such as Username and Password
 
             if (Settings.Login == "")
             {
-                Console.Write(ConsoleIO.BasicIO ? "Please type the username or email of your choice.\n" : "Login : ");
+                Console.Write(ConsoleIO.BasicIO ? "请输入用户名或邮箱\n" : "账户 : ");
                 Settings.Login = Console.ReadLine();
             }
             if (Settings.Password == "" && (Settings.SessionCaching == CacheType.None || !SessionCache.Contains(Settings.Login.ToLower())))
@@ -153,13 +155,13 @@ namespace MinecraftClient
         /// </summary>
         private static void RequestPassword()
         {
-            Console.Write(ConsoleIO.BasicIO ? "Please type the password for " + Settings.Login + ".\n" : "Password : ");
+            Console.Write(ConsoleIO.BasicIO ? "请为 " + Settings.Login + "输入密码.\n留空使用离线模式.\n密码:");
             Settings.Password = ConsoleIO.BasicIO ? Console.ReadLine() : ConsoleIO.ReadPassword();
             if (Settings.Password == "") { Settings.Password = "-"; }
             if (!ConsoleIO.BasicIO)
             {
                 //Hide password length
-                Console.CursorTop--; Console.Write("Password : <******>");
+                Console.CursorTop--; Console.Write("密码 : <******>");
                 for (int i = 19; i < Console.BufferWidth; i++) { Console.Write(' '); }
             }
         }
@@ -175,7 +177,7 @@ namespace MinecraftClient
 
             if (Settings.Password == "-")
             {
-                ConsoleIO.WriteLineFormatted("§8You chose to run in offline mode.");
+                ConsoleIO.WriteLineFormatted("§8你选择使用离线模式.");
                 result = ProtocolHandler.LoginResult.Success;
                 session.PlayerID = "0";
                 session.PlayerName = Settings.Login;
@@ -189,16 +191,16 @@ namespace MinecraftClient
                     result = ProtocolHandler.GetTokenValidation(session);
                     if (result != ProtocolHandler.LoginResult.Success)
                     {
-                        ConsoleIO.WriteLineFormatted("§8Cached session is invalid or expired.");
+                        ConsoleIO.WriteLineFormatted("§8Session 错误或过期.");
                         if (Settings.Password == "")
                             RequestPassword();
                     }
-                    else ConsoleIO.WriteLineFormatted("§8Cached session is still valid for " + session.PlayerName + '.');
+                    else ConsoleIO.WriteLineFormatted("§8Session 错误 " + session.PlayerName + '.');
                 }
 
                 if (result != ProtocolHandler.LoginResult.Success)
                 {
-                    Console.WriteLine("Connecting to Minecraft.net...");
+                    Console.WriteLine("正在连接到验证服务器..");
                     result = ProtocolHandler.GetLogin(Settings.Login, Settings.Password, out session);
 
                     if (result == ProtocolHandler.LoginResult.Success && Settings.SessionCaching != CacheType.None)
@@ -220,13 +222,13 @@ namespace MinecraftClient
                     ConsoleIcon.setPlayerIconAsync(Settings.Username);
 
                 if (Settings.DebugMessages)
-                    Console.WriteLine("Success. (session ID: " + session.ID + ')');
+                    Console.WriteLine("成功 (session ID: " + session.ID + ')');
 
                 //ProtocolHandler.RealmsListWorlds(Settings.Username, PlayerID, sessionID); //TODO REMOVE
 
                 if (Settings.ServerIP == "")
                 {
-                    Console.Write("Server IP : ");
+                    Console.Write("服务器 IP : ");
                     Settings.SetServerIP(Console.ReadLine());
                 }
 
@@ -240,9 +242,9 @@ namespace MinecraftClient
 
                     if (protocolversion != 0)
                     {
-                        ConsoleIO.WriteLineFormatted("§8Using Minecraft version " + Settings.ServerVersion + " (protocol v" + protocolversion + ')');
+                        ConsoleIO.WriteLineFormatted("§8使用MC版本: " + Settings.ServerVersion + " (protocol v" + protocolversion + ')');
                     }
-                    else ConsoleIO.WriteLineFormatted("§8Unknown or not supported MC version '" + Settings.ServerVersion + "'.\nSwitching to autodetection mode.");
+                    else ConsoleIO.WriteLineFormatted("§8未知或不支持的mc版本 '" + Settings.ServerVersion + "'.\n正在自动选择版本.");
 
                     if (useMcVersionOnce)
                     {
@@ -254,11 +256,11 @@ namespace MinecraftClient
                 if (protocolversion == 0 || Settings.ServerMayHaveForge)
                 {
                     if (protocolversion != 0)
-                        Console.WriteLine("Checking if server is running Forge...");
-                    else Console.WriteLine("Retrieving Server Info...");
+                        Console.WriteLine("正在检查服务器是否存在forge..");
+                    else Console.WriteLine("正在检查Motd....");
                     if (!ProtocolHandler.GetServerInfo(Settings.ServerIP, Settings.ServerPort, ref protocolversion, ref forgeInfo))
                     {
-                        HandleFailure("Failed to ping this IP.", true, ChatBots.AutoRelog.DisconnectReason.ConnectionLost);
+                        HandleFailure("无法ping这个服务器!", true, ChatBots.AutoRelog.DisconnectReason.ConnectionLost);
                         return;
                     }
                 }
@@ -278,22 +280,22 @@ namespace MinecraftClient
                         if (Settings.ConsoleTitle != "")
                             Console.Title = Settings.ExpandVars(Settings.ConsoleTitle);
                     }
-                    catch (NotSupportedException) { HandleFailure("Cannot connect to the server : This version is not supported !", true); }
+                    catch (NotSupportedException) { HandleFailure("无法连接到服务器 : 不支持的版本!", true); }
                 }
-                else HandleFailure("Failed to determine server version.", true);
+                else HandleFailure("无法侦测服务器版本.", true);
             }
             else
             {
                 string failureMessage = "Minecraft Login failed : ";
                 switch (result)
                 {
-                    case ProtocolHandler.LoginResult.AccountMigrated: failureMessage += "Account migrated, use e-mail as username."; break;
-                    case ProtocolHandler.LoginResult.ServiceUnavailable: failureMessage += "Login servers are unavailable. Please try again later."; break;
-                    case ProtocolHandler.LoginResult.WrongPassword: failureMessage += "Incorrect password, blacklisted IP or too many logins."; break;
-                    case ProtocolHandler.LoginResult.InvalidResponse: failureMessage += "Invalid server response."; break;
-                    case ProtocolHandler.LoginResult.NotPremium: failureMessage += "User not premium."; break;
-                    case ProtocolHandler.LoginResult.OtherError: failureMessage += "Network error."; break;
-                    case ProtocolHandler.LoginResult.SSLError: failureMessage += "SSL Error."; break;
+                    case ProtocolHandler.LoginResult.AccountMigrated: failureMessage += "未知邮箱."; break;
+                    case ProtocolHandler.LoginResult.ServiceUnavailable: failureMessage += "验证服务器目前离线."; break;
+                    case ProtocolHandler.LoginResult.WrongPassword: failureMessage += "密码错误或短时间登陆太多次被禁止登录."; break;
+                    case ProtocolHandler.LoginResult.InvalidResponse: failureMessage += "返回错误"; break;
+                    case ProtocolHandler.LoginResult.NotPremium: failureMessage += "用户名错误" break;
+                    case ProtocolHandler.LoginResult.OtherError: failureMessage += "网络错误."; break;
+                    case ProtocolHandler.LoginResult.SSLError: failureMessage += "SSL证书错误."; break;
                     default: failureMessage += "Unknown Error."; break;
                 }
                 if (result == ProtocolHandler.LoginResult.SSLError && isUsingMono)
@@ -319,10 +321,10 @@ namespace MinecraftClient
                 if (offlinePrompt != null) { offlinePrompt.Abort(); offlinePrompt = null; ConsoleIO.Reset(); }
                 if (delaySeconds > 0)
                 {
-                    Console.WriteLine("Waiting " + delaySeconds + " seconds before restarting...");
+                    Console.WriteLine("等待 " + delaySeconds + " s后重启...");
                     System.Threading.Thread.Sleep(delaySeconds * 1000);
                 }
-                Console.WriteLine("Restarting Minecraft Console Client...");
+                Console.WriteLine("正在重启mcc客户端...");
                 InitializeClient();
             })).Start();
         }
@@ -383,8 +385,8 @@ namespace MinecraftClient
                     offlinePrompt = new Thread(new ThreadStart(delegate
                     {
                         string command = " ";
-                        ConsoleIO.WriteLineFormatted("Not connected to any server. Use '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' for help.");
-                        ConsoleIO.WriteLineFormatted("Or press Enter to exit Minecraft Console Client.");
+                        ConsoleIO.WriteLineFormatted("没有任何服务器连接中. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
+                        ConsoleIO.WriteLineFormatted("或直接点击回车退出MCC");
                         while (command.Length > 0)
                         {
                             if (!ConsoleIO.BasicIO)
@@ -417,7 +419,7 @@ namespace MinecraftClient
                                     ConsoleIO.WriteLineFormatted("§8MCC: " + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + new Commands.Reco().CMDDesc);
                                     ConsoleIO.WriteLineFormatted("§8MCC: " + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + new Commands.Connect().CMDDesc);
                                 }
-                                else ConsoleIO.WriteLineFormatted("§8Unknown command '" + command.Split(' ')[0] + "'.");
+                                else ConsoleIO.WriteLineFormatted("§8未知命令: '" + command.Split(' ')[0] + "'.");
 
                                 if (message != "")
                                     ConsoleIO.WriteLineFormatted("§8MCC: " + message);
