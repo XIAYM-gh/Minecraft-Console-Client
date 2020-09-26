@@ -13,7 +13,7 @@ namespace MinecraftClient.Commands
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
             if (!handler.GetInventoryEnabled())
-                return "Please enable InventoryHandling in the config file first.";
+                return "请先在配置文件中开启 InventoryHandling";
 
             if (hasArg(command))
             {
@@ -24,17 +24,17 @@ namespace MinecraftClient.Commands
                 }
                 catch (FormatException)
                 {
-                    return "Could not change slot: Not a Number";
+                    return "这不是一个有效的数字.";
                 }
                 if (slot >= 1 && slot <= 9)
                 {
                     if (handler.ChangeSlot(slot-=1))
                     {
-                        return "Changed to slot " + (slot+=1);
+                        return "切换至栏 " + (slot+=1);
                     }
                     else
                     {
-                        return "Could not change slot";
+                        return "不能切换栏";
                     }
                 }
             }
