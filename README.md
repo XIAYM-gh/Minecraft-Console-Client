@@ -1,3 +1,8 @@
+这是一个MCC的汉化版本
+
+
+
+
 Minecraft Console Client
 ========================
 
