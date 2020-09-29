@@ -44,7 +44,7 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
-            Console.WriteLine("您正在使用汉化版MCC客户端 By XIAYM");
+            Console.WriteLine("§8汉化版MCC客户端 By XIAYM");
 
             //Build information to facilitate processing of bug reports
             //if (BuildInfo != null)
@@ -155,7 +155,7 @@ namespace MinecraftClient
         /// </summary>
         private static void RequestPassword()
         {
-            Console.Write(ConsoleIO.BasicIO ? "请为 " + Settings.Login + "输入密码.\n留空使用离线模式.\n密码:");
+            Console.Write(ConsoleIO.BasicIO ? "请输入用户名或邮箱.\n" : "密码 : ");
             Settings.Password = ConsoleIO.BasicIO ? Console.ReadLine() : ConsoleIO.ReadPassword();
             if (Settings.Password == "") { Settings.Password = "-"; }
             if (!ConsoleIO.BasicIO)
@@ -286,17 +286,17 @@ namespace MinecraftClient
             }
             else
             {
-                string failureMessage = "Minecraft Login failed : ";
+                string failureMessage = "Minecraft 登陆失败 : ";
                 switch (result)
                 {
                     case ProtocolHandler.LoginResult.AccountMigrated: failureMessage += "未知邮箱."; break;
                     case ProtocolHandler.LoginResult.ServiceUnavailable: failureMessage += "验证服务器目前离线."; break;
                     case ProtocolHandler.LoginResult.WrongPassword: failureMessage += "密码错误或短时间登陆太多次被禁止登录."; break;
                     case ProtocolHandler.LoginResult.InvalidResponse: failureMessage += "返回错误"; break;
-                    case ProtocolHandler.LoginResult.NotPremium: failureMessage += "用户名错误" break;
+                    case ProtocolHandler.LoginResult.NotPremium: failureMessage += "用户名错误"; break;
                     case ProtocolHandler.LoginResult.OtherError: failureMessage += "网络错误."; break;
                     case ProtocolHandler.LoginResult.SSLError: failureMessage += "SSL证书错误."; break;
-                    default: failureMessage += "Unknown Error."; break;
+                    default: failureMessage += "未知错误."; break;
                 }
                 if (result == ProtocolHandler.LoginResult.SSLError && isUsingMono)
                 {
