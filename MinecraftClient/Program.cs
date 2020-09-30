@@ -44,7 +44,7 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
-            Console.WriteLine("§8汉化版MCC客户端 By XIAYM");
+            Console.WriteLine("§8Chinese Translate Version.");
 
             //Build information to facilitate processing of bug reports
             //if (BuildInfo != null)
