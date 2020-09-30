@@ -1,7 +1,8 @@
 ## 这是一个MCC的汉化版本 如果你有更好的意见，请fork此项目.
 ## 状态
 Translated(已翻译) : 20%<br>
-已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)
+已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
+**Change color of "feature not handled" from gray to red (#1265)**<br>
 
 
 我的世界控制台客户端(MCC Readme-Zh_hans)
