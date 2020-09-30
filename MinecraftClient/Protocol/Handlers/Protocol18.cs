@@ -81,19 +81,19 @@ namespace MinecraftClient.Protocol.Handlers
 
             if (handler.GetTerrainEnabled() && protocolversion > MC1152Version)
             {
-                ConsoleIO.WriteLineFormatted("§8Terrain & Movements currently not handled for that MC version.");
+                ConsoleIO.WriteLineFormatted("§cTerrain & Movements 此版本MC暂不支持");
                 handler.SetTerrainEnabled(false);
             }
 
             if (handler.GetInventoryEnabled() && (protocolversion < MC110Version || protocolversion > MC1163Version))
             {
-                ConsoleIO.WriteLineFormatted("§8Inventories are currently not handled for that MC version.");
+                ConsoleIO.WriteLineFormatted("§c此MC版本不支持物品栏交互.");
                 handler.SetInventoryEnabled(false);
             }
 
             if (handler.GetEntityHandlingEnabled() && (protocolversion < MC110Version || protocolversion > MC1163Version))
             {
-                ConsoleIO.WriteLineFormatted("§8Entities are currently not handled for that MC version.");
+                ConsoleIO.WriteLineFormatted("§c此MC版本不支持实体交互.");
                 handler.SetEntityHandlingEnabled(false);
             }
 
@@ -101,7 +101,7 @@ namespace MinecraftClient.Protocol.Handlers
             if (protocolversion >= MC113Version)
             {
                 if (protocolVersion > MC1152Version && handler.GetTerrainEnabled())
-                    throw new NotImplementedException("Please update block types handling for this Minecraft version. See Material.cs");
+                    throw new NotImplementedException("请更新您的方块列表. 请查看 github.com上的Material.cs");
                 if (protocolVersion >= MC115Version)
                     Block.Palette = new Palette115();
                 else if (protocolVersion >= MC114Version)
@@ -114,8 +114,8 @@ namespace MinecraftClient.Protocol.Handlers
             if (protocolversion >= MC113Version)
             {
                 if (protocolversion > MC1163Version && handler.GetEntityHandlingEnabled())
-                    throw new NotImplementedException("Please update entity types handling for this Minecraft version. See EntityType.cs");
-                if (protocolversion >= MC1163Version)
+                    throw new NotImplementedException("请更新您的生物交互列表. 请查看 github.com 上的EntityType.cs");
+                if (protocolversion >= MC1162Version)
                     entityPalette = new EntityPalette1162();
                 else if (protocolversion >= MC116Version)
                     entityPalette = new EntityPalette1161();
@@ -131,8 +131,8 @@ namespace MinecraftClient.Protocol.Handlers
             if (protocolversion >= MC116Version)
             {
                 if (protocolversion > MC1163Version && handler.GetInventoryEnabled())
-                    throw new NotImplementedException("Please update item types handling for this Minecraft version. See ItemType.cs");
-                if (protocolversion >= MC1163Version)
+                    throw new NotImplementedException("请更新您的物品列表. 请查看 github.com 上的ItemType.cs");
+                if (protocolversion >= MC1162Version)
                     itemPalette = new ItemPalette1162();
                 else itemPalette = new ItemPalette1161();
             }
@@ -1120,12 +1120,12 @@ namespace MinecraftClient.Protocol.Handlers
                 }
                 else if (packetID == 0x02) //Login successful
                 {
-                    ConsoleIO.WriteLineFormatted("§8Server is in offline mode.");
+                    ConsoleIO.WriteLineFormatted("§8服务器正在使用离线模式.");
                     login_phase = false;
 
                     if (!pForge.CompleteForgeHandshake())
                     {
-                        ConsoleIO.WriteLineFormatted("§8Forge Login Handshake did not complete successfully");
+                        ConsoleIO.WriteLineFormatted("§8Forge版本因验证问题登录失败");
                         return false;
                     }
 
