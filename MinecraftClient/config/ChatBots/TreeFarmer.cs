@@ -48,7 +48,7 @@ public class TreeFarmer : ChatBot
                 break;
             default:
                 // Other block, cannot grow trees here
-                LogToConsole("Block at " + sapling + " is not a sapling: " + blockType + "...");
+                LogToConsole("方块 " + sapling + " 并不是树叶! 种类: " + blockType + "...");
                 break;
         }
     }
