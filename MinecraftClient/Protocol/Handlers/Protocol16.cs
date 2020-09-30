@@ -38,19 +38,19 @@ namespace MinecraftClient.Protocol.Handlers
 
             if (Handler.GetTerrainEnabled())
             {
-                ConsoleIO.WriteLineFormatted("§8Terrain & Movements currently not handled for that MC version.");
+                ConsoleIO.WriteLineFormatted("§cTerrain & Movements 暂不支持此MC版本");
                 Handler.SetTerrainEnabled(false);
             }
 
             if (handler.GetInventoryEnabled())
             {
-                ConsoleIO.WriteLineFormatted("§8Inventories are currently not handled for that MC version.");
+                ConsoleIO.WriteLineFormatted("§c物品栏交互暂不支持此MC版本");
                 handler.SetInventoryEnabled(false);
             }
 
             if (handler.GetEntityHandlingEnabled())
             {
-                ConsoleIO.WriteLineFormatted("§8Entities are currently not handled for that MC version.");
+                ConsoleIO.WriteLineFormatted("§c实体交互暂不支持此MC版本");
                 handler.SetEntityHandlingEnabled(false);
             }
         }
@@ -837,7 +837,7 @@ namespace MinecraftClient.Protocol.Handlers
                         version = "B1.8.1 - 1.3.2";
                     }
 
-                    ConsoleIO.WriteLineFormatted("§8Server version : MC " + version + " (protocol v" + protocolversion + ").");
+                    ConsoleIO.WriteLineFormatted("§8服务器版本 : MC " + version + " (协议版本 v" + protocolversion + ").");
 
                     return true;
                 }
