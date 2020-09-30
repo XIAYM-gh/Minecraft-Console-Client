@@ -1,7 +1,7 @@
 ## 这是一个MCC的汉化版本 如果你有更好的意见，请fork此项目.
 ## 状态
-Translated(已翻译) : 20%
-已更新到官方Commit : 9bfb2bf6c7b6d6c016724a1ce2ba0e8dfef634d6 (正在更新..)
+Translated(已翻译) : 20%<br>
+已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)
 
 
 我的世界控制台客户端(MCC Readme-Zh_hans)
