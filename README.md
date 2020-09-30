@@ -3,9 +3,9 @@
 Translated(已翻译) : 20%<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
 **Change color of "feature not handled" from gray to red (#1265)**<br>
-下载汉化版本请前往"Releases"页面
-提交bug请去:
-[ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues
+下载汉化版本请前往"Releases"页面<br>
+提交bug请去:<br>
+[ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
 
 我的世界控制台客户端(MCC)
 ========================
