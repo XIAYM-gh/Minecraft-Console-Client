@@ -202,7 +202,7 @@ namespace MinecraftClient
                 client = ProxyHandler.newTcpClient(host, port);
                 client.ReceiveBufferSize = 1024 * 1024;
                 handler = Protocol.ProtocolHandler.GetProtocolHandler(client, protocolversion, forgeInfo, this);
-                Console.WriteLine("Version is supported.\nLogging in...");
+                ConsoleIO.WriteLineFormatted("§e[信息]§3服务器版本支持.\n§e[信息]§b登入中...");
 
                 try
                 {
@@ -211,7 +211,7 @@ namespace MinecraftClient
                         if (singlecommand)
                         {
                             handler.SendChatMessage(command);
-                            ConsoleIO.WriteLineFormatted("§7Command §8" + command + "§7 sent.");
+                            ConsoleIO.WriteLineFormatted("§7命令 §8" + command + "§7 已发送.");
                             Thread.Sleep(5000);
                             handler.Disconnect();
                             Thread.Sleep(1000);
@@ -222,9 +222,9 @@ namespace MinecraftClient
                                 BotLoad(bot, false);
                             botsOnHold.Clear();
 
-                            Console.WriteLine("Server was successfully joined.\nType '"
+                            ConsoleIO.WriteLineFormatted("§e[信息]§7服务器成功加入.\n§e[信息]§7输入 '"
                                 + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar)
-                                + "quit' to leave the server.");
+                                + "quit'离开服务器.");
 
                             cmdprompt = new Thread(new ThreadStart(CommandPrompt));
                             cmdprompt.Name = "MCC Command prompt";
@@ -237,21 +237,21 @@ namespace MinecraftClient
                     }
                     else
                     {
-                        Console.WriteLine("Failed to login to this server.");
+                        ConsoleIO.WriteLineFormatted("§c[错误]§8无法连接至服务器.");
                         retry = true;
                     }
                 }
                 catch (Exception e)
                 {
                     ConsoleIO.WriteLineFormatted("§8" + e.GetType().Name + ": " + e.Message);
-                    Console.WriteLine("Failed to join this server.");
+                    ConsoleIO.WriteLineFormatted("§c[错误]§8无法登录到服务器");
                     retry = true;
                 }
             }
             catch (SocketException e)
             {
                 ConsoleIO.WriteLineFormatted("§8" + e.Message);
-                Console.WriteLine("Failed to connect to this IP.");
+                Console.WriteLine("无法登录到这个IP.");
                 retry = true;
             }
 
@@ -259,7 +259,7 @@ namespace MinecraftClient
             {
                 if (ReconnectionAttemptsLeft > 0)
                 {
-                    ConsoleIO.WriteLogLine("Waiting 5 seconds (" + ReconnectionAttemptsLeft + " attempts left)...");
+                    ConsoleIO.WriteLogLine("等待5秒后 (" + ReconnectionAttemptsLeft + " attempts left)...");
                     Thread.Sleep(5000);
                     ReconnectionAttemptsLeft--;
                     Program.Restart();
@@ -292,8 +292,8 @@ namespace MinecraftClient
                         switch (command[0].ToLower())
                         {
                             case "autocomplete":
-                                if (command.Length > 1) { ConsoleIO.WriteLine((char)0x00 + "autocomplete" + (char)0x00 + handler.AutoComplete(command[1])); }
-                                else Console.WriteLine((char)0x00 + "autocomplete" + (char)0x00);
+                                if (command.Length > 1) { ConsoleIO.WriteLine((char)0x00 + "自动完成" + (char)0x00 + handler.AutoComplete(command[1])); }
+                                else Console.WriteLine((char)0x00 + "自动完成" + (char)0x00);
                                 break;
                         }
                     }
@@ -340,7 +340,7 @@ namespace MinecraftClient
                 {
                     if (lastKeepAlive.AddSeconds(30) < DateTime.Now)
                     {
-                        OnConnectionLost(ChatBot.DisconnectReason.ConnectionLost, "Connection Timeout");
+                        OnConnectionLost(ChatBot.DisconnectReason.ConnectionLost, "连接超时.");
                         return;
                     }
                 }
@@ -367,15 +367,15 @@ namespace MinecraftClient
                     string help_cmdname = Command.getArgs(command)[0].ToLower();
                     if (help_cmdname == "help")
                     {
-                        response_msg = "help <cmdname>: show brief help about a command.";
+                        response_msg = "help <命令名>: 显示这个MCC命令的帮助";
                     }
                     else if (cmds.ContainsKey(help_cmdname))
                     {
                         response_msg = cmds[help_cmdname].CMDDesc;
                     }
-                    else response_msg = "Unknown command '" + command_name + "'. Use 'help' for command list.";
+                    else response_msg = "未知命令 '" + command_name + "'. 使用help命令查看帮助.";
                 }
-                else response_msg = "help <cmdname>. Available commands: " + String.Join(", ", cmd_names.ToArray()) + ". For server help, use '" + Settings.internalCmdChar + "send /help' instead.";
+                else response_msg = "help <命令名>. 所有命令: " + String.Join(", ", cmd_names.ToArray()) + ". 如果想要查看服务器帮助，请输入 '" + Settings.internalCmdChar + "send /help' ";
             }
             else if (cmds.ContainsKey(command_name))
             {
@@ -390,7 +390,7 @@ namespace MinecraftClient
                     {
                         if (!(e is ThreadAbortException))
                         {
-                            ConsoleIO.WriteLogLine("OnInternalCommand: Got error from " + bot.ToString() + ": " + e.ToString());
+                            ConsoleIO.WriteLogLine("命令交互: 发生错误: " + bot.ToString() + ": " + e.ToString());
                         }
                         else throw; //ThreadAbortException should not be caught
                     }
@@ -398,7 +398,7 @@ namespace MinecraftClient
             }
             else
             {
-                response_msg = "Unknown command '" + command_name + "'. Use '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' for help.";
+                response_msg = "未知命令 '" + command_name + "'. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.";
                 return false;
             }
             
@@ -449,7 +449,7 @@ namespace MinecraftClient
                 {
                     if (!(e is ThreadAbortException))
                     {
-                        ConsoleIO.WriteLogLine("OnDisconnect: Got error from " + bot.ToString() + ": " + e.ToString());
+                        ConsoleIO.WriteLogLine("断开连接时发生错误:  " + bot.ToString() + ": " + e.ToString());
                     }
                     else throw; //ThreadAbortException should not be caught
                 }
@@ -498,17 +498,17 @@ namespace MinecraftClient
             switch (reason)
             {
                 case ChatBot.DisconnectReason.ConnectionLost:
-                    message = "Connection has been lost.";
+                    message = "连接已丢失.";
                     ConsoleIO.WriteLine(message);
                     break;
 
                 case ChatBot.DisconnectReason.InGameKick:
-                    ConsoleIO.WriteLine("Disconnected by Server :");
+                    ConsoleIO.WriteLine("被服务器踢出 :");
                     ConsoleIO.WriteLineFormatted(message);
                     break;
 
                 case ChatBot.DisconnectReason.LoginRejected:
-                    ConsoleIO.WriteLine("Login failed :");
+                    ConsoleIO.WriteLine("登录失败 :");
                     ConsoleIO.WriteLineFormatted(message);
                     break;
 
@@ -526,7 +526,7 @@ namespace MinecraftClient
                 {
                     if (!(e is ThreadAbortException))
                     {
-                        ConsoleIO.WriteLogLine("OnDisconnect: Got error from " + bot.ToString() + ": " + e.ToString());
+                        ConsoleIO.WriteLogLine("断开连接时发生错误: " + bot.ToString() + ": " + e.ToString());
                     }
                     else throw; //ThreadAbortException should not be caught
                 }
@@ -552,7 +552,7 @@ namespace MinecraftClient
                 {
                     if (!(e is ThreadAbortException))
                     {
-                        ConsoleIO.WriteLogLine("Update: Got error from " + bot.ToString() + ": " + e.ToString());
+                        ConsoleIO.WriteLogLine("更新时发生错误: " + bot.ToString() + ": " + e.ToString());
                     }
                     else throw; //ThreadAbortException should not be caught
                 }
@@ -2071,12 +2071,12 @@ namespace MinecraftClient
             {
                 if (Settings.AutoRespawn)
                 {
-                    ConsoleIO.WriteLogLine("You are dead. Automatically respawning after 1 second.");
+                    ConsoleIO.WriteLogLine("你死了，将在1秒后重生.");
                     respawnTicks = 10;
                 }
                 else
                 {
-                    ConsoleIO.WriteLogLine("You are dead. Type /respawn to respawn.");
+                    ConsoleIO.WriteLogLine("你死了，请输入/respawn来重生.");
                 }
                 DispatchBotEvent(bot => bot.OnDeath());
             }

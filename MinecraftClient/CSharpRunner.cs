@@ -34,7 +34,7 @@ namespace MinecraftClient
             //Script compatibility check for handling future versions differently
             if (lines.Length < 1 || lines[0] != "//MCCScript 1.0")
                 throw new CSharpException(CSErrorType.InvalidScript,
-                    new InvalidDataException("The provided script does not have a valid MCCScript header"));
+                    new InvalidDataException("此cs脚本文件并非MCC脚本文件!"));
 
             //Script hash for determining if it was previously compiled
             ulong scriptHash = QuickHash(lines);

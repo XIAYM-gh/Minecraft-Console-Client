@@ -25,7 +25,7 @@ namespace MinecraftClient
             if (Settings.DebugMessages)
             {
                 string callerClass = new System.Diagnostics.StackFrame(1).GetMethod().DeclaringType.Name;
-                ConsoleIO.WriteLineFormatted(String.Format("§8[{0}] Initializing FileSystemWatcher for file: {1}", callerClass, Path.Combine(folder, filename)));
+                ConsoleIO.WriteLineFormatted(String.Format("§e[调试]§8[{0}] 初始化文件系统: {1}", callerClass, Path.Combine(folder, filename)));
             }
 
             try
@@ -43,12 +43,12 @@ namespace MinecraftClient
                 if (Settings.DebugMessages)
                 {
                     string callerClass = new System.Diagnostics.StackFrame(1).GetMethod().DeclaringType.Name;
-                    ConsoleIO.WriteLineFormatted(String.Format("§8[{0}] Failed to initialize FileSystemWatcher, retrying using Polling", callerClass));
+                    ConsoleIO.WriteLineFormatted(String.Format("§c[错误/调试]§8[{0}] 初始化文件系统失败，使用Polling方式.", callerClass));
                 }
 
                 monitor = null;
                 polling = new Thread(() => PollingThread(folder, filename, handler));
-                polling.Name = String.Format("{0} Polling thread: {1}", this.GetType().Name, Path.Combine(folder, filename));
+                polling.Name = String.Format("{0} Polling 线程: {1}", this.GetType().Name, Path.Combine(folder, filename));
                 polling.Start();
             }
         }
