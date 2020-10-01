@@ -81,19 +81,19 @@ namespace MinecraftClient.Protocol.Handlers
 
             if (handler.GetTerrainEnabled() && protocolversion > MC1152Version)
             {
-                ConsoleIO.WriteLineFormatted("§cTerrain & Movements 此版本MC暂不支持");
+                ConsoleIO.WriteLineFormatted("§c[错误]§c此版本暂不支持世界交互.");
                 handler.SetTerrainEnabled(false);
             }
 
             if (handler.GetInventoryEnabled() && (protocolversion < MC110Version || protocolversion > MC1163Version))
             {
-                ConsoleIO.WriteLineFormatted("§c此MC版本不支持物品栏交互.");
+                ConsoleIO.WriteLineFormatted("§c[错误]§c此版本不支持物品栏交互.");
                 handler.SetInventoryEnabled(false);
             }
 
             if (handler.GetEntityHandlingEnabled() && (protocolversion < MC110Version || protocolversion > MC1163Version))
             {
-                ConsoleIO.WriteLineFormatted("§c此MC版本不支持实体交互.");
+                ConsoleIO.WriteLineFormatted("§c[错误]§c此版本不支持实体交互.");
                 handler.SetEntityHandlingEnabled(false);
             }
 
@@ -101,7 +101,7 @@ namespace MinecraftClient.Protocol.Handlers
             if (protocolversion >= MC113Version)
             {
                 if (protocolVersion > MC1152Version && handler.GetTerrainEnabled())
-                    throw new NotImplementedException("请更新您的方块列表. 请查看 github.com上的Material.cs");
+                    throw new NotImplementedException("§c[错误]§f请更新您的方块列表. 请查看 github.com上的Material.cs");
                 if (protocolVersion >= MC115Version)
                     Block.Palette = new Palette115();
                 else if (protocolVersion >= MC114Version)
@@ -114,7 +114,7 @@ namespace MinecraftClient.Protocol.Handlers
             if (protocolversion >= MC113Version)
             {
                 if (protocolversion > MC1163Version && handler.GetEntityHandlingEnabled())
-                    throw new NotImplementedException("请更新您的生物交互列表. 请查看 github.com 上的EntityType.cs");
+                    throw new NotImplementedException("§c[错误]§f请更新您的生物交互列表. 请查看 github.com 上的EntityType.cs");
                 if (protocolversion >= MC1162Version)
                     entityPalette = new EntityPalette1162();
                 else if (protocolversion >= MC116Version)
@@ -131,7 +131,7 @@ namespace MinecraftClient.Protocol.Handlers
             if (protocolversion >= MC116Version)
             {
                 if (protocolversion > MC1163Version && handler.GetInventoryEnabled())
-                    throw new NotImplementedException("请更新您的物品列表. 请查看 github.com 上的ItemType.cs");
+                    throw new NotImplementedException("§c[错误]§f请更新您的物品列表. 请查看 github.com 上的ItemType.cs");
                 if (protocolversion >= MC1162Version)
                     itemPalette = new ItemPalette1162();
                 else itemPalette = new ItemPalette1161();
@@ -1120,12 +1120,12 @@ namespace MinecraftClient.Protocol.Handlers
                 }
                 else if (packetID == 0x02) //Login successful
                 {
-                    ConsoleIO.WriteLineFormatted("§8服务器正在使用离线模式.");
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8服务器正在使用离线模式.");
                     login_phase = false;
 
                     if (!pForge.CompleteForgeHandshake())
                     {
-                        ConsoleIO.WriteLineFormatted("§8Forge版本因验证问题登录失败");
+                        ConsoleIO.WriteLineFormatted("§c[错误]§8Forge版本因验证问题登录失败");
                         return false;
                     }
 
@@ -1146,14 +1146,14 @@ namespace MinecraftClient.Protocol.Handlers
             byte[] secretKey = CryptoHandler.GenerateAESPrivateKey();
 
             if (Settings.DebugMessages)
-                ConsoleIO.WriteLineFormatted("§8Crypto keys & hash generated.");
+                ConsoleIO.WriteLineFormatted("§7[调试]§8Crypto keys & hash 已生成.");
 
             if (serverIDhash != "-")
             {
-                Console.WriteLine("Checking Session...");
+                Console.WriteLine("检查Session中...");
                 if (!ProtocolHandler.SessionCheck(uuid, sessionID, CryptoHandler.getServerHash(serverIDhash, serverKey, secretKey)))
                 {
-                    handler.OnConnectionLost(ChatBot.DisconnectReason.LoginRejected, "Failed to check session.");
+                    handler.OnConnectionLost(ChatBot.DisconnectReason.LoginRejected, "无法检查Session.");
                     return false;
                 }
             }
@@ -1185,7 +1185,7 @@ namespace MinecraftClient.Protocol.Handlers
 
                     if (!pForge.CompleteForgeHandshake())
                     {
-                        ConsoleIO.WriteLineFormatted("§8Forge StartEncryption Handshake did not complete successfully");
+                        ConsoleIO.WriteLineFormatted("§c[错误]§8Forge 入口点未完成.");
                         return false;
                     }
 

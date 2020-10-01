@@ -134,7 +134,7 @@ namespace MinecraftClient.Protocol.Handlers
                             byte fmlProtocolVersion = dataTypes.ReadNextByte(packetData);
 
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Forge protocol version : " + fmlProtocolVersion);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8Forge 协议版本 : " + fmlProtocolVersion);
 
                             if (fmlProtocolVersion >= 1)
                                 currentDimension = dataTypes.ReadNextInt(packetData);
@@ -144,7 +144,7 @@ namespace MinecraftClient.Protocol.Handlers
 
                             // Then tell the server that we're running the same mods.
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Sending falsified mod list to server...");
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8发送假mod列表中...");
                             byte[][] mods = new byte[forgeInfo.Mods.Count][];
                             for (int i = 0; i < forgeInfo.Mods.Count; i++)
                             {
@@ -164,7 +164,7 @@ namespace MinecraftClient.Protocol.Handlers
                             Thread.Sleep(2000);
 
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Accepting server mod list...");
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8传输mod列表中...");
                             // Tell the server that yes, we are OK with the mods it has
                             // even though we don't actually care what mods it has.
 
@@ -186,7 +186,7 @@ namespace MinecraftClient.Protocol.Handlers
                                 int registrySize = dataTypes.ReadNextVarInt(packetData);
 
                                 if (Settings.DebugMessages)
-                                    ConsoleIO.WriteLineFormatted("§8Received registry with " + registrySize + " entries");
+                                    ConsoleIO.WriteLineFormatted("§e[信息]§8载入注册名: " + registrySize + " entries");
 
                                 fmlHandshakeState = FMLHandshakeClientState.PENDINGCOMPLETE;
                             }
@@ -198,7 +198,7 @@ namespace MinecraftClient.Protocol.Handlers
                                 string registryName = dataTypes.ReadNextString(packetData);
                                 int registrySize = dataTypes.ReadNextVarInt(packetData);
                                 if (Settings.DebugMessages)
-                                    ConsoleIO.WriteLineFormatted("§8Received registry " + registryName + " with " + registrySize + " entries");
+                                    ConsoleIO.WriteLineFormatted("§8载入 注册名 " + registryName + " 与 " + registrySize + " entries");
                                 if (!hasNextRegistry)
                                     fmlHandshakeState = FMLHandshakeClientState.PENDINGCOMPLETE;
                             }
@@ -210,7 +210,7 @@ namespace MinecraftClient.Protocol.Handlers
                             if (discriminator != FMLHandshakeDiscriminator.HandshakeAck)
                                 return false;
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Accepting server registries...");
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8正在传输服务器mod注册名...");
                             SendForgeHandshakePacket(FMLHandshakeDiscriminator.HandshakeAck,
                                 new byte[] { (byte)FMLHandshakeClientState.PENDINGCOMPLETE });
                             fmlHandshakeState = FMLHandshakeClientState.COMPLETE;
@@ -224,7 +224,7 @@ namespace MinecraftClient.Protocol.Handlers
                             SendForgeHandshakePacket(FMLHandshakeDiscriminator.HandshakeAck,
                                 new byte[] { (byte)FMLHandshakeClientState.COMPLETE });
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLine("Forge server connection complete!");
+                                ConsoleIO.WriteLine("§e[信息]§f连接成功");
                             fmlHandshakeState = FMLHandshakeClientState.DONE;
                             return true;
                     }
@@ -304,7 +304,7 @@ namespace MinecraftClient.Protocol.Handlers
                             // [1]: Version is usually set to "FML2" for FML stuff and "1" for mods
 
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Received FML2 Server Mod List");
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8正在获取新版Forge模组列表");
 
                             List<string> mods = new List<string>();
                             int modCount = dataTypes.ReadNextVarInt(packetData);
@@ -336,7 +336,7 @@ namespace MinecraftClient.Protocol.Handlers
                             // In MCC, we just want to send a valid response so we'll reply back with data collected from the server.
 
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Sending back FML2 Client Mod List");
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8正在返回新版Forge模组列表");
 
                             // Packet ID 2: Client to Server Mod List
                             fmlResponsePacket.AddRange(dataTypes.GetVarInt(2));
@@ -374,7 +374,7 @@ namespace MinecraftClient.Protocol.Handlers
                             if (Settings.DebugMessages)
                             {
                                 string registryName = dataTypes.ReadNextString(packetData);
-                                ConsoleIO.WriteLineFormatted("§8Acknowledging FML2 Server Registry: " + registryName);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8Acknowledging FML2 Server Registry: " + registryName);
                             }
 
                             fmlResponsePacket.AddRange(dataTypes.GetVarInt(99));
@@ -393,7 +393,7 @@ namespace MinecraftClient.Protocol.Handlers
                             if (Settings.DebugMessages)
                             {
                                 string configName = dataTypes.ReadNextString(packetData);
-                                ConsoleIO.WriteLineFormatted("§8Acknowledging FML2 Server Config: " + configName);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8Acknowledging FML2 Server Config: " + configName);
                             }
 
                             fmlResponsePacket.AddRange(dataTypes.GetVarInt(99));
@@ -402,7 +402,7 @@ namespace MinecraftClient.Protocol.Handlers
 
                         default:
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Got Unknown FML2 Handshake message no. " + packetID);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8Got Unknown FML2 Handshake message no. " + packetID);
                             break;
                     }
 
@@ -418,7 +418,7 @@ namespace MinecraftClient.Protocol.Handlers
                 }
                 else if (Settings.DebugMessages)
                 {
-                    ConsoleIO.WriteLineFormatted("§8Ignoring Unknown FML2 LoginMessage channel: " + fmlChannel);
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8Ignoring Unknown FML2 LoginMessage channel: " + fmlChannel);
                 }
             }
             return false;
@@ -472,7 +472,7 @@ namespace MinecraftClient.Protocol.Handlers
                     versionString = "2";
                     break;
                 default:
-                    throw new NotImplementedException("FMLVersion '" + fmlVersion + "' not implemented!");
+                    throw new NotImplementedException("§e[信息]FML版本 '" + fmlVersion + "' 未完成/不支持!");
             }
 
             if (jsonData.Properties.ContainsKey(forgeDataTag) && jsonData.Properties[forgeDataTag].Type == Json.JSONData.DataType.Object)
@@ -483,10 +483,10 @@ namespace MinecraftClient.Protocol.Handlers
                     forgeInfo = new ForgeInfo(modData, fmlVersion);
                     if (forgeInfo.Mods.Any())
                     {
-                        ConsoleIO.WriteLineFormatted(String.Format("§8Server is running Forge with {0} mods.", forgeInfo.Mods.Count));
+                        ConsoleIO.WriteLineFormatted(String.Format("§e[信息]§8服务器有 {0} 个mod.", forgeInfo.Mods.Count));
                         if (Settings.DebugMessages)
                         {
-                            ConsoleIO.WriteLineFormatted("§8Mod list:");
+                            ConsoleIO.WriteLineFormatted("§e[信息]§8模组列表:");
                             foreach (ForgeInfo.ForgeMod mod in forgeInfo.Mods)
                                 ConsoleIO.WriteLineFormatted("§8  " + mod.ToString());
                         }
@@ -494,7 +494,7 @@ namespace MinecraftClient.Protocol.Handlers
                     }
                     else
                     {
-                        ConsoleIO.WriteLineFormatted("§8Server is running Forge without mods.");
+                        ConsoleIO.WriteLineFormatted("§e[信息]§8服务器不需要必需mod.");
                         forgeInfo = null;
                     }
                 }

@@ -38,19 +38,19 @@ namespace MinecraftClient.Protocol.Handlers
 
             if (Handler.GetTerrainEnabled())
             {
-                ConsoleIO.WriteLineFormatted("§cTerrain & Movements 暂不支持此MC版本");
+                ConsoleIO.WriteLineFormatted("§e[错误]§c世界交互 暂不支持此版本");
                 Handler.SetTerrainEnabled(false);
             }
 
             if (handler.GetInventoryEnabled())
             {
-                ConsoleIO.WriteLineFormatted("§c物品栏交互暂不支持此MC版本");
+                ConsoleIO.WriteLineFormatted("§e[错误]§c物品栏交互暂不支持此版本");
                 handler.SetInventoryEnabled(false);
             }
 
             if (handler.GetEntityHandlingEnabled())
             {
-                ConsoleIO.WriteLineFormatted("§c实体交互暂不支持此MC版本");
+                ConsoleIO.WriteLineFormatted("§e[错误]§c实体交互暂不支持此版本");
                 handler.SetEntityHandlingEnabled(false);
             }
         }
@@ -167,7 +167,7 @@ namespace MinecraftClient.Protocol.Handlers
                 case 0x84: readData(11); nbr = readNextShort(); if (nbr > 0) { readData(nbr); } break;
                 case 0x85: if (protocolversion >= 74) { readData(13); } break;
                 case 0xC8:
-                    if (readNextInt() == 2022) { ConsoleIO.WriteLogLine("You are dead. Type /respawn to respawn."); }
+                    if (readNextInt() == 2022) { ConsoleIO.WriteLogLine("§e[信息]§f你死了. 输入 /respawn 重生."); }
                     if (protocolversion >= 72) { readData(4); } else readData(1);
                     break;
                 case 0xC9:
