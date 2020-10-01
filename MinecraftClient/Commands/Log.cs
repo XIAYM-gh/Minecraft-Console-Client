@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     public class Log : Command
     {
         public override string CMDName { get { return "log"; } }
-        public override string CMDDesc { get { return "log <text>: log some text to the console."; } }
+        public override string CMDDesc { get { return "log <text>: 执行脚本时在屏幕上显示文字."; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {

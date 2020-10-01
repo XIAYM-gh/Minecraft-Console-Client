@@ -33,10 +33,10 @@ namespace MinecraftClient.Commands
                                 {
                                     case "attack":
                                         handler.InteractEntity(entityID, 1);
-                                        return "Entity attacked";
+                                        return "已攻击实体";
                                     case "use":
                                         handler.InteractEntity(entityID, 0);
-                                        return "Entity used";
+                                        return "已使用实体";
                                     default:
                                         Entity entity = handler.GetEntities()[entityID];
                                         int id = entity.ID;
@@ -95,7 +95,7 @@ namespace MinecraftClient.Commands
                                         return done;
                                 }
                             }
-                            else return "Entity not found";
+                            else return "实体未找到";
                         }
                         else
                         {
@@ -160,7 +160,7 @@ namespace MinecraftClient.Commands
                     return String.Join("\n", response);
                 }
             }
-            else return "Please enable entityhandling in config to use this command.";
+            else return "请先开启 entityhandling.";
         }
     }
 }

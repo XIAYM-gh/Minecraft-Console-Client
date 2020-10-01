@@ -9,7 +9,7 @@ namespace MinecraftClient.Commands
     {
         private bool sneaking = false;
         public override string CMDName { get { return "Sneak"; } }
-        public override string CMDDesc { get { return "Sneak: Toggles sneaking"; } }
+        public override string CMDDesc { get { return "Sneak: 切换潜行"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
@@ -18,14 +18,14 @@ namespace MinecraftClient.Commands
                 var result = handler.SendEntityAction(Protocol.EntityActionType.StopSneaking);
                 if (result)
                     sneaking = false;
-                return  result ? "You aren't sneaking anymore" : "Fail";
+                return  result ? "你取消了蹲下." : "Fail";
             }
             else
             {
                 var result = handler.SendEntityAction(Protocol.EntityActionType.StartSneaking);
                 if (result)
                     sneaking = true;
-                return  result ? "You are sneaking now" : "Fail";
+                return  result ? "你已蹲下." : "Fail";
             }
             
         }

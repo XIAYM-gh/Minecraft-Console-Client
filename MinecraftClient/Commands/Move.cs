@@ -9,7 +9,7 @@ namespace MinecraftClient.Commands
     public class Move : Command
     {
         public override string CMDName { get { return "move"; } }
-        public override string CMDDesc { get { return "move <on|off|get|up|down|east|west|north|south|x y z>: walk or start walking."; } }
+        public override string CMDDesc { get { return "move <on|off|get|up|down|east|west|north|south|x y z>: 移动至方块"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
@@ -19,12 +19,12 @@ namespace MinecraftClient.Commands
             if (argStr == "on")
             {
                 handler.SetTerrainEnabled(true);
-                return "Enabling Terrain and Movements on next server login, respawn or world change.";
+                return "正在启用 Terrain and Movements ,将会在下一次登入,或重生时启用.";
             }
             else if (argStr == "off")
             {
                 handler.SetTerrainEnabled(false);
-                return "Disabling Terrain and Movements.";
+                return "正在禁用 Terrain and Movements.";
             }
             else if (handler.GetTerrainEnabled())
             {
@@ -45,9 +45,9 @@ namespace MinecraftClient.Commands
                     if (Movement.CanMove(handler.GetWorld(), handler.GetCurrentLocation(), direction))
                     {
                         handler.MoveTo(Movement.Move(handler.GetCurrentLocation(), direction));
-                        return "Moving " + argStr + '.';
+                        return "正在移动至 " + argStr;
                     }
-                    else return "Cannot move in that direction.";
+                    else return "无法移动至那个位置.";
                 }
                 else if (args.Length == 3)
                 {
@@ -58,14 +58,14 @@ namespace MinecraftClient.Commands
                         int z = int.Parse(args[2]);
                         Location goal = new Location(x, y, z);
                         if (handler.MoveTo(goal))
-                            return "Walking to " + goal;
-                        return "Failed to compute path to " + goal;
+                            return "已移动至 " + goal;
+                        return "无法演算路径 " + goal;
                     }
                     catch (FormatException) { return CMDDesc; }
                 }
                 else return CMDDesc;
             }
-            else return "Please enable terrainandmovements to use this command.";
+            else return "请先启用 terrainandmovements 再使用此指令.";
         }
     }
 }

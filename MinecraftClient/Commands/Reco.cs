@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     public class Reco : Command
     {
         public override string CMDName { get { return "reco"; } }
-        public override string CMDDesc { get { return "reco [account]: restart and reconnect to the server."; } }
+        public override string CMDDesc { get { return "reco [用户]: 重新连接至服务器"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
@@ -17,7 +17,7 @@ namespace MinecraftClient.Commands
             {
                 if (!Settings.SetAccount(args[0]))
                 {
-                    return "Unknown account '" + args[0] + "'.";
+                    return "未知用户 '" + args[0] + "'.";
                 }
             }
             Program.Restart();

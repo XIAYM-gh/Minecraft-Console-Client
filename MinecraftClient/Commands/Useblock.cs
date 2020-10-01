@@ -9,11 +9,11 @@ namespace MinecraftClient.Commands
     class Useblock : Command
     {
         public override string CMDName { get { return "useblock"; } }
-        public override string CMDDesc { get { return "useblock <x> <y> <z>: use block"; } }
+        public override string CMDDesc { get { return "useblock <x> <y> <z>: 放置方块"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
-            if (!handler.GetTerrainEnabled()) return "Please enable TerrainHandling in the config file first.";
+            if (!handler.GetTerrainEnabled()) return "请先启用 TerrainHandling.";
             if (hasArg(command))
             {
                 string[] args = getArgs(command);

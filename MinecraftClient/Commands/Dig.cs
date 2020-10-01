@@ -9,12 +9,12 @@ namespace MinecraftClient.Commands
     public class Dig : Command
     {
         public override string CMDName { get { return "dig"; } }
-        public override string CMDDesc { get { return "dig <x> <y> <z>: attempt to break a block"; } }
+        public override string CMDDesc { get { return "dig <x> <y> <z>: 挖一个方块"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
             if (!handler.GetTerrainEnabled())
-                return "Please enable Terrain and Movements to use this command.";
+                return "请先打开 Terrain and Movements.";
 
             if (hasArg(command))
             {
@@ -28,12 +28,12 @@ namespace MinecraftClient.Commands
                         int z = int.Parse(args[2]);
                         Location blockToBreak = new Location(x, y, z);
                         if (blockToBreak.DistanceSquared(handler.GetCurrentLocation().EyesLocation()) > 25)
-                            return "You are too far away from this block.";
+                            return "你离这个方块太远了.";
                         if (handler.GetWorld().GetBlock(blockToBreak).Type == Material.Air)
-                            return "No block at this location (Air)";
+                            return "那个方块是空气!";
                         if (handler.DigBlock(blockToBreak))
-                            return String.Format("Attempting to dig block at {0} {1} {2}", x, y, z);
-                        else return "Failed to start digging block.";
+                            return String.Format("正在开始破坏 {0} {1} {2} 的方块", x, y, z);
+                        else return "破坏失败!";
                     }
                     catch (FormatException) { return CMDDesc; }
                 }

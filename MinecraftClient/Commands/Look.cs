@@ -9,7 +9,7 @@ namespace MinecraftClient.Commands
     public class Look : Command
     {
         public override string CMDName { get { return "look"; } }
-        public override string CMDDesc { get { return "look <x y z|yaw pitch|up|down|east|west|north|south>: look at direction or coordinates."; } }
+        public override string CMDDesc { get { return "look <x y z|yaw pitch|up|down|east|west|north|south>: 看一个位置或一个方向"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
@@ -28,11 +28,11 @@ namespace MinecraftClient.Commands
                         case "west": direction = Direction.West; break;
                         case "north": direction = Direction.North; break;
                         case "south": direction = Direction.South; break;
-                        default: return "Unknown direction '" + dirStr + "'.";
+                        default: return "未知位置 '" + dirStr + "'.";
                     }
 
                     handler.UpdateLocation(handler.GetCurrentLocation(), direction);
-                    return "Looking " + dirStr;
+                    return "正在转向 " + dirStr;
                 }
                 else if (args.Length == 2)
                 {
@@ -42,7 +42,7 @@ namespace MinecraftClient.Commands
                         float pitch = Single.Parse(args[1]);
 
                         handler.UpdateLocation(handler.GetCurrentLocation(), yaw, pitch);
-                        return String.Format("Looking at YAW: {0} PITCH: {1}", yaw.ToString("0.00"), pitch.ToString("0.00"));
+                        return String.Format("正在转向 YAW: {0} PITCH: {1}", yaw.ToString("0.00"), pitch.ToString("0.00"));
                     }
                     catch (FormatException) { return CMDDesc; }
                 }
@@ -57,14 +57,14 @@ namespace MinecraftClient.Commands
                         Location block = new Location(x, y, z);
                         handler.UpdateLocation(handler.GetCurrentLocation(), block);
 
-                        return "Looking at " + block;
+                        return "正在转向 " + block;
                     }
                     catch (FormatException) { return CMDDesc; }
                     
                 }
                 else return CMDDesc;
             }
-            else return "Please enable terrainandmovements in config to use this command.";
+            else return "请先开启 terrainandmovements 再执行此指令.";
         }
     }
 }

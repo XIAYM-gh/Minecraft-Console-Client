@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     public class Script : Command
     {
         public override string CMDName { get { return "script"; } }
-        public override string CMDDesc { get { return "script <scriptname>: run a script file."; } }
+        public override string CMDDesc { get { return "script <文件名>: 运行脚本文件."; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {

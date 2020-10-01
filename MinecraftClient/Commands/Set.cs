@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     public class Set : Command
     {
         public override string CMDName { get { return "set"; } }
-        public override string CMDDesc { get { return "set varname=value: set a custom %variable%."; } }
+        public override string CMDDesc { get { return "set varname=value: 设置一个变量."; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
@@ -21,7 +21,7 @@ namespace MinecraftClient.Commands
                     {
                         return ""; //Success
                     }
-                    else return "variable name must be A-Za-z0-9.";
+                    else return "变量名必须为大小写字母和数字.";
                 }
                 else return CMDDesc;
             }
