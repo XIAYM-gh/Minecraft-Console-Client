@@ -51,7 +51,7 @@ namespace MinecraftClient.Protocol
                                 .ThenBy(record => Guid.NewGuid())
                                 .First();
                             string target = result.TARGET.Trim('.');
-                            ConsoleIO.WriteLineFormatted(String.Format("§8Found server {0}:{1} for domain {2}", target, result.PORT, domainVal));
+                            ConsoleIO.WriteLineFormatted(String.Format("§8找到服务器 {0}:{1} 在 {2} 上", target, result.PORT, domainVal));
                             domainVal = target;
                             portVal = result.PORT;
                             foundService = true;
@@ -59,7 +59,7 @@ namespace MinecraftClient.Protocol
                     }
                     catch (Exception e)
                     {
-                        ConsoleIO.WriteLineFormatted(String.Format("§8Failed to perform SRV lookup for {0}\n{1}: {2}", domainVal, e.GetType().FullName, e.Message));
+                        ConsoleIO.WriteLineFormatted(String.Format("§8SRV校验错误 {0}\n{1}: {2}", domainVal, e.GetType().FullName, e.Message));
                     }
                 }, TimeSpan.FromSeconds(Settings.ResolveSrvRecordsShortTimeout ? 10 : 30));
             }
@@ -90,7 +90,7 @@ namespace MinecraftClient.Protocol
                     {
                         success = true;
                     }
-                    else ConsoleIO.WriteLineFormatted("§8Unexpected response from the server (is that a Minecraft server?)");
+                    else ConsoleIO.WriteLineFormatted("§8无法连接至非Minecraft服务器之外的服务器!");
                 }
                 catch (Exception e)
                 {
@@ -99,9 +99,9 @@ namespace MinecraftClient.Protocol
             }, TimeSpan.FromSeconds(Settings.ResolveSrvRecordsShortTimeout ? 10 : 30)))
             {
                 if (protocolversion != 0 && protocolversion != protocolversionTmp)
-                    ConsoleIO.WriteLineFormatted("§8Server reports a different version than manually set. Login may not work.");
+                    ConsoleIO.WriteLineFormatted("§8服务器发送了不同的版本，可能无法登入.");
                 if (protocolversion == 0 && protocolversionTmp <= 1)
-                    ConsoleIO.WriteLineFormatted("§8Server does not report its protocol version, autodetection will not work.");
+                    ConsoleIO.WriteLineFormatted("§8服务器未通知协议版本，可能会无法登入.");
                 if (protocolversion == 0)
                     protocolversion = protocolversionTmp;
                 forgeInfo = forgeInfoTmp;
@@ -109,7 +109,7 @@ namespace MinecraftClient.Protocol
             }
             else
             {
-                ConsoleIO.WriteLineFormatted("§8A timeout occured while attempting to connect to this IP.");
+                ConsoleIO.WriteLineFormatted("§8连接超时.");
                 return false;
             }
         }
@@ -129,7 +129,7 @@ namespace MinecraftClient.Protocol
             int[] supportedVersions_Protocol18 = { 4, 5, 47, 107, 108, 109, 110, 210, 315, 316, 335, 338, 340, 393, 401, 404, 477, 480, 485, 490, 498, 573, 575, 578, 735, 736, 751, 753 };
             if (Array.IndexOf(supportedVersions_Protocol18, ProtocolVersion) > -1)
                 return new Protocol18Handler(Client, ProtocolVersion, Handler, forgeInfo);
-            throw new NotSupportedException("The protocol version no." + ProtocolVersion + " is not supported.");
+            throw new NotSupportedException("协议版本" + ProtocolVersion + " 不支持.");
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace MinecraftClient.Protocol
                 }
                 else
                 {
-                    ConsoleIO.WriteLineFormatted("§8Got error code from server: " + code);
+                    ConsoleIO.WriteLineFormatted("§8服务器返回错误信息: " + code);
                     return LoginResult.OtherError;
                 }
             }
@@ -466,7 +466,7 @@ namespace MinecraftClient.Protocol
                 }
                 else
                 {
-                    ConsoleIO.WriteLineFormatted("§8Got error code from server while refreshing authentication: " + code);
+                    ConsoleIO.WriteLineFormatted("§8服务器验证时发生错误，错误码: " + code);
                     return LoginResult.OtherError;
                 }
             }
