@@ -166,7 +166,7 @@ namespace MinecraftClient.ChatBots
         {
             if (!GetInventoryEnabled())
             {
-                LogToConsole("Inventory handling is disabled. AutoCraft will be unloaded");
+                LogToConsole("Inventory handling 已禁用,自动合成将无法使用!");
                 UnloadBot();
                 return;
             }
@@ -209,7 +209,7 @@ namespace MinecraftClient.ChatBots
                         else return "Please specify the recipe name you want to craft.";
                     case "stop":
                         StopCrafting();
-                        return "AutoCraft stopped";
+                        return "AutoCraft 已停止.";
                     case "help":
                         return GetCommandHelp(args.Length >= 2 ? args[1] : "");
                     default:

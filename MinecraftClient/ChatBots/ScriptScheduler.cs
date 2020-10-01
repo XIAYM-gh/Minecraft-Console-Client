@@ -45,7 +45,7 @@ namespace MinecraftClient.ChatBots
             if (System.IO.File.Exists(tasksfile))
             {
                 if (Settings.DebugMessages)
-                    LogToConsole("Loading tasks from '" + System.IO.Path.GetFullPath(tasksfile) + "'");
+                    LogToConsole("从 '" + System.IO.Path.GetFullPath(tasksfile) + "' 加载任务中..");
                 TaskDesc current_task = null;
                 String[] lines = System.IO.File.ReadAllLines(tasksfile, Encoding.UTF8);
                 foreach (string lineRAW in lines)
@@ -88,7 +88,7 @@ namespace MinecraftClient.ChatBots
             }
             else
             {
-                LogToConsole("File not found: '" + System.IO.Path.GetFullPath(tasksfile) + "'");
+                LogToConsole("文件未找到: '" + System.IO.Path.GetFullPath(tasksfile) + "'");
                 UnloadBot(); //No need to keep the bot active
             }
         }
@@ -114,12 +114,12 @@ namespace MinecraftClient.ChatBots
                     }
                     else if (Settings.DebugMessages)
                     {
-                        LogToConsole("This task will never trigger:\n" + Task2String(current_task));
+                        LogToConsole("此任务永远不会被执行:\n" + Task2String(current_task));
                     }
                 }
                 else if (Settings.DebugMessages)
                 {
-                    LogToConsole("No action for task:\n" + Task2String(current_task));
+                    LogToConsole("此任务没有可执行的动作:\n" + Task2String(current_task));
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace MinecraftClient.ChatBots
                                     {
                                         task.triggerOnTime_alreadyTriggered = true;
                                         if (Settings.DebugMessages)
-                                            LogToConsole("Time / Running action: " + task.action);
+                                            LogToConsole("Time / Running : " + task.action);
                                         PerformInternalCommand(task.action);
                                     }
                                 }
@@ -162,7 +162,7 @@ namespace MinecraftClient.ChatBots
                             {
                                 task.triggerOnInterval_Interval_Countdown = task.triggerOnInterval_Interval;
                                 if (Settings.DebugMessages)
-                                    LogToConsole("Interval / Running action: " + task.action);
+                                    LogToConsole("定时 / Running : " + task.action);
                                 PerformInternalCommand(task.action);
                             }
                             else task.triggerOnInterval_Interval_Countdown--;
@@ -176,7 +176,7 @@ namespace MinecraftClient.ChatBots
                         if (task.triggerOnLogin || (firstlogin_done == false && task.triggerOnFirstLogin))
                         {
                             if (Settings.DebugMessages)
-                                LogToConsole("Login / Running action: " + task.action);
+                                LogToConsole("登录 / Running : " + task.action);
                             PerformInternalCommand(task.action);
                         }
                     }

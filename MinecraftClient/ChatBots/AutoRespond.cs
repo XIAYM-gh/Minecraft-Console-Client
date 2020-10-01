@@ -142,7 +142,7 @@ namespace MinecraftClient.ChatBots
                 respondRules = new List<RespondRule>();
 
                 if (Settings.DebugMessages)
-                    LogToConsole("Loading matches from file: " + System.IO.Path.GetFullPath(matchesFile));
+                    LogToConsole("加载自动回复文件: " + System.IO.Path.GetFullPath(matchesFile));
 
                 foreach (string lineRAW in File.ReadAllLines(matchesFile, Encoding.UTF8))
                 {
@@ -187,7 +187,7 @@ namespace MinecraftClient.ChatBots
             }
             else
             {
-                LogToConsole("File not found: '" + System.IO.Path.GetFullPath(matchesFile) + "'");
+                LogToConsole("文件未找到: '" + System.IO.Path.GetFullPath(matchesFile) + "'");
                 UnloadBot(); //No need to keep the bot active
             }
         }

@@ -28,21 +28,21 @@ namespace MinecraftClient.ChatBots
                 singleMode = true;
             else if (mode == "multi")
                 singleMode = false;
-            else LogToConsole("Unknown attack mode: " + mode + ". Using single mode as default.");
+            else LogToConsole("未知攻击模式: " + mode + ". 已更改为single模式.");
 
             if (priority == "distance")
                 priorityDistance = true;
             else if (priority == "health")
                 priorityDistance = false;
-            else LogToConsole("Unknown priority: " + priority + ". Using distance priority as default.");
+            else LogToConsole("未知优先攻击参数: " + priority + ". 已更改为distance模式.");
         }
 
         public override void Initialize()
         {
             if (!GetEntityHandlingEnabled())
             {
-                LogToConsole("Entity Handling is not enabled in the config file!");
-                LogToConsole("This bot will be unloaded.");
+                LogToConsole("Entity Handling 并未开启!");
+                LogToConsole("无法被使用..");
                 UnloadBot();
             }
         }
