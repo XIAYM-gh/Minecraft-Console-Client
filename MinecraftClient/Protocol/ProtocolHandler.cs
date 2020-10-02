@@ -39,7 +39,7 @@ namespace MinecraftClient.Protocol
                 {
                     try
                     {
-                        Console.WriteLine("Resolving {0}...", domainVal);
+                        ConsoleIO.WriteLineFormatted("§e[信息]§8检测中...");
                         Heijden.DNS.Response response = new Heijden.DNS.Resolver().Query("_minecraft._tcp." + domainVal, Heijden.DNS.QType.SRV);
                         Heijden.DNS.RecordSRV[] srvRecords = response.RecordsSRV;
                         if (srvRecords != null && srvRecords.Any())
@@ -51,7 +51,7 @@ namespace MinecraftClient.Protocol
                                 .ThenBy(record => Guid.NewGuid())
                                 .First();
                             string target = result.TARGET.Trim('.');
-                            ConsoleIO.WriteLineFormatted(String.Format("§8找到服务器 {0}:{1} 在 {2} 上", target, result.PORT, domainVal));
+                            ConsoleIO.WriteLineFormatted(String.Format("§e[信息]§8找到服务器 {0}:{1} 在 {2} 上", target, result.PORT, domainVal));
                             domainVal = target;
                             portVal = result.PORT;
                             foundService = true;
@@ -59,7 +59,7 @@ namespace MinecraftClient.Protocol
                     }
                     catch (Exception e)
                     {
-                        ConsoleIO.WriteLineFormatted(String.Format("§8SRV校验错误 {0}\n{1}: {2}", domainVal, e.GetType().FullName, e.Message));
+                        ConsoleIO.WriteLineFormatted(String.Format("§c[错误]§8SRV校验错误 {0}\n{1}: {2}", domainVal, e.GetType().FullName, e.Message));
                     }
                 }, TimeSpan.FromSeconds(Settings.ResolveSrvRecordsShortTimeout ? 10 : 30));
             }
@@ -90,18 +90,18 @@ namespace MinecraftClient.Protocol
                     {
                         success = true;
                     }
-                    else ConsoleIO.WriteLineFormatted("§8无法连接至非Minecraft服务器之外的服务器!");
+                    else ConsoleIO.WriteLineFormatted("§c[警告]§8无法连接至非Minecraft服务器之外的服务器!");
                 }
                 catch (Exception e)
                 {
-                    ConsoleIO.WriteLineFormatted(String.Format("§8{0}: {1}", e.GetType().FullName, e.Message));
+                    ConsoleIO.WriteLineFormatted(String.Format("§e[信息]§8{0}: {1}", e.GetType().FullName, e.Message));
                 }
             }, TimeSpan.FromSeconds(Settings.ResolveSrvRecordsShortTimeout ? 10 : 30)))
             {
                 if (protocolversion != 0 && protocolversion != protocolversionTmp)
-                    ConsoleIO.WriteLineFormatted("§8服务器发送了不同的版本，可能无法登入.");
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8服务器发送了不同的版本，可能无法登入,请手动输入版本.");
                 if (protocolversion == 0 && protocolversionTmp <= 1)
-                    ConsoleIO.WriteLineFormatted("§8服务器未通知协议版本，可能会无法登入.");
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8服务器未通知协议版本，可能会无法登入,请手动输入版本.");
                 if (protocolversion == 0)
                     protocolversion = protocolversionTmp;
                 forgeInfo = forgeInfoTmp;
@@ -109,7 +109,7 @@ namespace MinecraftClient.Protocol
             }
             else
             {
-                ConsoleIO.WriteLineFormatted("§8连接超时.");
+                ConsoleIO.WriteLineFormatted("§c[错误]§8连接超时.");
                 return false;
             }
         }
@@ -129,7 +129,7 @@ namespace MinecraftClient.Protocol
             int[] supportedVersions_Protocol18 = { 4, 5, 47, 107, 108, 109, 110, 210, 315, 316, 335, 338, 340, 393, 401, 404, 477, 480, 485, 490, 498, 573, 575, 578, 735, 736, 751, 753 };
             if (Array.IndexOf(supportedVersions_Protocol18, ProtocolVersion) > -1)
                 return new Protocol18Handler(Client, ProtocolVersion, Handler, forgeInfo);
-            throw new NotSupportedException("协议版本" + ProtocolVersion + " 不支持.");
+            throw new NotSupportedException("§c[错误]协议版本" + ProtocolVersion + " 不支持.");
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace MinecraftClient.Protocol
                 }
                 else
                 {
-                    ConsoleIO.WriteLineFormatted("§8服务器返回错误信息: " + code);
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8服务器返回错误信息: " + code);
                     return LoginResult.OtherError;
                 }
             }
@@ -466,7 +466,7 @@ namespace MinecraftClient.Protocol
                 }
                 else
                 {
-                    ConsoleIO.WriteLineFormatted("§8服务器验证时发生错误，错误码: " + code);
+                    ConsoleIO.WriteLineFormatted("§c[错误]§8服务器验证时发生错误，错误码: " + code);
                     return LoginResult.OtherError;
                 }
             }
@@ -568,7 +568,7 @@ namespace MinecraftClient.Protocol
                 try
                 {
                     if (Settings.DebugMessages)
-                        ConsoleIO.WriteLineFormatted("§8Performing request to " + host);
+                        ConsoleIO.WriteLineFormatted("§e[信息]§8正在向 " + host + " 提交请求...");
 
                     TcpClient client = ProxyHandler.newTcpClient(host, 443, true);
                     SslStream stream = new SslStream(client.GetStream());
@@ -576,7 +576,7 @@ namespace MinecraftClient.Protocol
 
                     if (Settings.DebugMessages)
                         foreach (string line in headers)
-                            ConsoleIO.WriteLineFormatted("§8> " + line);
+                            ConsoleIO.WriteLineFormatted("§e[信息]§8> " + line);
 
                     stream.Write(Encoding.ASCII.GetBytes(String.Join("\r\n", headers.ToArray())));
                     System.IO.StreamReader sr = new System.IO.StreamReader(stream);
@@ -586,7 +586,7 @@ namespace MinecraftClient.Protocol
                     {
                         ConsoleIO.WriteLine("");
                         foreach (string line in raw_result.Split('\n'))
-                            ConsoleIO.WriteLineFormatted("§8< " + line);
+                            ConsoleIO.WriteLineFormatted("§e[信息]§8< " + line);
                     }
 
                     if (raw_result.StartsWith("HTTP/1.1"))

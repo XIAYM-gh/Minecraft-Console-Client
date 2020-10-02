@@ -802,7 +802,7 @@ namespace MinecraftClient
                 + "# 使用Replaymod且保存录像!(稳定差)\r\n"
                 + "# 不使用/quit命令退出将不会保存录像.\r\n"
                 + "enabled=false\r\n"
-                + "backupinterval=300                # How long should replay file be auto-saved, in seconds. Use -1 for disabled\r\n"
+                + "backupinterval=300                # 多长时间后会自动保存录像，设置为-1为从不\r\n"
                 + "\r\n", Encoding.UTF8);
         }
 

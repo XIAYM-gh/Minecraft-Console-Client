@@ -124,7 +124,7 @@ namespace MinecraftClient.Protocol.Session
             if (File.Exists(SessionCacheFileMinecraft))
             {
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted("§8Loading Minecraft profiles: " + Path.GetFileName(SessionCacheFileMinecraft));
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8加载Minecraft档案: " + Path.GetFileName(SessionCacheFileMinecraft));
                 Json.JSONData mcSession = new Json.JSONData(Json.JSONData.DataType.String);
                 try
                 {
@@ -158,7 +158,7 @@ namespace MinecraftClient.Protocol.Session
                                         clientID
                                     ));
                                     if (Settings.DebugMessages)
-                                        ConsoleIO.WriteLineFormatted("§8Loaded session: " + login + ':' + session.ID);
+                                        ConsoleIO.WriteLineFormatted("§e[信息]§8已加载Session: " + login + ':' + session.ID);
                                     sessions[login] = session;
                                 }
                                 catch (InvalidDataException) { /* Not a valid session */ }
@@ -172,7 +172,7 @@ namespace MinecraftClient.Protocol.Session
             if (File.Exists(SessionCacheFileSerialized))
             {
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted("§8Converting session cache from disk: " + SessionCacheFileSerialized);
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8正在转换Session: " + SessionCacheFileSerialized);
 
                 try
                 {
@@ -182,18 +182,18 @@ namespace MinecraftClient.Protocol.Session
                         foreach (KeyValuePair<string, SessionToken> item in sessionsTemp)
                         {
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§8Loaded session: " + item.Key + ':' + item.Value.ID);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8已加载Session: " + item.Key + ':' + item.Value.ID);
                             sessions[item.Key] = item.Value;
                         }
                     }
                 }
                 catch (IOException ex)
                 {
-                    ConsoleIO.WriteLineFormatted("§8Failed to read serialized session cache from disk: " + ex.Message);
+                    ConsoleIO.WriteLineFormatted("§c[错误]§8无法加载Session: " + ex.Message);
                 }
                 catch (SerializationException ex2)
                 {
-                    ConsoleIO.WriteLineFormatted("§8Got malformed data while reading serialized session cache from disk: " + ex2.Message);
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8已从Session加载: " + ex2.Message);
                 }
             }
 
@@ -201,7 +201,7 @@ namespace MinecraftClient.Protocol.Session
             if (File.Exists(SessionCacheFilePlaintext))
             {
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted("§8Loading session cache from disk: " + SessionCacheFilePlaintext);
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8已从硬盘加载Session: " + SessionCacheFilePlaintext);
 
                 try
                 {
@@ -217,25 +217,25 @@ namespace MinecraftClient.Protocol.Session
                                     string login = keyValue[0].ToLower();
                                     SessionToken session = SessionToken.FromString(keyValue[1]);
                                     if (Settings.DebugMessages)
-                                        ConsoleIO.WriteLineFormatted("§8Loaded session: " + login + ':' + session.ID);
+                                        ConsoleIO.WriteLineFormatted("§e[信息]§8已加载Session: " + login + ':' + session.ID);
                                     sessions[login] = session;
                                 }
                                 catch (InvalidDataException e)
                                 {
                                     if (Settings.DebugMessages)
-                                        ConsoleIO.WriteLineFormatted("§8Ignoring session token string '" + keyValue[1] + "': " + e.Message);
+                                        ConsoleIO.WriteLineFormatted("§e[信息]§8已忽略错误的Session '" + keyValue[1] + "': " + e.Message);
                                 }
                             }
                             else if (Settings.DebugMessages)
                             {
-                                ConsoleIO.WriteLineFormatted("§8Ignoring invalid session token line: " + line);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8已忽略错误的Session行: " + line);
                             }
                         }
                     }
                 }
                 catch (IOException e)
                 {
-                    ConsoleIO.WriteLineFormatted("§8Failed to read session cache from disk: " + e.Message);
+                    ConsoleIO.WriteLineFormatted("§c[错误]§8无法从硬盘读取Session: " + e.Message);
                 }
             }
 
@@ -248,7 +248,7 @@ namespace MinecraftClient.Protocol.Session
         private static void SaveToDisk()
         {
             if (Settings.DebugMessages)
-                ConsoleIO.WriteLineFormatted("§8Saving session cache to disk");
+                ConsoleIO.WriteLineFormatted("§e[信息]§8正在向硬盘保存Session..");
 
             List<string> sessionCacheLines = new List<string>();
             sessionCacheLines.Add("# Generated by MCC v" + Program.Version + " - Edit at own risk!");
@@ -262,7 +262,7 @@ namespace MinecraftClient.Protocol.Session
             }
             catch (IOException e)
             {
-                ConsoleIO.WriteLineFormatted("§8Failed to write session cache to disk: " + e.Message);
+                ConsoleIO.WriteLineFormatted("§c[错误]§8无法向硬盘保存Session: " + e.Message);
             }
         }
     }

@@ -123,7 +123,7 @@ namespace MinecraftClient
             //Test line to troubleshoot invisible colors
             if (Settings.DebugMessages)
             {
-                ConsoleIO.WriteLineFormatted("§e[调试]§f颜色测试: 您应该显示为: [0123456789ABCDEF]: [§00§11§22§33§44§55§66§77§88§99§aA§bB§cC§dD§eE§fF§r]");
+                ConsoleIO.WriteLineFormatted("§e[调试]§8 颜色测试: 您应该显示为: [0123456789ABCDEF]: [§00§11§22§33§44§55§66§77§88§99§aA§bB§cC§dD§eE§fF§r]");
             }
 
             //Load cached sessions from disk if necessary

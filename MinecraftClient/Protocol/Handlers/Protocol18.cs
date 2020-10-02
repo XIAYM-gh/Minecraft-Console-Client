@@ -1321,7 +1321,7 @@ namespace MinecraftClient.Protocol.Handlers
                             // Check for forge on the server.
                             Protocol18Forge.ServerInfoCheckForge(jsonData, ref forgeInfo);
 
-                            ConsoleIO.WriteLineFormatted("§8Server version : " + version + " (protocol v" + protocolversion + (forgeInfo != null ? ", with Forge)." : ")."));
+                            ConsoleIO.WriteLineFormatted("§e[信息]§8服务器版本 : " + version + " (protocol v" + protocolversion + (forgeInfo != null ? ", Forge版本)." : ")."));
 
                             return true;
                         }

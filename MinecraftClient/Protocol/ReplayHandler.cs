@@ -134,7 +134,7 @@ namespace MinecraftClient.Protocol
         /// <param name="replayFileName">Replay file name</param>
         public void CreateReplayFile(string replayFileName)
         {
-            WriteLog("Creating replay file.");
+            WriteLog("正在创建回放文件.");
 
             using (Stream recordingFile = new FileStream(Path.Combine(temporaryCache, recordingTmpFileName), FileMode.Open))
             {
@@ -154,7 +154,7 @@ namespace MinecraftClient.Protocol
             File.Delete(Path.Combine(temporaryCache, recordingTmpFileName));
             File.Delete(Path.Combine(temporaryCache, MetaData.MetaDataFileName));
 
-            WriteLog("Replay file created.");
+            WriteLog("回放文件已创建.");
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace MinecraftClient.Protocol
         {
             if (cleanedUp)
                 return;
-            WriteDebugLog("Creating backup replay file.");
+            WriteDebugLog("正在创建备份文件..");
 
             MetaData.duration = Convert.ToInt32((lastPacketTime - recordStartTime).TotalMilliseconds);
             MetaData.SaveToFile();
