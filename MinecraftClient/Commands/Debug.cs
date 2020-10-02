@@ -17,7 +17,7 @@ namespace MinecraftClient.Commands
                 Settings.DebugMessages = (getArg(command).ToLower() == "on");
             }
             else Settings.DebugMessages = !Settings.DebugMessages;
-            return "调试消息 " + (Settings.DebugMessages ? "开启" : "关闭");
+            return "调试消息 : " + (Settings.DebugMessages ? "开启" : "关闭");
         }
     }
 }

@@ -10,8 +10,8 @@ public class AutoLook : ChatBot
     public override void Initialize()
     {
         if (GetEntityHandlingEnabled() && GetTerrainEnabled()) return;
-        LogToConsole("Entity Handling or Terrain Handling is not enabled in the config file!");
-        LogToConsole("This bot will be unloaded.");
+        LogToConsole("Entity Handling & Terrain Handling未开启!");
+        LogToConsole("已卸载.");
         UnloadBot();
     }
     

@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     class ChangeSlot : Command
     {
         public override string CMDName { get { return "changeslot"; } }
-        public override string CMDDesc { get { return "changeslot <1-9>: Change hotbar"; } }
+        public override string CMDDesc { get { return "changeslot <1-9>: 切换物品栏"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {

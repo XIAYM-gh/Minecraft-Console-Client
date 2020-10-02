@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     public class Connect : Command
     {
         public override string CMDName { get { return "connect"; } }
-        public override string CMDDesc { get { return "connect <server> [account]: connect to the specified server."; } }
+        public override string CMDDesc { get { return "connect <服务器> : 连接一个存在于servers.txt中的服务器"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
@@ -19,7 +19,7 @@ namespace MinecraftClient.Commands
                 {
                     if (!Settings.SetAccount(args[1]))
                     {
-                        return "Unknown account '" + args[1] + "'.";
+                        return "未知用户 '" + args[1] + "'.";
                     }
                 }
 
@@ -28,7 +28,7 @@ namespace MinecraftClient.Commands
                     Program.Restart();
                     return "";
                 }
-                else return "Invalid server IP '" + args[0] + "'.";
+                else return "未知服务器 IP '" + args[0] + "'.";
             }
             else return CMDDesc;
         }

@@ -68,7 +68,7 @@ internal class VkLongPoolClient
 			if (link == "") return Utils_GetShortLink(url);
 			else return link;
 		}
-		else return "Invalid link format";
+		else return "错误链接格式.";
 	}
 	/* Docs */
 	public string Docs_GetMessagesUploadServer(string peer_id, string type, string file)
