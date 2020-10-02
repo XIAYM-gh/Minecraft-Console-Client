@@ -43,7 +43,7 @@ namespace MinecraftClient.ChatBots
             public void SaveToFile(string filePath)
             {
                 List<string> lines = new List<string>();
-                lines.Add("#Ignored Players");
+                lines.Add("#被忽略的玩家:");
                 foreach (string player in this)
                     lines.Add(player);
                 FileMonitor.WriteAllLinesWithRetries(filePath, lines);
@@ -96,7 +96,7 @@ namespace MinecraftClient.ChatBots
                     iniSection["anonymous"] = mail.Anonymous.ToString();
                     iniFileDict["mail" + mailCount] = iniSection;
                 }
-                FileMonitor.WriteAllLinesWithRetries(filePath, INIFile.Generate(iniFileDict, "Mail Database"));
+                FileMonitor.WriteAllLinesWithRetries(filePath, INIFile.Generate(iniFileDict, "邮箱数据库"));
             }
         }
 
@@ -156,53 +156,53 @@ namespace MinecraftClient.ChatBots
         /// </summary>
         public override void Initialize()
         {
-            LogDebugToConsole("Initializing Mailer with settings:");
-            LogDebugToConsole(" - Database File: " + Settings.Mailer_DatabaseFile);
-            LogDebugToConsole(" - Ignore List: " + Settings.Mailer_IgnoreListFile);
-            LogDebugToConsole(" - Public Interactions: " + Settings.Mailer_PublicInteractions);
-            LogDebugToConsole(" - Max Mails per Player: " + Settings.Mailer_MaxMailsPerPlayer);
-            LogDebugToConsole(" - Max Database Size: " + Settings.Mailer_MaxDatabaseSize);
-            LogDebugToConsole(" - Mail Retention: " + Settings.Mailer_MailRetentionDays + " days");
+            LogDebugToConsole("邮箱机器人设置:");
+            LogDebugToConsole(" - 数据库文件: " + Settings.Mailer_DatabaseFile);
+            LogDebugToConsole(" - 忽略列表: " + Settings.Mailer_IgnoreListFile);
+            LogDebugToConsole(" - 公开互动者: " + Settings.Mailer_PublicInteractions);
+            LogDebugToConsole(" - 每个玩家最多发送的邮件: " + Settings.Mailer_MaxMailsPerPlayer);
+            LogDebugToConsole(" - 最大数据库大小: " + Settings.Mailer_MaxDatabaseSize);
+            LogDebugToConsole(" - 邮件保留时间: " + Settings.Mailer_MailRetentionDays + " 天");
 
             if (Settings.Mailer_MaxDatabaseSize <= 0)
             {
-                LogToConsole("Cannot enable Mailer: Max Database Size must be greater than zero. Please review the settings.");
+                LogToConsole("无法启用邮件功能: 邮件数据库最大大小必须大于0!");
                 UnloadBot();
                 return;
             }
 
             if (Settings.Mailer_MaxMailsPerPlayer <= 0)
             {
-                LogToConsole("Cannot enable Mailer: Max Mails per Player must be greater than zero. Please review the settings.");
+                LogToConsole("无法启用邮件功能: 每个玩家最大发送的邮件数量必须大于0!");
                 UnloadBot();
                 return;
             }
 
             if (Settings.Mailer_MailRetentionDays <= 0)
             {
-                LogToConsole("Cannot enable Mailer: Mail Retention must be greater than zero. Please review the settings.");
+                LogToConsole("无法启用邮件功能: 邮件保存时间必须大于0.");
                 UnloadBot();
                 return;
             }
 
             if (!File.Exists(Settings.Mailer_DatabaseFile))
             {
-                LogToConsole("Creating new database file: " + Path.GetFullPath(Settings.Mailer_DatabaseFile));
+                LogToConsole("创建新的数据库文件: " + Path.GetFullPath(Settings.Mailer_DatabaseFile));
                 new MailDatabase().SaveToFile(Settings.Mailer_DatabaseFile);
             }
 
             if (!File.Exists(Settings.Mailer_IgnoreListFile))
             {
-                LogToConsole("Creating new ignore list: " + Path.GetFullPath(Settings.Mailer_IgnoreListFile));
+                LogToConsole("创建新的忽略列表文件: " + Path.GetFullPath(Settings.Mailer_IgnoreListFile));
                 new IgnoreList().SaveToFile(Settings.Mailer_IgnoreListFile);
             }
 
             lock (readWriteLock)
             {
-                LogDebugToConsole("Loading database file: " + Path.GetFullPath(Settings.Mailer_DatabaseFile));
+                LogDebugToConsole("正在加载数据库文件: " + Path.GetFullPath(Settings.Mailer_DatabaseFile));
                 mailDatabase = MailDatabase.FromFile(Settings.Mailer_DatabaseFile);
 
-                LogDebugToConsole("Loading ignore list: " + Path.GetFullPath(Settings.Mailer_IgnoreListFile));
+                LogDebugToConsole("正在加载忽略列表文件: " + Path.GetFullPath(Settings.Mailer_IgnoreListFile));
                 ignoreList = IgnoreList.FromFile(Settings.Mailer_IgnoreListFile);
             }
 
@@ -210,7 +210,7 @@ namespace MinecraftClient.ChatBots
             mailDbFileMonitor = new FileMonitor(Path.GetDirectoryName(Settings.Mailer_DatabaseFile), Path.GetFileName(Settings.Mailer_DatabaseFile), FileMonitorCallback);
             ignoreListFileMonitor = new FileMonitor(Path.GetDirectoryName(Settings.Mailer_IgnoreListFile), Path.GetFileName(Settings.Mailer_IgnoreListFile), FileMonitorCallback);
 
-            RegisterChatBotCommand("mailer", "Subcommands: getmails, addignored, getignored, removeignored", ProcessInternalCommand);
+            RegisterChatBotCommand("mailer", "子命令: getmails, addignored, getignored, removeignored", ProcessInternalCommand);
         }
 
         /// <summary>
@@ -264,19 +264,19 @@ namespace MinecraftClient.ChatBots
                                                 mailDatabase.Add(mail);
                                                 mailDatabase.SaveToFile(Settings.Mailer_DatabaseFile);
                                             }
-                                            SendPrivateMessage(username, "Message saved!");
+                                            SendPrivateMessage(username, "信息已保存!");
                                         }
-                                        else SendPrivateMessage(username, "Your message cannot be longer than " + maxMessageLength + " characters.");
+                                        else SendPrivateMessage(username, "你的信息长度不能大于 " + maxMessageLength + " 字节.");
                                     }
-                                    else SendPrivateMessage(username, "Recipient '" + recipient + "' is not a valid player name.");
+                                    else SendPrivateMessage(username, "'" + recipient + "' 不是一个有效的玩家名.");
                                 }
-                                else SendPrivateMessage(username, "Usage: " + command + " <recipient> <message>");
+                                else SendPrivateMessage(username, "使用方法: " + command + " <玩家名> <信息>");
                             }
-                            else SendPrivateMessage(username, "Couldn't save Message. Limit reached!");
+                            else SendPrivateMessage(username, "数据库达到上线，无法保存!");
                             break;
                     }
                 }
-                else LogDebugToConsole(username + " is ignored!");
+                else LogDebugToConsole(username + " 已经被忽略!");
             }
         }
 
@@ -288,16 +288,16 @@ namespace MinecraftClient.ChatBots
             DateTime dateNow = DateTime.Now;
             if (nextMailSend < dateNow)
             {
-                LogDebugToConsole("Looking for mails to send @ " + DateTime.Now);
+                LogDebugToConsole("正在检查邮件并发送 @ " + DateTime.Now);
 
                 // Process at most 3 mails at a time to avoid spamming. Other mails will be processed on next mail send
                 HashSet<string> onlinePlayersLowercase = new HashSet<string>(GetOnlinePlayers().Select(name => name.ToLower()));
                 foreach (Mail mail in mailDatabase.Where(mail => !mail.Delivered && onlinePlayersLowercase.Contains(mail.RecipientLowercase)).Take(3))
                 {
                     string sender = mail.Anonymous ? "Anonymous" : mail.Sender;
-                    SendPrivateMessage(mail.Recipient, sender + " mailed: " + mail.Content);
+                    SendPrivateMessage(mail.Recipient, sender + " 发送信息: " + mail.Content);
                     mail.setDelivered();
-                    LogDebugToConsole("Delivered: " + mail.ToString());
+                    LogDebugToConsole("已到达: " + mail.ToString());
                 }
 
                 lock (readWriteLock)

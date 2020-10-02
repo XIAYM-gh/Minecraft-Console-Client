@@ -257,7 +257,7 @@ namespace MinecraftClient
                 {
                     if (protocolversion != 0)
                         ConsoleIO.WriteLineFormatted("§e[信息]§8正在检查服务器是否存在forge..");
-                    else ConsoleIO.WriteLineFormatted("§e[信息]§8正在检查Motd....");
+                    else ConsoleIO.WriteLineFormatted("§e[信息]§8正在检查版本....");
                     if (!ProtocolHandler.GetServerInfo(Settings.ServerIP, Settings.ServerPort, ref protocolversion, ref forgeInfo))
                     {
                         HandleFailure("无法找到这个服务器!", true, ChatBots.AutoRelog.DisconnectReason.ConnectionLost);

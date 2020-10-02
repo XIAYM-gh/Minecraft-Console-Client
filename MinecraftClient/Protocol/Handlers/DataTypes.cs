@@ -776,7 +776,7 @@ namespace MinecraftClient.Protocol.Handlers
             }
             else
             {
-                throw new System.IO.InvalidDataException("GetNbt: Cannot encode data type " + obj.GetType().Name + " into NBT!");
+                throw new System.IO.InvalidDataException("GetNbt: 无法将数据类型编码 " + obj.GetType().Name + " 为 NBT!");
             }
         }
 

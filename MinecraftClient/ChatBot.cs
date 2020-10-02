@@ -73,7 +73,7 @@ namespace MinecraftClient
                 if (MessageCooldownEnded)
                 {
                     string text = chatQueue.Dequeue();
-                    LogToConsole("Sending '" + text + "'");
+                    LogToConsole("发送 '" + text + "'中");
                     lastMessageSentTime = DateTime.Now;
                     Handler.SendText(text);
                 }
@@ -391,7 +391,7 @@ namespace MinecraftClient
                 }
             }
 
-            LogToConsole("Sending '" + text + "'");
+            LogToConsole("正在发送 '" + text + "'");
             lastMessageSentTime = DateTime.Now;
             return Handler.SendText(text);
         }

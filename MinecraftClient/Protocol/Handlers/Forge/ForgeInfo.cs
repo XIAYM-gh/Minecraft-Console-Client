@@ -117,7 +117,7 @@ namespace MinecraftClient.Protocol.Handlers.Forge
                     break;
 
                 default:
-                    throw new NotImplementedException("FMLVersion '" + fmlVersion + "' not implemented!");
+                    throw new NotImplementedException("FML版本 '" + fmlVersion + "' 暂未实现!");
             }
         }
     }

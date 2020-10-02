@@ -468,15 +468,15 @@ namespace MinecraftClient.Protocol.Handlers
                 byte[] token = readNextByteArray();
 
                 if (serverID == "-")
-                    ConsoleIO.WriteLineFormatted("§8Server is in offline mode.");
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8服务器处于离线模式.");
                 else if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted("§8Handshake successful. (Server ID: " + serverID + ')');
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8握手成功. (服务器 ID: " + serverID + ')');
 
                 return StartEncryption(uuid, username, sessionID, token, serverID, PublicServerkey);
             }
             else
             {
-                ConsoleIO.WriteLineFormatted("§8Invalid response to Handshake packet");
+                ConsoleIO.WriteLineFormatted("§c[错误]§8对握手数据包的响应无效");
                 return false;
             }
         }
@@ -487,14 +487,14 @@ namespace MinecraftClient.Protocol.Handlers
             byte[] secretKey = CryptoHandler.GenerateAESPrivateKey();
 
             if (Settings.DebugMessages)
-                ConsoleIO.WriteLineFormatted("§8Crypto keys & hash generated.");
+                ConsoleIO.WriteLineFormatted("§e[信息]§8Crypto 键 & hash值 已生成.");
 
             if (serverIDhash != "-")
             {
-                Console.WriteLine("Checking Session...");
+                Console.WriteLine("正在检查 Session...");
                 if (!ProtocolHandler.SessionCheck(uuid, sessionID, CryptoHandler.getServerHash(serverIDhash, serverKey, secretKey)))
                 {
-                    handler.OnConnectionLost(ChatBot.DisconnectReason.LoginRejected, "Failed to check session.");
+                    handler.OnConnectionLost(ChatBot.DisconnectReason.LoginRejected, "Session检查失败.");
                     return false;
                 }
             }
@@ -531,7 +531,7 @@ namespace MinecraftClient.Protocol.Handlers
             }
             else
             {
-                ConsoleIO.WriteLineFormatted("§8Invalid response to StartEncryption packet");
+                ConsoleIO.WriteLineFormatted("§c[错误]§8对始加密数据包的响应无效.");
                 return false;
             }
         }

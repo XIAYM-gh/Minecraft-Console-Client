@@ -170,8 +170,8 @@ namespace MinecraftClient.ChatBots
                 UnloadBot();
                 return;
             }
-            RegisterChatBotCommand("autocraft", "Auto-crafting ChatBot command", CommandHandler);
-            RegisterChatBotCommand("ac", "Auto-crafting ChatBot command alias", CommandHandler);
+            RegisterChatBotCommand("autocraft", "自动合成机器人命令", CommandHandler);
+            RegisterChatBotCommand("ac", "自动合成命令别名", CommandHandler);
             LoadConfig();
         }
 
@@ -186,14 +186,14 @@ namespace MinecraftClient.ChatBots
                         return "";
                     case "list":
                         string names = string.Join(", ", recipes.Keys.ToList());
-                        return String.Format("Total {0} recipes loaded: {1}", recipes.Count, names);
+                        return String.Format("总共有 {0} 个配方加载 : {1}", recipes.Count, names);
                     case "reload":
                         recipes.Clear();
                         LoadConfig();
                         return "";
                     case "resetcfg":
                         WriteDefaultConfig();
-                        return "Resetting your config to default";
+                        return "已设置配置为默认.";
                     case "start":
                         if (args.Length >= 2)
                         {
@@ -204,9 +204,9 @@ namespace MinecraftClient.ChatBots
                                 PrepareCrafting(recipes[name]);
                                 return "";
                             }
-                            else return "Specified recipe name does not exist. Check your config file.";
+                            else return "未指定配方名称,请检查配置文件!";
                         }
-                        else return "Please specify the recipe name you want to craft.";
+                        else return "请指定您要合成的配方名称!";
                     case "stop":
                         StopCrafting();
                         return "AutoCraft 已停止.";
@@ -221,7 +221,7 @@ namespace MinecraftClient.ChatBots
 
         private string GetHelp()
         {
-            return "Available commands: load, list, reload, resetcfg, start, stop, help. Use /autocraft help <cmd name> for more information. You may use /ac as command alias.";
+            return "可用子命令: load, list, reload, resetcfg, start, stop, help. 使用 /autocraft help <cmd name> 获取帮助. 可以用/ac代替/autocraft.";
         }
 
         private string GetCommandHelp(string cmd)
@@ -229,7 +229,7 @@ namespace MinecraftClient.ChatBots
             switch (cmd.ToLower())
             {
                 case "load":
-                    return "Load the config file.";
+                    return "加载配置文件.";
                 case "list":
                     return "List loaded recipes name.";
                 case "reload":
@@ -276,7 +276,7 @@ namespace MinecraftClient.ChatBots
             string[] content =
             {
                 "[AutoCraft]",
-                "# A valid autocraft config must begin with [AutoCraft]",
+                "# 一个有效的自动合成文件必须以 [AutoCraft] 开头.",
                 "",
                 "tablelocation=0,65,0   # Location of the crafting table if you intended to use it. Terrain and movements must be enabled. Format: x,y,z",
                 "onfailure=abort        # What to do on crafting failure, abort or wait",
@@ -285,7 +285,7 @@ namespace MinecraftClient.ChatBots
                 "# This is an example of how to define a recipe",
                 "[Recipe]",
                 "name=whatever          # name could be whatever you like. This field must be defined first",
-                "type=player            # crafting table type: player or table",
+                "type=player            # 合成台类别,player或table",
                 "result=StoneButton     # the resulting item",
                 "",
                 "# define slots with their deserved item",

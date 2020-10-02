@@ -256,7 +256,7 @@ public class Mail : ChatBot
         {
             if (options.debug_msg)
             {
-                LogToConsole("Respawning! \n Performed by: " + sender);
+                LogToConsole("重生中! \n Performed by: " + sender);
             }
             PerformInternalCommand("respawn");
         }

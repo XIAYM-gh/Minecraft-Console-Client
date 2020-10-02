@@ -374,7 +374,7 @@ namespace MinecraftClient.Protocol.Handlers
                             if (Settings.DebugMessages)
                             {
                                 string registryName = dataTypes.ReadNextString(packetData);
-                                ConsoleIO.WriteLineFormatted("§e[信息]§8Acknowledging FML2 Server Registry: " + registryName);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8已确定FML2服务器注册表: " + registryName);
                             }
 
                             fmlResponsePacket.AddRange(dataTypes.GetVarInt(99));
@@ -393,7 +393,7 @@ namespace MinecraftClient.Protocol.Handlers
                             if (Settings.DebugMessages)
                             {
                                 string configName = dataTypes.ReadNextString(packetData);
-                                ConsoleIO.WriteLineFormatted("§e[信息]§8Acknowledging FML2 Server Config: " + configName);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8已确定FML2服务器配置: " + configName);
                             }
 
                             fmlResponsePacket.AddRange(dataTypes.GetVarInt(99));
@@ -402,7 +402,7 @@ namespace MinecraftClient.Protocol.Handlers
 
                         default:
                             if (Settings.DebugMessages)
-                                ConsoleIO.WriteLineFormatted("§e[信息]§8Got Unknown FML2 Handshake message no. " + packetID);
+                                ConsoleIO.WriteLineFormatted("§e[信息]§8由服务器得到了未知的FML2握手消息. " + packetID);
                             break;
                     }
 
@@ -472,7 +472,7 @@ namespace MinecraftClient.Protocol.Handlers
                     versionString = "2";
                     break;
                 default:
-                    throw new NotImplementedException("§e[信息]FML版本 '" + fmlVersion + "' 未完成/不支持!");
+                    throw new NotImplementedException("§e[信息]§8FML版本 '" + fmlVersion + "' 未完成/不支持!");
             }
 
             if (jsonData.Properties.ContainsKey(forgeDataTag) && jsonData.Properties[forgeDataTag].Type == Json.JSONData.DataType.Object)
