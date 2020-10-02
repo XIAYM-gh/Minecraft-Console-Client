@@ -62,7 +62,7 @@ namespace MinecraftClient.ChatBots
             }
             if (String.IsNullOrEmpty(file) || file.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
             {
-                LogToConsole("Path '" + file + "' contains invalid characters.");
+                LogToConsole("路径 '" + file + "' 包含无效字符.");
                 UnloadBot();
             }
         }
@@ -88,15 +88,15 @@ namespace MinecraftClient.ChatBots
 
             if (saveChat && IsChatMessage(text, ref message, ref sender))
             {
-                save("Chat " + sender + ": " + message);
+                save("聊天 " + sender + ": " + message);
             }
             else if (savePrivate && IsPrivateMessage(text, ref message, ref sender))
             {
-                save("Private " + sender + ": " + message);
+                save("私密 " + sender + ": " + message);
             }
             else if (saveOther)
             {
-                save("Other: " + text);
+                save("其他: " + text);
             }
         }
 
@@ -104,7 +104,7 @@ namespace MinecraftClient.ChatBots
         {
             if (saveInternal)
             {
-                save(string.Format("Internal {0}({1}): {2}", commandName, commandParams, result));
+                save(string.Format("定时 {0}({1}): {2}", commandName, commandParams, result));
             }
         }
 
