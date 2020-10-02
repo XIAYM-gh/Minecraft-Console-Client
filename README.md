@@ -1,12 +1,18 @@
 ## 这是一个MCC的汉化版本 如果你有更好的意见，请fork此项目.
 ## 状态
-Translated(已翻译) : 61%<br>
-~ 正在汉化:自动检测forge/服务器版本<br>
+Translated(已翻译) : 65%<br>
+~ 正在汉化:自动检测forge<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
 **Change color of "feature not handled" from gray to red (#1265)**<br>
 下载汉化版本请前往"Releases"页面<br>
 提交bug请去:<br>
 [ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
+## 编译方法
+1.找到C:\Windows\Microsoft.NET\Framework\v4.X.XXXXX\MsBuild.exe<br>
+2.更改完代码后，将MinecraftClient.csproj拖到他上面<br>
+3.在编译成功的情况下, 应该在:<br>
+MinecraftClient/bin/Release或MinecraftClient/bin/Debug里面
+
 
 我的世界控制台客户端(MCC)
 ========================
