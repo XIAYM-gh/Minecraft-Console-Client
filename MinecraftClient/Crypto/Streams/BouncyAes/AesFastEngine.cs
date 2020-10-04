@@ -620,7 +620,7 @@ namespace Org.BouncyCastle.Crypto.Engines
             int KC = key.Length / 4;  // key length in words
 
             if (((KC != 4) && (KC != 6) && (KC != 8)) || ((KC * 4) != key.Length))
-                throw new ArgumentException("Key length not 128/192/256 bits.");
+                throw new ArgumentException("密钥长度不是 128/192/256 位");
 
             ROUNDS = KC + 6;  // This is not always true for the generalized Rijndael that allows larger block sizes
 
@@ -702,7 +702,7 @@ namespace Org.BouncyCastle.Crypto.Engines
             KeyParameter keyParameter = parameters as KeyParameter;
 
             if (keyParameter == null)
-                throw new ArgumentException("invalid parameter passed to AES init - " + parameters.GetType().Name);
+                throw new ArgumentException("传递给AES init的参数无效 - " + parameters.GetType().Name);
 
             WorkingKey = GenerateWorkingKey(keyParameter.GetKey(), forEncryption);
 
@@ -731,10 +731,10 @@ namespace Org.BouncyCastle.Crypto.Engines
             int outOff)
         {
             if (WorkingKey == null)
-                throw new InvalidOperationException("AES engine not initialised");
+                throw new InvalidOperationException("AES引擎没有初始化");
 
-            Check.DataLength(input, inOff, 16, "input buffer too short");
-            Check.OutputLength(output, outOff, 16, "output buffer too short");
+            Check.DataLength(input, inOff, 16, "输入缓冲区过短");
+            Check.OutputLength(output, outOff, 16, "输出缓冲器过短");
 
             UnPackBlock(input, inOff);
 
