@@ -1,4 +1,3 @@
-## 这是一个MCC的汉化版本 如果你有更好的意见，请提交Pull Request或Fork此项目.
 ## 状态
 **当前 Minecraft Console Client ChineseTranslate 并未完全汉化完成，所以如若发现翻译不准确等问题，欢迎提交Issuse哦！**<br>
 Translated(已翻译) 约 70%<br>
