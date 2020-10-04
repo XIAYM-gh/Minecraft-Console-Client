@@ -149,11 +149,11 @@ namespace Org.BouncyCastle.Crypto.Modes
         {
             if ((inOff + blockSize) > input.Length)
             {
-                throw new DataLengthException("input buffer too short");
+                throw new DataLengthException("输入缓冲区过短");
             }
             if ((outOff + blockSize) > outBytes.Length)
             {
-                throw new DataLengthException("output buffer too short");
+                throw new DataLengthException("输出缓冲器过短");
             }
             cipher.ProcessBlock(cfbV, 0, cfbOutV, 0);
             //
@@ -190,11 +190,11 @@ namespace Org.BouncyCastle.Crypto.Modes
         {
             if ((inOff + blockSize) > input.Length)
             {
-                throw new DataLengthException("input buffer too short");
+                throw new DataLengthException("输入缓冲区过短");
             }
             if ((outOff + blockSize) > outBytes.Length)
             {
-                throw new DataLengthException("output buffer too short");
+                throw new DataLengthException("输出缓冲器过短");
             }
             cipher.ProcessBlock(cfbV, 0, cfbOutV, 0);
             //
