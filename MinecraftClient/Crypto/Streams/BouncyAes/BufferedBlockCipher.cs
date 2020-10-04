@@ -137,7 +137,7 @@ namespace Org.BouncyCastle.Crypto
 			if (bufOff == buf.Length)
 			{
 				if ((outOff + buf.Length) > output.Length)
-					throw new DataLengthException("output buffer too short");
+					throw new DataLengthException("输出缓冲器过短");
 
 				bufOff = 0;
 				return cipher.ProcessBlock(buf, 0, output, outOff);
@@ -213,7 +213,7 @@ namespace Org.BouncyCastle.Crypto
 			if (length < 1)
 			{
 				if (length < 0)
-					throw new ArgumentException("Can't have a negative input length!");
+					throw new ArgumentException("输入长度不能为负!");
 
 				return 0;
 			}
@@ -223,7 +223,7 @@ namespace Org.BouncyCastle.Crypto
 
 			if (outLength > 0)
 			{
-                Check.OutputLength(output, outOff, outLength, "output buffer too short");
+                Check.OutputLength(output, outOff, outLength, "输出缓冲器过短");
 			}
 
             int resultLen = 0;
@@ -336,8 +336,8 @@ namespace Org.BouncyCastle.Crypto
 			{
 				if (bufOff != 0)
 				{
-                    Check.DataLength(!cipher.IsPartialBlockOkay, "data not block size aligned");
-                    Check.OutputLength(output, outOff, bufOff, "output buffer too short for DoFinal()");
+                    Check.DataLength(!cipher.IsPartialBlockOkay, "数据块大小未对齐");
+                    Check.OutputLength(output, outOff, bufOff, "输出缓冲区对 DoFinal() 来说太短了");
 
                     // NB: Can't copy directly, or we may write too much output
 					cipher.ProcessBlock(buf, 0, buf, 0);
