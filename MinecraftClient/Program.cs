@@ -44,7 +44,7 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
-			ConsoleIO.WriteLineFormatted("§eCommit ID 0c88c18ea060853b32d5b23684d9323bfd3840ae   §8汉化By XIAYM");
+			ConsoleIO.WriteLineFormatted("§e更新到 (ORelio) Commit ID 0c88c18ea060853b32d5b23684d9323bfd3840ae   §8汉化By XIAYM");
 
             //Build information to facilitate processing of bug reports
             //if (BuildInfo != null)

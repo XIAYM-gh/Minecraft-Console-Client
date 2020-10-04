@@ -43,7 +43,7 @@ namespace MinecraftClient
 
         //Minecraft Settings
         public static bool MCSettings_Enabled = true;
-        public static string MCSettings_Locale = "en_US";
+        public static string MCSettings_Locale = "zh_CN";
         public static byte MCSettings_Difficulty = 0;
         public static byte MCSettings_RenderDistance = 8;
         public static byte MCSettings_ChatMode = 0;
@@ -79,7 +79,7 @@ namespace MinecraftClient
         public static TimeSpan splitMessageDelay = TimeSpan.FromSeconds(2);
         public static List<string> Bots_Owners = new List<string>();
         public static TimeSpan botMessageDelay = TimeSpan.FromSeconds(2);
-        public static string Language = "en_GB";
+        public static string Language = "zh_CN";
         public static bool interactiveMode = true;
         public static char internalCmdChar = '/';
         public static bool playerHeadAsIcon = false;

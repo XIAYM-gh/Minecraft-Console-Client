@@ -25,7 +25,7 @@ namespace MinecraftClient.ChatBots
         private int updateDebounce = 0;
         private int updateTimeoutValue = 10;
         private int updateTimeout = 0;
-        private string timeoutAction = "unspecified";
+        private string timeoutAction = "未定义";
 
         private string configPath = @"autocraft\config.ini";
         private string lastRecipe = ""; // Used in parsing recipe config
@@ -229,19 +229,19 @@ namespace MinecraftClient.ChatBots
             switch (cmd.ToLower())
             {
                 case "load":
-                    return "加载配置文件.";
+                    return "加载配置文件";
                 case "list":
-                    return "List loaded recipes name.";
+                    return "列出已加载合成方案";
                 case "reload":
-                    return "Reload the config file.";
+                    return "重新加载配置文件";
                 case "resetcfg":
-                    return "Write the default example config to default location.";
+                    return "将默认示例配置写入默认位置";
                 case "start":
-                    return "Start the crafting. Usage: /autocraft start <recipe name>";
+                    return "开始合成, 使用: /autocraft start <合成方案>";
                 case "stop":
-                    return "Stop the current running crafting process";
+                    return "停止当前正在运行的制造过程";
                 case "help":
-                    return "Get the command description. Usage: /autocraft help <command name>";
+                    return "获取命令描述, 使用: /autocraft help <命令名>";
                 default:
                     return GetHelp();
             }
@@ -258,16 +258,16 @@ namespace MinecraftClient.ChatBots
                     Directory.CreateDirectory(@"autocraft");
                 }
                 WriteDefaultConfig();
-                LogDebugToConsole("No config found. Writing a new one.");
+                LogDebugToConsole("没有找到配置, 创建一个新的");
             }
             try
             {
                 ParseConfig();
-                LogToConsole("Successfully loaded");
+                LogToConsole("成功加载");
             }
             catch (Exception e)
             {
-                LogToConsole("Error while parsing config: \n" + e.Message);
+                LogToConsole("解析配置时出错: \n" + e.Message);
             }
         }
 
@@ -278,20 +278,28 @@ namespace MinecraftClient.ChatBots
                 "[AutoCraft]",
                 "# 一个有效的自动合成文件必须以 [AutoCraft] 开头.",
                 "",
-                "tablelocation=0,65,0   # Location of the crafting table if you intended to use it. Terrain and movements must be enabled. Format: x,y,z",
-                "onfailure=abort        # What to do on crafting failure, abort or wait",
+                "tablelocation=0,65,0   # 如果你想使用工作台的话, Terrain and movements必须启用, 在这里填写工作台的坐标, 格式: x,y,z",
+                "onfailure=abort        # 若合成失败, 终止(abort) 还是 等待(wait)",
                 "",
-                "# You can define multiple recipes in a single config file",
-                "# This is an example of how to define a recipe",
+                "# 您可以在一个配置文件中定义多个合成方案",
+                "# 这是一个如何定义合成方案的示例",
                 "[Recipe]",
-                "name=whatever          # name could be whatever you like. This field must be defined first",
-                "type=player            # 合成台类别,player或table",
+                "name=whatever          # 你想叫什么名字都行, 必须首先定义此字段（用于 Start）",
+                "type=player            # 合成方式, 玩家(player) 还是 工作台(table)",
                 "result=StoneButton     # the resulting item",
                 "",
-                "# define slots with their deserved item",
-                "slot1=Stone            # slot start with 1, count from left to right, top to bottom",
-                "# For the naming of the items, please see",
+                "# 定义 槽 与它们应得的项目",
+                "slot1=Stone            # 插槽(slot) 从1开始，从左到右，从上到下计数",
+                "# 有关项目名称，请参阅：",
                 "# https://github.com/ORelio/Minecraft-Console-Client/blob/master/MinecraftClient/Inventory/ItemType.cs"
+							
+				 
+			 
+			 
+			 
+			  
+		   
+		   
             };
             File.WriteAllLines(configPath, content);
         }
@@ -301,11 +309,11 @@ namespace MinecraftClient.ChatBots
             string[] content = File.ReadAllLines(configPath);
             if (content.Length <= 0)
             {
-                throw new Exception("Empty onfiguration file: " + configPath);
+                throw new Exception("空的配置文件: " + configPath);
             }
             if (content[0].ToLower() != "[autocraft]")
             {
-                throw new Exception("Invalid configuration file: " + configPath);
+                throw new Exception("无效的配置文件: " + configPath);
             }
 
             // local variable for use in parsing config
@@ -352,7 +360,7 @@ namespace MinecraftClient.ChatBots
                 }
                 else
                 {
-                    throw new Exception("Missing item in recipe: " + pair.Key);
+                    throw new Exception("合成方案中遗漏的项目: " + pair.Key);
                 }
             }
 
@@ -373,7 +381,7 @@ namespace MinecraftClient.ChatBots
                         tableLocation.Y = Convert.ToInt32(values[1]);
                         tableLocation.Z = Convert.ToInt32(values[2]);
                     }
-                    else throw new Exception("Invalid tablelocation format: " + key);
+                    else throw new Exception("合成台位置(tablelocation) 格式无效: " + key);
                     break;
                 case "onfailure":
                     abortOnFailure = value.ToLower() == "abort" ? true : false;
@@ -411,17 +419,17 @@ namespace MinecraftClient.ChatBots
                         }
                         else
                         {
-                            throw new Exception("Invalid item name in recipe " + lastRecipe + " at " + key);
+                            throw new Exception("无效的物品名称 " + lastRecipe + " 在 " + key);
                         }
                     }
                     else
                     {
-                        throw new Exception("Missing recipe name while parsing a recipe");
+                        throw new Exception("解析合成方案时缺少合成方案名称");
                     }
                 }
                 else
                 {
-                    throw new Exception("Invalid slot field in recipe: " + key);
+                    throw new Exception("无效的物品槽在合成方案: " + key);
                 }
             }
             else
@@ -436,7 +444,7 @@ namespace MinecraftClient.ChatBots
                         }
                         else
                         {
-                            throw new Exception("Duplicate recipe name specified: " + value);
+                            throw new Exception("指定的复制配方名称: " + value);
                         }
                         break;
                     case "type":
@@ -555,7 +563,7 @@ namespace MinecraftClient.ChatBots
                     // table required but not found. Try to open one
                     OpenTable(tableLocation);
                     waitingForTable = true;
-                    SetTimeout("table not found");
+                    SetTimeout("未找到工作台");
                     return;
                 }
             }
@@ -577,10 +585,10 @@ namespace MinecraftClient.ChatBots
                 // Repeat the whole process again
                 actionSteps.Add(new ActionStep(ActionType.Repeat));
                 // Start crafting
-                ConsoleIO.WriteLogLine("Starting AutoCraft: " + recipe.ResultItem);
+                ConsoleIO.WriteLogLine("正在启动 AutoCraft: " + recipe.ResultItem);
                 HandleNextStep();
             }
-            else ConsoleIO.WriteLogLine("AutoCraft cannot be started. Check your available materials for crafting " + recipe.ResultItem);
+            else ConsoleIO.WriteLogLine("AutoCraft 启动失败, 检查你可用的制作材料 " + recipe.ResultItem);
         }
 
         /// <summary>
@@ -596,7 +604,7 @@ namespace MinecraftClient.ChatBots
             if (GetInventories().ContainsKey(inventoryInUse))
             {
                 CloseInventory(inventoryInUse);
-                ConsoleIO.WriteLogLine("Inventory #" + inventoryInUse + " was closed by AutoCraft");
+                ConsoleIO.WriteLogLine("物品栏 #" + inventoryInUse + " 已关闭于 AutoCraft");
             }
         }
 
@@ -679,12 +687,12 @@ namespace MinecraftClient.ChatBots
                 if (actionSteps[index - 1].ActionType == ActionType.LeftClick && actionSteps[index - 1].ItemType != ItemType.Air)
                 {
                     // Inform user the missing meterial name
-                    ConsoleIO.WriteLogLine("Missing material: " + actionSteps[index - 1].ItemType.ToString());
+                    ConsoleIO.WriteLogLine("缺少材料: " + actionSteps[index - 1].ItemType.ToString());
                 }
                 if (abortOnFailure)
                 {
                     StopCrafting();
-                    ConsoleIO.WriteLogLine("Crafting aborted! Check your available materials.");
+                    ConsoleIO.WriteLogLine("制作失败! 请检查你的可用材料");
                 }
                 else
                 {
@@ -692,21 +700,21 @@ namespace MinecraftClient.ChatBots
                     // Even though crafting failed, action step index will still increase
                     // we want to do that failed step again so decrease index by 1
                     index--;
-                    ConsoleIO.WriteLogLine("Crafting failed! Waiting for more materials");
+                    ConsoleIO.WriteLogLine("制作失败! 等待更多材料");
                 }
             }
         }
 
         private void HandleUpdateTimeout()
         {
-            ConsoleIO.WriteLogLine("Action timeout! Reason: " + timeoutAction);
+            ConsoleIO.WriteLogLine("操作超时! 原因: " + timeoutAction);
         }
 
         /// <summary>
         /// Set the timeout. Used to detect the failure of open crafting table
         /// </summary>
         /// <param name="reason">The reason to display if timeout</param>
-        private void SetTimeout(string reason = "unspecified")
+        private void SetTimeout(string reason = "未定义")
         {
             updateTimeout = updateTimeoutValue;
             timeoutAction = reason;

@@ -27,7 +27,7 @@ namespace MinecraftClient.ChatBots
         {
             if (!Enum.TryParse(mode, true, out dropMode))
             {
-                LogToConsole("Cannot read drop mode from config. Using include mode.");
+                LogToConsole("无法从配置中读取拖放模式, 使用 Include 模式");
             }
             if (dropMode != Mode.Everything)
                 this.itemList = ItemListParser(itemList).ToList();
@@ -64,10 +64,10 @@ namespace MinecraftClient.ChatBots
                         enable = true;
                         inventoryUpdated = 0;
                         OnUpdateFinish();
-                        return "AutoDrop enabled";
+                        return "AutoDrop 开启";
                     case "off":
                         enable = false;
-                        return "AutoDrop disabled";
+                        return "AutoDrop 关闭";
                     case "add":
                         if (args.Length >= 2)
                         {
@@ -75,16 +75,16 @@ namespace MinecraftClient.ChatBots
                             if (Enum.TryParse(args[1], true, out item))
                             {
                                 itemList.Add(item);
-                                return "Added item " + item.ToString();
+                                return "增加物品 " + item.ToString();
                             }
                             else
                             {
-                                return "Incorrect item name " + args[1] + ". Please try again";
+                                return "错误的物品的名称 " + args[1] + ". 请重试";
                             }
                         }
                         else
                         {
-                            return "Usage: add <item name>";
+                            return "语法: add <物品名称>";
                         }
                     case "remove":
                         if (args.Length >= 2)
@@ -95,30 +95,30 @@ namespace MinecraftClient.ChatBots
                                 if (itemList.Contains(item))
                                 {
                                     itemList.Remove(item);
-                                    return "Removed item " + item.ToString();
+                                    return "移除物品 " + item.ToString();
                                 }
                                 else
                                 {
-                                    return "Item not in the list";
+                                    return "列表中没有的项目";
                                 }
                             }
                             else
                             {
-                                return "Incorrect item name " + args[1] + ". Please try again";
+                                return "错误的物品的名称 " + args[1] + ". 请重试";
                             }
                         }
                         else
                         {
-                            return "Usage: remove <item name>";
+                            return "语法: remove <物品名称>";
                         }
                     case "list":
                         if (itemList.Count > 0)
                         {
-                            return "Total " + itemList.Count + " in the list:\n" + string.Join("\n", itemList);
+                            return "总计 " + itemList.Count + " 在列表:\n" + string.Join("\n", itemList);
                         }
                         else
                         {
-                            return "No item in the list";
+                            return "列表中没有的项目";
                         }
                     default:
                         return GetHelp();
@@ -132,19 +132,19 @@ namespace MinecraftClient.ChatBots
 
         private string GetHelp()
         {
-            return "AutoDrop ChatBot command. Available commands: on, off, add, remove, list";
+            return "AutoDrop ChatBot 命令. 可用命令: on, off, add, remove, list";
         }
 
         public override void Initialize()
         {
             if (!GetInventoryEnabled())
             {
-                LogToConsole("Inventory handling is disabled. Unloading...");
+                LogToConsole("库存处理被禁用. 取消加载...");
                 UnloadBot();
                 return;
             }
-            RegisterChatBotCommand("autodrop", "AutoDrop ChatBot command", CommandHandler);
-            RegisterChatBotCommand("ad", "AutoDrop ChatBot command alias", CommandHandler);
+            RegisterChatBotCommand("autodrop", "AutoDrop ChatBot 命令", CommandHandler);
+            RegisterChatBotCommand("ad", "AutoDrop ChatBot 命令别名", CommandHandler);
         }
 
         public override void Update()

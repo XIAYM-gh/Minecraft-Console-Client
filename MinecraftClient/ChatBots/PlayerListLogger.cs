@@ -41,9 +41,9 @@ namespace MinecraftClient.ChatBots
 
         public override void GetText(string text)
         {
-            if (text.Contains("Joueurs en ligne") || text.Contains("Connected:") || text.Contains("online:"))
+            if (text.Contains("Joueurs en ligne") || text.Contains("已连接:") || text.Contains("在线:"))
             {
-                LogToConsole("Saving Player List");
+                LogToConsole("正在保存玩家列表");
                 DateTime now = DateTime.Now;
                 string TimeStamp = "[" + now.Year + '/' + now.Month + '/' + now.Day + ' ' + now.Hour + ':' + now.Minute + ']';
                 System.IO.File.AppendAllText(file, TimeStamp + "\n" + GetVerbatim(text) + "\n\n");

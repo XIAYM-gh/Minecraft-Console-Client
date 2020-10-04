@@ -8,8 +8,8 @@
     <ProjectGuid>{1E2FACE4-F5CA-4323-9641-740C6A551770}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MinecraftClient</RootNamespace>
-    <AssemblyName>MinecraftClient</AssemblyName>
+    <RootNamespace>MinecraftClientCN</RootNamespace>
+    <AssemblyName>MinecraftClientCN</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

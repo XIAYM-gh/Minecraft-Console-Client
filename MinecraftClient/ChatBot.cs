@@ -51,8 +51,8 @@ namespace MinecraftClient
                 if (_handler != null)
                     return _handler;
                 throw new InvalidOperationException(
-                    "ChatBot methods should NOT be called in the constructor as API handler is not initialized yet."
-                    + " Override Initialize() or AfterGameJoined() instead to perform initialization tasks.");
+                    "不应该在构造函数中调用 ChatBot 方法，因为 API 处理程序还没有初始化"
+                    + " 重写 Initialize() 或 aftergamejoin() 来执行初始化任务");
             }
         }
         private bool MessageCooldownEnded
@@ -771,7 +771,7 @@ namespace MinecraftClient
         protected void ReconnectToTheServer(int ExtraAttempts = 3, int delaySeconds = 0)
         {
             if (Settings.DebugMessages)
-                ConsoleIO.WriteLogLine(String.Format("[{0}] Disconnecting and Reconnecting to the Server", this.GetType().Name));
+                ConsoleIO.WriteLogLine(String.Format("[{0}] 断开和重新连接到服务器", this.GetType().Name));
             McClient.ReconnectionAttemptsLeft = ExtraAttempts;
             Program.Restart(delaySeconds);
         }
@@ -977,7 +977,7 @@ namespace MinecraftClient
             }
             else
             {
-                LogToConsole("File not found: " + System.IO.Path.GetFullPath(file));
+                LogToConsole("文件未找到: " + System.IO.Path.GetFullPath(file));
                 return new string[0];
             }
         }
