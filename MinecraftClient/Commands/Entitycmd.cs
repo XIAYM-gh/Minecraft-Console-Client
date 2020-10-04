@@ -56,20 +56,20 @@ namespace MinecraftClient.Commands
                                             color = "§e";  // Yellow
 
                                         string location = String.Format("X:{0}, Y:{1}, Z:{2}", Math.Round(entity.Location.X, 2), Math.Round(entity.Location.Y, 2), Math.Round(entity.Location.Y, 2));
-                                        string done = String.Format("实体: {0}\n [信息] 类型: {1}", id, type);
+                                        string done = String.Format("实体: {0}\n 类型: {1}", id, type);
                                         if (!String.IsNullOrEmpty(nickname))
-                                            done += String.Format("\n [信息] 昵称: {0}", nickname);
+                                            done += String.Format("\n 昵称: {0}", nickname);
                                         else if (!String.IsNullOrEmpty(customname))
-                                            done += String.Format("\n [信息] 自定义名称: {0}§8", customname.Replace("&", "§"));
+                                            done += String.Format("\n 自定义名称: {0}§8", customname.Replace("&", "§"));
                                         if (type == EntityType.Player)
-                                            done += String.Format("\n [信息] 延迟: {0}", latency);
+                                            done += String.Format("\n 延迟: {0}", latency);
                                         else if (type == EntityType.Item || type == EntityType.ItemFrame || type == Mapping.EntityType.EyeOfEnder || type == Mapping.EntityType.Egg || type == Mapping.EntityType.EnderPearl || type == Mapping.EntityType.Potion || type == Mapping.EntityType.Fireball || type == Mapping.EntityType.FireworkRocket)
                                         {
                                             string displayName = item.DisplayName;
                                             if (String.IsNullOrEmpty(displayName))
-                                                done += String.Format("\n [信息] 物品: {0} x{1}", item.Type, item.Count);
+                                                done += String.Format("\n 物品: {0} x{1}", item.Type, item.Count);
                                             else
-                                                done += String.Format("\n [信息] 物品: {0} x{1} - {2}§8", item.Type, item.Count, displayName);
+                                                done += String.Format("\n 物品: {0} x{1} - {2}§8", item.Type, item.Count, displayName);
                                         }
 
                                         if (entity.Equipment.Count >= 1 && entity.Equipment != null)
