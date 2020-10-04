@@ -4,15 +4,17 @@
 Translated(已翻译) 约 70%<br>
 正在汉化:`各个内容`<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
-*Change color of "feature not handled" from gray to red (#1265)*<br>
+Change color of "feature not handled" from gray to red (#1265)<br>
 下载汉化版本请前往"Releases"页面<br>
 提交~bug~请去:<br>
 [Go To ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
-## 编译方法<br>
+## 编译方法
 1.找到C:\Windows\Microsoft.NET\Framework\v4.X.XXXXX\MsBuild.exe（前提：安装了.Net Framework)<br>
 2.更改完代码后，将MinecraftClient.csproj 或 MinecraftClient.sln 拖放 MsBuild.exe 打开<br>
 3.在编译成功的情况下, 应该在:<br>
-MinecraftClient/bin/Release 或 MinecraftClient/bin/Debug里。<br>
+MinecraftClient/bin/Release 或 MinecraftClient/bin/Debug里。
+
+
 我的世界控制台客户端(MCC)
 ========================
 
