@@ -11,7 +11,7 @@ namespace MinecraftClient.Commands
         public override string CMDName { get { return "entity"; } }
         public override string CMDDesc { get { return "entity <id|entitytype> <attack|use>"; } }
 
-        public override string Run(信息lient handler, string command, Dictionary<string, object> localVars)
+        public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
             if (handler.GetEntityHandlingEnabled())
             {
@@ -74,24 +74,24 @@ namespace MinecraftClient.Commands
 
                                         if (entity.Equipment.Count >= 1 && entity.Equipment != null)
                                         {
-                                            done += String.Format("\n [信息] 设备:");
+                                            done += String.Format("\n 设备:");
                                             if (entity.Equipment.ContainsKey(0) && entity.Equipment[0] != null)
-                                                done += String.Format("\n   [信息] 主手: {0} x{1}", entity.Equipment[0].Type, entity.Equipment[0].Count);
+                                                done += String.Format("\n   主手: {0} x{1}", entity.Equipment[0].Type, entity.Equipment[0].Count);
                                             if (entity.Equipment.ContainsKey(1) && entity.Equipment[1] != null)
-                                                done += String.Format("\n   [信息] 副手: {0} x{1}", entity.Equipment[1].Type, entity.Equipment[1].Count);
+                                                done += String.Format("\n   副手: {0} x{1}", entity.Equipment[1].Type, entity.Equipment[1].Count);
                                             if (entity.Equipment.ContainsKey(5) && entity.Equipment[5] != null)
-                                                done += String.Format("\n   [信息] 头盔: {0} x{1}", entity.Equipment[5].Type, entity.Equipment[5].Count);
+                                                done += String.Format("\n   头盔: {0} x{1}", entity.Equipment[5].Type, entity.Equipment[5].Count);
                                             if (entity.Equipment.ContainsKey(4) && entity.Equipment[4] != null)
-                                                done += String.Format("\n   [信息] 胸甲: {0} x{1}", entity.Equipment[4].Type, entity.Equipment[4].Count);
+                                                done += String.Format("\n   胸甲: {0} x{1}", entity.Equipment[4].Type, entity.Equipment[4].Count);
                                             if (entity.Equipment.ContainsKey(3) && entity.Equipment[3] != null)
-                                                done += String.Format("\n   [信息] 护腿: {0} x{1}", entity.Equipment[3].Type, entity.Equipment[3].Count);
+                                                done += String.Format("\n   护腿: {0} x{1}", entity.Equipment[3].Type, entity.Equipment[3].Count);
                                             if (entity.Equipment.ContainsKey(2) && entity.Equipment[2] != null)
-                                                done += String.Format("\n   [信息] 鞋子: {0} x{1}", entity.Equipment[2].Type, entity.Equipment[2].Count);
+                                                done += String.Format("\n   鞋子: {0} x{1}", entity.Equipment[2].Type, entity.Equipment[2].Count);
                                         }
-                                        done += String.Format("\n [信息] 构成: {0}", pose);
-                                        done += String.Format("\n [信息] 血量: {0}", color + health + "§8");
-                                        done += String.Format("\n [信息] 距离: {0}", distance);
-                                        done += String.Format("\n [信息] 位置: {0}", location);
+                                        done += String.Format("\n 构成: {0}", pose);
+                                        done += String.Format("\n 血量: {0}", color + health + "§8");
+                                        done += String.Format("\n 距离: {0}", distance);
+                                        done += String.Format("\n 位置: {0}", location);
                                         return done;
                                 }
                             }
