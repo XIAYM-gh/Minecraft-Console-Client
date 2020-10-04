@@ -1,4 +1,4 @@
-## 这是一个MCC的汉化版本 如果你有更好的~意见~，请提交Pull Request或Fork此项目.
+## 这是一个MCC的汉化版本 如果你有更好的意见，请提交Pull Request或Fork此项目.
 ## 状态
 **当前 Minecraft Console Client ChineseTranslate 并未完全汉化完成，所以如若发现翻译不准确等问题，欢迎提交Issuse哦！**<br>
 Translated(已翻译) 约 70%<br>
@@ -8,7 +8,7 @@ Translated(已翻译) 约 70%<br>
 下载汉化版本请前往"Releases"页面<br>
 提交~bug~请去:<br>
 [Go To ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
-## 编译方法
+## 编译方法<br>
 1.找到C:\Windows\Microsoft.NET\Framework\v4.X.XXXXX\MsBuild.exe（前提：安装了.Net Framework)<br>
 2.更改完代码后，将MinecraftClient.csproj 或 MinecraftClient.sln 拖放 MsBuild.exe 打开<br>
 3.在编译成功的情况下, 应该在:<br>
