@@ -27,7 +27,7 @@ namespace Org.BouncyCastle.Crypto
 			if (outBytes == null)
 				return 0;
 			if (outOff + outBytes.Length > output.Length)
-				throw new DataLengthException("output buffer too short");
+				throw new DataLengthException("输出缓冲器过短");
 			outBytes.CopyTo(output, outOff);
 			return outBytes.Length;
 		}
@@ -59,7 +59,7 @@ namespace Org.BouncyCastle.Crypto
 			if (outBytes == null)
 				return 0;
 			if (outOff + outBytes.Length > output.Length)
-				throw new DataLengthException("output buffer too short");
+				throw new DataLengthException("输出缓冲器过短");
 			outBytes.CopyTo(output, outOff);
 			return outBytes.Length;
 		}
@@ -83,7 +83,7 @@ namespace Org.BouncyCastle.Crypto
 		{
 			byte[] outBytes = DoFinal();
 			if (outOff + outBytes.Length > output.Length)
-				throw new DataLengthException("output buffer too short");
+				throw new DataLengthException("输出缓冲器过短");
 			outBytes.CopyTo(output, outOff);
 			return outBytes.Length;
 		}
