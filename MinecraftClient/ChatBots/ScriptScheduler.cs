@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -146,7 +146,7 @@ namespace MinecraftClient.ChatBots
                                     {
                                         task.triggerOnTime_alreadyTriggered = true;
                                         if (Settings.DebugMessages)
-                                            LogToConsole("Time / Running : " + task.action);
+                                            LogToConsole("时间 / Running : " + task.action);
                                         PerformInternalCommand(task.action);
                                     }
                                 }
