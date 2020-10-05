@@ -19,7 +19,7 @@ namespace MinecraftClient.Commands
                 {
                     if (!Settings.SetAccount(args[1]))
                     {
-                        return "未知用户 '" + args[1] + "'.";
+                        return "未知用户 '" + args[1];
                     }
                 }
 
@@ -28,7 +28,7 @@ namespace MinecraftClient.Commands
                     Program.Restart();
                     return "";
                 }
-                else return "未知服务器 IP '" + args[0] + "'.";
+                else return "未知服务器 IP '" + args[0];
             }
             else return CMDDesc;
         }
