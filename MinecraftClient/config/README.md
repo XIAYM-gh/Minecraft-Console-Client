@@ -1,67 +1,51 @@
-Minecraft Console Client User Manual
+Minecraft Console Client 用户使用手册
 ======
 
-**Thanks for dowloading Minecraft Console Client!**
+**感谢下载MCC汉化版!**
 
-Minecraft Console Client is a lightweight app able to connect to any minecraft server,
-both offline and online mode. It enables you to send commands and receive text messages
-in a fast and easy way without having to open the main Minecraft game.
+MCC是一款可以进入离线/正版MC服务器的程序
+它可以在不打开MC游戏的情况下进入服务器聊天/发送命令!
 
-How to use
+如何使用
 ------
 
-First, extract the archive if not already extracted.
-On Windows, simply open MinecraftClient.exe by double-clicking on it.
-On Mac or Linux you need to install the Mono Runtime:
- - On Mac: http://www.mono-project.com/download/#download-mac
- - On Linux: sudo apt-get install mono-runtime libmono-reflection-cil
-Then, open a terminal in this folder and run "mono MinecraftClient.exe".
-If you cannot authenticate on Mono, you'll need to run "mozroots --import --ask-remove" once.
-If Mono crashes, retry with mono-complete instead of mono-runtime. Use at least Mono v4.0.
+在Windows上，双击运行"MinecraftClientCN-gitxxx.exe"
 
-Using Configuration files & Enabling bots
+使用配置文件操作机器人
 ------
 
-Simply open the INI configuration file with a text editor and change the values.
-To enable a bot change the "enabled" value in the INI file from "false" to "true".
-You will still be able to send and receive chat messages when a bot is loaded.
-You can remove or comment some lines from the INI file to use the default values instead.
-You can have several INI files and drag & drop one of them over MinecraftClient.exe
+使用文本编辑器打开MinecraftClient.ini并且修改东西
+加载自动模块(AutoCraft等)后，您仍然可以发送和接收聊天消息。
+你可以删除或不填写一些项来使用默认设置
+你可以拥有多个INI文件，并将其中之一拖放到主程序上!
 
-Command-line usage
+使用CMD启动MCC
 ------
 
-**MinecraftClient.exe username password server:**
+**程序名.exe 用户名 密码 服务器ip**
 
-This will automatically connect you to the chosen server.
-To specify a server and ask password interactively, use "" as password.
-To specify offline mode with no password, use "-" as password.
+这将自动的连接到这个服务器ip
+如果要连接到离线服务器，请将密码填写为"-"
 
-**MinecraftClient.exe username password server "/mycommand":**
+**程序名.exe 用户名 密码 服务器ip "/mycommand"**
 
-This will automatically send "/mycommand" to the server and close.
-To send several commands and maybe stay connected, use the Scripting bot instead.
+将会在执行完"/mycommand"后自动退出
+要发送多个命令并保持连接状态，请改用脚本
 
-**MinecraftClient.exe myconfig.ini:**
+**程序名.exe myconfig.ini**
 
-This will load the specified configuration file
-If the file contains login / password / server ip, it will automatically connect.
+运行后将会自动读取myconfig.ini里的内容
 
-**MinecraftClient.exe myconfig.ini othername otherpassword otherIP:**
-
-Load the specified configuration file and override some settings from the file.
-
-Internal commands
+交互命令
 ------
 
-These commands can be performed from the chat prompt, scripts or remote control.
-From chat prompt, commands must by default be prepended with a slash, eg. /quit
-In scripts and remote control, no slash is needed to perform the command.
+这些是MCC自带的命令,
+可以使用/quit直接退出服务器并关闭程序
 
- - quit or exit: disconnect from the server and close the application
- - reco [account] : disconnect and reconnect to the server
- - connect <server> [account] : go to the given server and resume the script
- - script <script name\> : run a script containing a list of commands
+ - quit 或 exit: 退出服务器并关闭程序
+ - reco [account] : 将会重新连接服务器
+ - connect <server> [account] : 连接到指定的服务器
+ - script <script name\> : 执行脚本文件
  - send <text> : send a message or a command to the server
  - respawn : Use this to respawn if you are dead (like clicking "respawn" ingame)
  - log <text> : display some text in the console (useful for scripts)
