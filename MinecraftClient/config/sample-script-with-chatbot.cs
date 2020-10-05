@@ -14,7 +14,7 @@ public class ExampleBot : ChatBot
 {
     public override void Initialize()
     {
-        LogToConsole("Sucessfully Initialized!");
+        LogToConsole("成功地初始化!");
     }
 
     public override void GetText(string text)
@@ -25,11 +25,11 @@ public class ExampleBot : ChatBot
 
         if (IsChatMessage(text, ref message, ref username))
         {
-            LogToConsole("Public message from " + username + ": " + message);
+            LogToConsole("公共信息 " + username + ": " + message);
         }
         else if (IsPrivateMessage(text, ref message, ref username))
         {
-            LogToConsole("Private message from " + username + ": " + message);
+            LogToConsole("私人的信息 " + username + ": " + message);
         }
     }
 }
