@@ -4,7 +4,7 @@ Translated(已翻译) 约 70%<br>
 正在汉化:`各个内容`<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
 Change color of "feature not handled" from gray to red (#1265)<br>
-下载汉化版本请前往"Releases"页面<br>
+下载汉化版本请前往"[Releases](https://github.com/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate/releases)"页面<br>
 提交~bug~请去:<br>
 [Go To ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
 ## 编译方法
