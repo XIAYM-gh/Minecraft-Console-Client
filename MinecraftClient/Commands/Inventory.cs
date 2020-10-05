@@ -33,7 +33,7 @@ namespace MinecraftClient.Commands
                                         int count = int.Parse(args[3]);
                                         if (handler.DoCreativeGive(slot, itemType, count, null))
                                             return "已要求 " + itemType + " x" + count + " 在物品槽 #" + slot;
-                                        else return "未能要求创造的给予";
+                                        else return "未能获取物品!";
                                     }
                                     else return "你必须处于创造模式";
                                 }
@@ -73,12 +73,12 @@ namespace MinecraftClient.Commands
                         {
                             case "close":
                                 if (handler.CloseInventory(inventoryId))
-                                    return "正在关闭仓库 #" + inventoryId;
-                                else return "关闭仓库 #" + inventoryId + "失败";
+                                    return "正在关闭物品栏 #" + inventoryId;
+                                else return "关闭物品栏 #" + inventoryId + "失败";
                             case "list":
                                 Container inventory = handler.GetInventory(inventoryId);
                                 if(inventory==null)
-                                    return "仓库 #" + inventoryId + " 未退出";
+                                    return "物品栏 #" + inventoryId + " 未退出";
                                 List<string> response = new List<string>();
                                 response.Add("Inventory #" + inventoryId + " - " + inventory.Title + "§8");
                                 foreach (KeyValuePair<int, Item> item in inventory.Items)
@@ -87,14 +87,14 @@ namespace MinecraftClient.Commands
                                     if (String.IsNullOrEmpty(displayName))
                                     {
                                         if (item.Value.Damage != 0)
-                                            response.Add(String.Format(" #{0}: {1} x{2} | 损伤: {3}", item.Key, item.Value.Type, item.Value.Count, item.Value.Damage));
+                                            response.Add(String.Format(" #{0}: {1} x{2} | 已消耗耐久: {3}", item.Key, item.Value.Type, item.Value.Count, item.Value.Damage));
                                         else
                                             response.Add(String.Format(" #{0}: {1} x{2}", item.Key, item.Value.Type, item.Value.Count));
                                     }
                                     else
                                     {
                                         if (item.Value.Damage != 0)
-                                            response.Add(String.Format(" #{0}: {1} x{2} - {3}§8 | 损伤: {4}", item.Key, item.Value.Type, item.Value.Count, displayName, item.Value.Damage));
+                                            response.Add(String.Format(" #{0}: {1} x{2} - {3}§8 | 已消耗耐久: {4}", item.Key, item.Value.Type, item.Value.Count, displayName, item.Value.Damage));
                                         else
                                             response.Add(String.Format(" #{0}: {1} x{2} - {3}§8", item.Key, item.Value.Type, item.Value.Count, displayName));
                                     }
@@ -118,7 +118,7 @@ namespace MinecraftClient.Commands
                                         if (b.ToLower()[0] == 'm')
                                         {
                                             actionType = WindowActionType.MiddleClick;
-                                            keyName = "中间";
+                                            keyName = "中键";
                                         }
                                     }
                                     handler.DoWindowAction(inventoryId, slot, actionType);
@@ -194,7 +194,7 @@ namespace MinecraftClient.Commands
         {
             return GetBasicUsage()
                 + "\n " + GetAvailableActions() + " 使用 \"/inventory help <action>\" 来获取命令帮助"
-                + "\n 创造模式给予: " + GetCreativeGiveHelp()
+                + "\n 创造模式物品获取: " + GetCreativeGiveHelp()
                 + "\n \"player\" 和 \"container\" 可以缩写为 \"p\" and \"c\""
                 + "\n 注意， \"[]\" 中的参数是可选的";
         }
@@ -209,13 +209,13 @@ namespace MinecraftClient.Commands
             switch (cmd)
             {
                 case "list":
-                    return "列出你库存中的物品 语法: /inventory <player|container|<id>> list";
+                    return "列出你物品栏中的物品 语法: /inventory <player|container|<id>> list";
                 case "close":
-                    return "关闭一个已打开的容器 语法: /inventory <player|container|<id>> close";
+                    return "关闭一个已打开的物品栏 语法: /inventory <player|container|<id>> close";
                 case "click":
                     return "点击一个物品 语法: /inventory <player|container|<id>> click <物品槽> [left|right|middle]. \n默认为左键物品";
                 case "drop":
-                    return "从你的库存中丢出物品 语法: /inventory <player|container|<id>> drop <物品槽> [all]. \n“all”即代表丢出所有的物品";
+                    return "从你的背包中丢出物品 语法: /inventory <player|container|<id>> drop <物品槽> [all]. \n“all”即代表丢出所有的物品";
                 case "help":
                     return GetHelp();
                 default:
