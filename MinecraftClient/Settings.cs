@@ -204,7 +204,7 @@ namespace MinecraftClient
         /// <param name="settingsfile">File to load</param>
         public static void LoadSettings(string settingsfile)
         {
-            ConsoleIO.WriteLogLine(String.Format("[设置] 正在读取设置 文件路径: {0}", System.IO.Path.GetFullPath(settingsfile)));
+            ConsoleIO.WriteLogLine(String.Format("正在读取设置 文件路径: {0}", System.IO.Path.GetFullPath(settingsfile)));
             if (File.Exists(settingsfile))
             {
                 try
