@@ -8,7 +8,7 @@ namespace MinecraftClient.Commands
     public class Debug : Command
     {
         public override string CMDName { get { return "debug"; } }
-        public override string CMDDesc { get { return "debug [on|off]: 切换调试消息."; } }
+        public override string CMDDesc { get { return "debug [on|off]: 切换调试消息"; } }
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
