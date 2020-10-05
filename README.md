@@ -1,6 +1,6 @@
 ## 状态
 **当前 Minecraft Console Client ChineseTranslate 并未完全汉化完成，所以如若发现翻译不准确等问题，欢迎提交Issuse哦！**<br>
-Translated(已翻译) 约 70%<br>
+Translated(已翻译) : 约95%<br>
 正在汉化:`用户使用手册等`<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
 Change color of "feature not handled" from gray to red (#1265)<br>
