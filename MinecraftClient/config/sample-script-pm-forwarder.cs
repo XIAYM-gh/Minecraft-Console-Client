@@ -16,11 +16,11 @@ public class PMForwarder : ChatBot
     {
         pmRecipients = LoadDistinctEntriesFromFile(PMRecipientsFile);
         if (Settings.Bots_Owners.Count == 0)
-            LogToConsole("No Bot owners in Settings INI file. Unloading.");
+            LogToConsole("在设置 INI 文件中没有机器人所有者 正在取消加载");
         else if (pmRecipients.Length == 0)
-            LogToConsole("No PM Recipients in '" + PMRecipientsFile + "'. Unloading.");
+            LogToConsole("'" + PMRecipientsFile + "' 没有 PM 收件人 正在取消加载");
         else LogToConsole(String.Format(
-            "Forwarding PMs from owners {0} to recipients {1}",
+            "从业主 {0} 转发 PMs 到收件人 {1}",
             String.Join(", ", Settings.Bots_Owners), String.Join(", ", pmRecipients)));
     }
 
@@ -30,7 +30,7 @@ public class PMForwarder : ChatBot
         string message = "", sender = "";
         if (IsPrivateMessage(text, ref message, ref sender) && Settings.Bots_Owners.Contains(sender.ToLower().Trim()))
         {
-            LogToConsole("Forwarding PM to " + String.Join(", ", pmRecipients));
+            LogToConsole("转送 PM 至 " + String.Join(", ", pmRecipients));
             foreach (string recipient in pmRecipients)
                 SendPrivateMessage(recipient, message);
         }
