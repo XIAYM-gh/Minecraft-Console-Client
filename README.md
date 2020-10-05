@@ -12,6 +12,7 @@ Change color of "feature not handled" from gray to red (#1265)<br>
 2.更改完代码后，将MinecraftClient.csproj 或 MinecraftClient.sln 拖放 MsBuild.exe 打开<br>
 3.在编译成功的情况下, 应该在:<br>
 MinecraftClient/bin/Release 或 MinecraftClient/bin/Debug里。<br>
+## 用户使用手册
 [用户使用手册 - 汉化中](https://github.com/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate/tree/master/MinecraftClient/config)
 
 我的世界控制台客户端(MCC)
