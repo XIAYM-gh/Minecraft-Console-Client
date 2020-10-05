@@ -2,7 +2,7 @@
 
 /* This script demonstrates how to use methods and arguments */
 
-string text = "hello";
+string text = "你好";
 
 if (args.Length > 0)
     text = args[0];
@@ -21,11 +21,11 @@ for (int i = 0; i < 5; i++)
 
 void SendHelloWorld(int count, string text)
 {
-    MCC.SendText("Hello World no. " + count + ": " + text);
+    MCC.SendText("你好！世界 " + count + ": " + text);
 }
 
 void SleepBetweenSends()
 {
-    MCC.LogToConsole("Sleeping for 5 seconds...");
+    MCC.LogToConsole("等待 5 秒钟...");
     Thread.Sleep(5000);
 }
