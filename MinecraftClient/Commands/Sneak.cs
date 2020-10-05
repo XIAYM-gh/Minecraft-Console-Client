@@ -18,14 +18,14 @@ namespace MinecraftClient.Commands
                 var result = handler.SendEntityAction(Protocol.EntityActionType.StopSneaking);
                 if (result)
                     sneaking = false;
-                return  result ? "你取消了蹲下." : "Fail";
+                return  result ? "你取消了蹲下." : "切换潜行时发生错误.";
             }
             else
             {
                 var result = handler.SendEntityAction(Protocol.EntityActionType.StartSneaking);
                 if (result)
                     sneaking = true;
-                return  result ? "你已蹲下." : "Fail";
+                return  result ? "你已蹲下." : "切换潜行时发生错误.";
             }
             
         }
