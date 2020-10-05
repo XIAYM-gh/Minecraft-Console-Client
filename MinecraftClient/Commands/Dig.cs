@@ -28,7 +28,7 @@ namespace MinecraftClient.Commands
                         int z = int.Parse(args[2]);
                         Location blockToBreak = new Location(x, y, z);
                         if (blockToBreak.DistanceSquared(handler.GetCurrentLocation().EyesLocation()) > 25)
-                            return "你离这个方块太远了.";
+                            return "你离这个方块太远了";
                         if (handler.GetWorld().GetBlock(blockToBreak).Type == Material.Air)
                             return "那个方块是空气!";
                         if (handler.DigBlock(blockToBreak))
