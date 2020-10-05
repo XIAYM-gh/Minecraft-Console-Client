@@ -46,9 +46,9 @@ MCC是一款可以进入离线/正版MC服务器的程序
  - reco [account] : 将会重新连接服务器
  - connect <server> [account] : 连接到指定的服务器
  - script <script name\> : 执行脚本文件
- - send <text> : send a message or a command to the server
- - respawn : Use this to respawn if you are dead (like clicking "respawn" ingame)
- - log <text> : display some text in the console (useful for scripts)
+ - send <text> : 向服务器发送消息或命令
+ - respawn : 死亡之后输入可以重生
+ - log <text> : 向控制台发送信息(非服务端)
  - list : list players logged in to the server (uses tab list info sent by server)
  - set varname=value : set a value which can be used as %varname% in further commands
  - wait <time> : wait X ticks (10 ticks = ~1 second. Only for scripts)
