@@ -12,6 +12,8 @@ namespace MinecraftClient.Commands
 
         public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
         {
+            MCC.LogToConsole("正在关闭 Minecraft Console Client ChineseTranslate...");
+            Thread.Sleep(1000);
             Program.Exit();
             return "";
         }
