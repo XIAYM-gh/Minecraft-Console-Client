@@ -203,12 +203,12 @@ public class Mail : ChatBot
                 }
                 else
                 {
-                    SendPrivateMessage(sender, "Something went wrong!");
+                    SendPrivateMessage(sender, "发生了一些错误!");
                 }
             }
             else
             {
-                SendPrivateMessage(sender, "Couldn't save Message. Limit reached!");
+                SendPrivateMessage(sender, "不能保存信息 被限制了!");
             }
             clearLogged_msg();
         }
@@ -228,7 +228,7 @@ public class Mail : ChatBot
         {
             if (options.debug_msg)
             {
-                LogToConsole("Listing all Messages. \n Performed by: " + sender);
+                LogToConsole("正在列出所有消息 \n 由: " + sender);
             }
             GetMailsFromFile();
             foreach (Message m in logged_msg)
@@ -256,7 +256,7 @@ public class Mail : ChatBot
         {
             if (options.debug_msg)
             {
-                LogToConsole("重生中! \n Performed by: " + sender);
+                LogToConsole("正在重生! \n 由: " + sender);
             }
             PerformInternalCommand("respawn");
         }
@@ -265,7 +265,7 @@ public class Mail : ChatBot
         {
             if (options.debug_msg)
             {
-                LogToConsole("Sending Mails! \n Performed by: " + sender);
+                LogToConsole("正在发送邮件! \n 由: " + sender);
             }
             DeliverMail();
         }
@@ -274,7 +274,7 @@ public class Mail : ChatBot
         {
             if (options.debug_msg)
             {
-                LogToConsole("Reconnecting! \n Performed by: " + sender);
+                LogToConsole("正在重新连接! \n 由: " + sender);
             }
             SaveMailsToFile();
             SaveOptionsToFile();
@@ -285,7 +285,7 @@ public class Mail : ChatBot
         {
             if (options.debug_msg)
             {
-                LogToConsole("Deleting old mails! \n Performed by: " + sender);
+                LogToConsole("正在删除旧邮件! \n 由: " + sender);
             }
             deleteOldMails();
             SaveMailsToFile();
@@ -308,12 +308,12 @@ public class Mail : ChatBot
             }
 
             addMod(name);
-            SendPrivateMessage(sender, name + "is now Moderator.");
+            SendPrivateMessage(sender, name + "现在是版主");
             SaveOptionsToFile();
 
             if (options.debug_msg)
             {
-                LogToConsole("Added " + name + " as moderator! \n Performed by: " + sender);
+                LogToConsole("已添加 " + name + " 于版主! \n 由: " + sender);
             }
         }
 
@@ -334,12 +334,12 @@ public class Mail : ChatBot
             }
 
             removeMod(name);
-            SendPrivateMessage(sender, name + "is no Moderator anymmore.");
+            SendPrivateMessage(sender, name + "现在不是版主");
             SaveOptionsToFile();
 
             if (options.debug_msg)
             {
-                LogToConsole("Removed " + name + " as moderator! \n Performed by: " + sender);
+                LogToConsole("已移除 " + name + " 为版主! \n 由: " + sender);
             }
         }
 
@@ -354,7 +354,7 @@ public class Mail : ChatBot
                 options.debug_msg = false;
                 if (options.debug_msg)
                 {
-                    LogToConsole(sender + ": Turned Console Log off!");
+                    LogToConsole(sender + ": 关闭控制台注销!");
                 }
             }
             else
@@ -362,10 +362,10 @@ public class Mail : ChatBot
                 options.debug_msg = true;
                 if (options.debug_msg)
                 {
-                    LogToConsole(sender + ": Turned Console Log off!");
+                    LogToConsole(sender + ": 关闭控制台注销!");
                 }
             }
-            SendPrivateMessage(sender, "Settings changed! Rejoin to apply!");
+            SendPrivateMessage(sender, "设置改变! 加入申请!");
             SaveOptionsToFile();
         }
 
@@ -373,11 +373,11 @@ public class Mail : ChatBot
         {
             options.daysTosaveMsg = getIntInCommand(message, "daystosavemsg");
             SaveOptionsToFile();
-            SendPrivateMessage(sender, "Settings changed! Rejoin to apply!");
+            SendPrivateMessage(sender, "设置改变! 加入申请!");
 
             if (options.debug_msg)
             {
-                LogToConsole(sender + " changed daystosavemsg to: " + Convert.ToString(options.daysTosaveMsg));
+                LogToConsole(sender + " 修改 daystosavemsg 为: " + Convert.ToString(options.daysTosaveMsg));
             }
         }
 
@@ -385,11 +385,11 @@ public class Mail : ChatBot
         {
             options.interval_sendmail = getIntInCommand(message, "intervalsendmail");
             SaveOptionsToFile();
-            SendPrivateMessage(sender, "Settings changed! Rejoin to apply!");
+            SendPrivateMessage(sender, "设置改变! 加入申请!");
 
             if (options.debug_msg)
             {
-                LogToConsole(sender + " changed intervalsendmail to: " + Convert.ToString(options.interval_sendmail));
+                LogToConsole(sender + " 修改 intervalsendmail 为: " + Convert.ToString(options.interval_sendmail));
             }
         }
 
@@ -397,11 +397,11 @@ public class Mail : ChatBot
         {
             options.maxSavedMails = getIntInCommand(message, "maxsavedmails");
             SaveOptionsToFile();
-            SendPrivateMessage(sender, "Settings changed! Rejoin to apply!");
+            SendPrivateMessage(sender, "设置改变! 加入申请!");
 
             if (options.debug_msg)
             {
-                LogToConsole(sender + " changed maxsavedmails to: " + Convert.ToString(options.maxSavedMails));
+                LogToConsole(sender + " 修改 maxsavedmails 为: " + Convert.ToString(options.maxSavedMails));
             }
         }
 
@@ -409,11 +409,11 @@ public class Mail : ChatBot
         {
             options.maxSavedMails_Player = getIntInCommand(message, "maxmailsperplayer");
             SaveOptionsToFile();
-            SendPrivateMessage(sender, "Settings changed! Rejoin to apply!");
+            SendPrivateMessage(sender, "设置改变! 加入申请!");
 
             if (options.debug_msg)
             {
-                LogToConsole(sender + " changed maxmailsperplayer to: " + Convert.ToString(options.maxSavedMails_Player));
+                LogToConsole(sender + " 修改 maxmailsperplayer 为: " + Convert.ToString(options.maxSavedMails_Player));
             }
         }
 
@@ -432,13 +432,13 @@ public class Mail : ChatBot
                 }
             }
             options.path_mail = AppDomain.CurrentDomain.BaseDirectory + path;
-            SendPrivateMessage(sender, "Settings changed!");
+            SendPrivateMessage(sender, "设置改变!");
             SaveOptionsToFile();
             GetOptionsFromFile();
 
             if (options.debug_msg)
             {
-                LogToConsole(sender + " changed mailpath to: " + Convert.ToString(options.path_mail));
+                LogToConsole(sender + " 修改 mailpath 为: " + Convert.ToString(options.path_mail));
             }
 
         }
@@ -458,13 +458,13 @@ public class Mail : ChatBot
                 }
             }
             options.path_setting = AppDomain.CurrentDomain.BaseDirectory + path;
-            SendPrivateMessage(sender, "Settings changed!");
+            SendPrivateMessage(sender, "设置改变!");
             SaveOptionsToFile();
             GetOptionsFromFile();
 
             if(options.debug_msg)
             {
-                LogToConsole(sender + " changed settingsspath to: " + Convert.ToString(options.path_setting));
+                LogToConsole(sender + " 修改 settingsspath 为: " + Convert.ToString(options.path_setting));
             }
 
         }
@@ -556,7 +556,7 @@ public class Mail : ChatBot
 
         if (options.debug_msg)
         {
-            LogToConsole("Saved mails to File!"  + " Location: " + options.path_mail + " Time: " + Convert.ToString(DateTime.UtcNow));
+            LogToConsole("已保存邮件文件!"  + " 位置: " + options.path_mail + " 时间: " + Convert.ToString(DateTime.UtcNow));
         }
     }
 
@@ -573,7 +573,7 @@ public class Mail : ChatBot
 
         if (options.debug_msg)
         {
-            LogToConsole("Loaded mails from File!" + " Location: " + options.path_mail + " Time: " + Convert.ToString(DateTime.UtcNow));
+            LogToConsole("正在从文件加载邮件!" + " 位置: " + options.path_mail + " 时间: " + Convert.ToString(DateTime.UtcNow));
         }
     }
 
@@ -590,7 +590,7 @@ public class Mail : ChatBot
 
         if (options.debug_msg)
         {
-            LogToConsole("Saved options to File! " + "Location: " + options.path_setting + " Time: " + Convert.ToString(DateTime.UtcNow));
+            LogToConsole("已保存邮件文件! " + "位置: " + options.path_setting + " 时间: " + Convert.ToString(DateTime.UtcNow));
         }
     }
 
@@ -608,7 +608,7 @@ public class Mail : ChatBot
 
         if (options.debug_msg)
         {
-            LogToConsole("Loaded options from File! " + "Location: " + options.path_setting + " Time: " + Convert.ToString(DateTime.UtcNow));
+            LogToConsole("正在从文件加载邮件! " + "位置: " + options.path_setting + " 时间: " + Convert.ToString(DateTime.UtcNow));
         }
     }
 
@@ -630,7 +630,7 @@ public class Mail : ChatBot
         logged_msg[logged_msg.Length - 1] = new Message(sender, destination, content);
 
         SaveMailsToFile();
-        SendPrivateMessage(sender, "Message saved!");
+        SendPrivateMessage(sender, "信息已保存!");
     }
 
     /// <summary>
@@ -638,7 +638,7 @@ public class Mail : ChatBot
     /// </summary>
     public void DeliverMail()
     {
-        LogToConsole("Looking for mails to send: " + DateTime.UtcNow); // Can not be disabled to indicate, that the script is still running. 
+        LogToConsole("正在寻找要发送的邮件: " + DateTime.UtcNow); // Can not be disabled to indicate, that the script is still running. 
         GetMailsFromFile();
 
         foreach(string Player in GetOnlinePlayers())
@@ -652,7 +652,8 @@ public class Mail : ChatBot
 
                     if (options.debug_msg)
                     {
-                        LogToConsole("Message of " + msg.GetSender() + " delivered to " + msg.GetDestination() + ".");
+                        //原句：LogToConsole("Message of " + msg.GetSender() + " delivered to " + msg.GetDestination() + ".");
+                        LogToConsole(msg.GetSender() + " 的信息已传递给 " + msg.GetDestination());
                     }
                 }
             }
