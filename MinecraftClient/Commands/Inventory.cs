@@ -32,10 +32,10 @@ namespace MinecraftClient.Commands
                                     {
                                         int count = int.Parse(args[3]);
                                         if (handler.DoCreativeGive(slot, itemType, count, null))
-                                            return "Requested " + itemType + " x" + count + " in slot #" + slot;
-                                        else return "Failed to request Creative Give";
+                                            return "已要求 " + itemType + " x" + count + " 在物品槽 #" + slot;
+                                        else return "未能要求创造的给予";
                                     }
-                                    else return "You need Gamemode Creative";
+                                    else return "你必须处于创造模式";
                                 }
                                 else
                                 {
@@ -55,7 +55,7 @@ namespace MinecraftClient.Commands
                             availableIds.Remove(0); // remove player inventory ID from list
                             if (availableIds.Count == 1)
                                 inventoryId = availableIds[0]; // one container, use it
-                            else return "Cannot find container, please retry with explicit ID";
+                            else return "未找到容器 请用明确的ID重试";
                         }
                         else if (args[0].ToLower() == "help")
                         {
@@ -73,12 +73,12 @@ namespace MinecraftClient.Commands
                         {
                             case "close":
                                 if (handler.CloseInventory(inventoryId))
-                                    return "Closing Inventoy #" + inventoryId;
-                                else return "Failed to close Inventory #" + inventoryId;
+                                    return "正在关闭仓库 #" + inventoryId;
+                                else return "关闭仓库 #" + inventoryId + "失败";
                             case "list":
                                 Container inventory = handler.GetInventory(inventoryId);
                                 if(inventory==null)
-                                    return "Inventory #" + inventoryId + " do not exist";
+                                    return "仓库 #" + inventoryId + " 未退出";
                                 List<string> response = new List<string>();
                                 response.Add("Inventory #" + inventoryId + " - " + inventory.Title + "§8");
                                 foreach (KeyValuePair<int, Item> item in inventory.Items)
@@ -87,42 +87,42 @@ namespace MinecraftClient.Commands
                                     if (String.IsNullOrEmpty(displayName))
                                     {
                                         if (item.Value.Damage != 0)
-                                            response.Add(String.Format(" #{0}: {1} x{2} | Damage: {3}", item.Key, item.Value.Type, item.Value.Count, item.Value.Damage));
+                                            response.Add(String.Format(" #{0}: {1} x{2} | 损伤: {3}", item.Key, item.Value.Type, item.Value.Count, item.Value.Damage));
                                         else
                                             response.Add(String.Format(" #{0}: {1} x{2}", item.Key, item.Value.Type, item.Value.Count));
                                     }
                                     else
                                     {
                                         if (item.Value.Damage != 0)
-                                            response.Add(String.Format(" #{0}: {1} x{2} - {3}§8 | Damage: {4}", item.Key, item.Value.Type, item.Value.Count, displayName, item.Value.Damage));
+                                            response.Add(String.Format(" #{0}: {1} x{2} - {3}§8 | 损伤: {4}", item.Key, item.Value.Type, item.Value.Count, displayName, item.Value.Damage));
                                         else
                                             response.Add(String.Format(" #{0}: {1} x{2} - {3}§8", item.Key, item.Value.Type, item.Value.Count, displayName));
                                     }
                                 }
-                                if (inventoryId == 0) response.Add("Your selected hotbar is " + (handler.GetCurrentSlot() + 1));
+                                if (inventoryId == 0) response.Add("您选择的物品栏位置是 " + (handler.GetCurrentSlot() + 1));
                                 return String.Join("\n", response.ToArray());
                             case "click":
                                 if (args.Length >= 3)
                                 {
                                     int slot = int.Parse(args[2]);
                                     WindowActionType actionType = WindowActionType.LeftClick;
-                                    string keyName = "Left";
+                                    string keyName = "左键";
                                     if (args.Length >= 4)
                                     {
                                         string b = args[3];
                                         if (b.ToLower()[0] == 'r')
                                         {
                                             actionType = WindowActionType.RightClick;
-                                            keyName = "Right";
+                                            keyName = "右键";
                                         }
                                         if (b.ToLower()[0] == 'm')
                                         {
                                             actionType = WindowActionType.MiddleClick;
-                                            keyName = "Middle";
+                                            keyName = "中间";
                                         }
                                     }
                                     handler.DoWindowAction(inventoryId, slot, actionType);
-                                    return keyName + " clicking slot " + slot + " in window #" + inventoryId;
+                                    return "正在使用 " + keyName + " 点击物品槽 " + slot + " 在窗口 #" + inventoryId;
                                 }
                                 else return CMDDesc;
                             case "drop":
@@ -131,7 +131,7 @@ namespace MinecraftClient.Commands
                                     int slot = int.Parse(args[2]);
                                     // check item exist
                                     if (!handler.GetInventory(inventoryId).Items.ContainsKey(slot))
-                                        return "No item in slot #" + slot;
+                                        return "物品槽 #" + slot + "没有物品";
                                     WindowActionType actionType = WindowActionType.DropItem;
                                     if (args.Length >= 4)
                                     {
@@ -143,12 +143,12 @@ namespace MinecraftClient.Commands
                                     if (handler.DoWindowAction(inventoryId, slot, actionType))
                                     {
                                         if (actionType == WindowActionType.DropItemStack)
-                                            return "Dropped whole item stack from slot #" + slot;
-                                        else return "Dropped 1 item from slot #" + slot;
+                                            return "从槽中删除整个项目堆栈 #" + slot;
+                                        else return "从物品槽 #" + slot + "丢出一个物品";
                                     }
                                     else
                                     {
-                                        return "Failed";
+                                        return "失败";
                                     }
                                 }
                                 else return CMDDesc;
@@ -162,7 +162,7 @@ namespace MinecraftClient.Commands
                 {
                     Dictionary<int, Container> inventories = handler.GetInventories();
                     List<string> response = new List<string>();
-                    response.Add("Inventories:");
+                    response.Add("库存:");
                     foreach (KeyValuePair<int, Container> inventory in inventories)
                     {
                         response.Add(String.Format(" #{0}: {1}", inventory.Key, inventory.Value.Title + "§8"));
@@ -171,37 +171,37 @@ namespace MinecraftClient.Commands
                     return String.Join("\n", response);
                 }
             }
-            else return "Please enable inventoryhandling in config to use this command.";
+            else return "请从配置文件中开启 inventoryhandling 来使用该指令";
         }
 
         #region Methods for commands help
         private string GetCommandDesc()
         {
-            return GetBasicUsage() + " Type \"/inventory help\" for more help";
+            return GetBasicUsage() + " 使用 \"/inventory help\" 获取更多帮助";
         }
 
         private string GetAvailableActions()
         {
-            return "Available actions: list, close, click, drop.";
+            return "可用的命令: list, close, click, drop.";
         }
 
         private string GetBasicUsage()
         {
-            return "Basic usage: /inventory <player|container|<id>> <action>.";
+            return "基础语法: /inventory <player|container|<id>> <action>.";
         }
 
         private string GetHelp()
         {
             return GetBasicUsage()
-                + "\n " + GetAvailableActions() + " Use \"/inventory help <action>\" for action help."
-                + "\n Creative mode give: " + GetCreativeGiveHelp()
-                + "\n \"player\" and \"container\" can be simplified to \"p\" and \"c\"."
-                + "\n Note that parameters in \"[]\" are optional.";
+                + "\n " + GetAvailableActions() + " 使用 \"/inventory help <action>\" 来获取命令帮助"
+                + "\n 创造模式给予: " + GetCreativeGiveHelp()
+                + "\n \"player\" 和 \"container\" 可以缩写为 \"p\" and \"c\""
+                + "\n 注意， \"[]\" 中的参数是可选的";
         }
 
         private string GetCreativeGiveHelp()
         {
-            return "Usage: /inventory creativegive <slot> <itemtype> <count>";
+            return "语法: /inventory creativegive <物品槽> <物品类型> <数量>";
         }
 
         private string GetSubCommandHelp(string cmd)
@@ -209,17 +209,17 @@ namespace MinecraftClient.Commands
             switch (cmd)
             {
                 case "list":
-                    return "List your inventory. Usage: /inventory <player|container|<id>> list";
+                    return "列出你库存中的物品 语法: /inventory <player|container|<id>> list";
                 case "close":
-                    return "Close an opened container. Usage: /inventory <player|container|<id>> close";
+                    return "关闭一个已打开的容器 语法: /inventory <player|container|<id>> close";
                 case "click":
-                    return "Click on an item. Usage: /inventory <player|container|<id>> click <slot> [left|right|middle]. \nDefault is left click";
+                    return "点击一个物品 语法: /inventory <player|container|<id>> click <物品槽> [left|right|middle]. \n默认为左键物品";
                 case "drop":
-                    return "Drop an item from inventory. Usage: /inventory <player|container|<id>> drop <slot> [all]. \nAll means drop full stack";
+                    return "从你的库存中丢出物品 语法: /inventory <player|container|<id>> drop <物品槽> [all]. \n“all”即代表丢出所有的物品";
                 case "help":
                     return GetHelp();
                 default:
-                    return "Unknown action. " + GetAvailableActions();
+                    return "未知命令 " + GetAvailableActions();
             }
         }
         #endregion
