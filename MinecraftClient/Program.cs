@@ -44,8 +44,9 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
-	    ConsoleIO.WriteLineFormatted("§7已更新到 (ORelio) Commit ID 0c88c18ea060853b32d5b23684d9323bfd3840ae\n§e本程序的汉化由 XIAYM 与 WindowX 共同完成~");
-	    //劳资的名字捏！！！！
+	    ConsoleIO.WriteLineFormatted("§e已更新到 (ORelio) §3Commit §1ID §d0c88c18ea060853b32d5b23684d9323bfd3840ae §eBy XIAYM §f& §eWindowX");
+	    //WindowX:劳资的名字捏！！！！
+		//XIAYM:好吧给你改了
             //Build information to facilitate processing of bug reports
             //if (BuildInfo != null)
             //{
