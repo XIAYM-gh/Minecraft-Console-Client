@@ -69,18 +69,18 @@ namespace MinecraftClient.ChatBots
                             case "save":
                                 {
                                     replay.CreateBackupReplay(@"replay_recordings\" + replay.GetReplayDefaultName());
-                                    return "Replay file created.";
+                                    return "重播文件已保存.";
                                 }
                             case "stop":
                                 {
                                     replay.OnShutDown();
-                                    return "Record stopped.";
+                                    return "录像已停止.";
                                 }
                         }
                     }
-                    return "Available commands: save, stop";
+                    return "子命令: save, stop";
                 }
-                else return "Record was stopped. Restart the program to start another record.";
+                else return "录像已停止，重新启动MCC以重新录制.";
             }
             catch (Exception e)
             {
