@@ -10,6 +10,10 @@ Change color of "feature not handled" from gray to red (#1265)<br>
 **Releases页面已弃用,如需下载请见README -> 下载地址**<br>
 提交bug请去:<br>
 [Go To ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
+## 汉化成员
+· XIAYM(owner)<br>
+· WindowX<br>
+· DaddyPeeka
 ## 编译方法
 1.找到C:\Windows\Microsoft.NET\Framework\v4.X.XXXXX\MsBuild.exe（前提：安装了.Net Framework)<br>
 2.更改完代码后，将MinecraftClient.csproj 或 MinecraftClient.sln 拖放 MsBuild.exe 打开<br>
