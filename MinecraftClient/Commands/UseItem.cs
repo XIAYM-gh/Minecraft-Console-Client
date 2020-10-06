@@ -15,9 +15,9 @@ namespace MinecraftClient.Commands
             if (handler.GetInventoryEnabled())
             {
                 handler.UseItemOnHand();
-                return "已左键物品";
+                return "已使用物品";
             }
-            else return "请先启用 inventoryhandling.";
+            else return "请先启用 inventoryhandling";
         }
     }
 }
