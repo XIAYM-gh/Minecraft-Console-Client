@@ -48,11 +48,11 @@ namespace MinecraftClient
 	    //WindowX:劳资的名字捏！！！！
 		//XIAYM:好吧给你改了
             //Build information to facilitate processing of bug reports
-            //if (BuildInfo != null)
-            //{
-            //    ConsoleIO.WriteLineFormatted("§8 " + BuildInfo);
-            //}
-            //已被禁用的信息
+            if (BuildInfo != null)
+            {
+                ConsoleIO.WriteLineFormatted("§3构建信息: §8 " + BuildInfo);
+            }
+            //已被禁用的信息(2020.10.6 17:30 启用)
 
             //Debug input ?
             if (args.Length == 1 && args[0] == "--keyboard-debug")
