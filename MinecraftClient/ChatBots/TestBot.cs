@@ -19,11 +19,11 @@ namespace MinecraftClient.ChatBots
 
             if (IsPrivateMessage(text, ref message, ref username))
             {
-                LogToConsole("Bot: " + username + " told me : " + message);
+                LogToConsole("TestBot: " + username + " 告诉我 : " + message);
             }
             else if (IsChatMessage(text, ref message, ref username))
             {
-                LogToConsole("Bot: " + username + " said : " + message);
+                LogToConsole("TestBot: " + username + " 说 : " + message);
             }
         }
     }
