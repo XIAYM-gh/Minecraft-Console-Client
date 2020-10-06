@@ -73,7 +73,7 @@ namespace MinecraftClient
         }
 
         //Other Settings
-        public static string TranslationsFile_FromMCDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\.minecraft\assets\objects\eb\ebf762c137bd91ab2496397f2504e250f3c5d1ba"; //MC 1.16 en_GB.lang
+        public static string TranslationsFile_FromMCDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\.minecraft\assets\objects\eb\ebf762c137bd91ab2496397f2504e250f3c5d1ba";
         public static string TranslationsFile_Website_Index = "https://launchermeta.mojang.com/v1/packages/bdb68de96a44ec1e9ed6d9cfcd2ee973be618c3a/1.16.json";
         public static string TranslationsFile_Website_Download = "http://resources.download.minecraft.net";
         public static TimeSpan splitMessageDelay = TimeSpan.FromSeconds(2);
@@ -664,14 +664,14 @@ namespace MinecraftClient
                 + "showsystemmessages=true            # 显示来自服务器的系统消息(例如/me,/say等)\r\n"
                 + "showxpbarmessages=true             # 显示在动作栏上的消息(1.12+ ActionBar)\r\n"
                 + "showchatlinks=true                 # 显示聊天信息里的链接\r\n"
-                + "terrainandmovements=false          # 让你可以移动 (测试，世界交互，可能会使用更多的cpu,内存等)\r\n"
-                + "inventoryhandling=false            # 切换 inventory handling (测试，物品栏交互，可以移动物品栏)\r\n"
-                + "entityhandling=false               # 切换 entity handling (测试，实体交互)\r\n"
+                + "terrainandmovements=true           # 让你可以移动 (测试，世界交互，可能会使用更多的CPU,内存等)\r\n"
+                + "inventoryhandling=false            # 切换 Inventory handling (测试，物品栏交互，可以移动物品栏)\r\n"
+                + "entityhandling=false               # 切换 Entity handling (测试，实体交互)\r\n"
                 + "sessioncache=disk                  # 如何保存Session(正版使用). 使用 'none(不保存)', 'memory(内存条中，重启电脑丢失)' 或者 'disk(硬盘，永久，直到Session过期)'\r\n"
                 + "resolvesrvrecords=fast             # 快速Ping服务器 使用 'false(关闭)', 'fast(启用&快速)' (5s 超时), 或者 'true(启用)'. 某些服务器可能需要.\r\n"
                 + "accountlist=accounts.txt           # 详见Github..\r\n"
                 + "serverlist=servers.txt             # 详见Github..\r\n"
-                + "playerheadicon=true                # 获取玩家头颅当做应用图标(可能在Windows7上不起作用)\r\n"
+                + "playerheadicon=true                # 获取玩家头颅当做应用图标(可能在 Windows7 上不起作用)\r\n"
                 + "exitonfailure=false                # 禁用错误暂停，以便在非交互式脚本中使用MCC\r\n"
                 + "debugmessages=false                # 显示高级信息(请在反馈bug前打开此项)\r\n"
                 + "scriptcache=true                   # 在下一次执行同样的脚本时速度会变快\r\n"
@@ -700,8 +700,8 @@ namespace MinecraftClient
                 + "# tprequest=^([a-zA-Z0-9_]+) has requested (?:to|that you) teleport to (?:you|them)\\.$\r\n"
                 + "\r\n"
                 + "[MCSettings]\r\n"
-                + "enabled=true                       # 如果禁用，将不会发送到服务器.\r\n"
-                + "locale=en_US                       # 可选择任何在MC中支持的语言 zh_CN / zh_TW / en_US\r\n"
+                + "enabled=true                       # 是否启用  如果禁用，将不会发送到服务器.\r\n"
+                + "locale=zh_CN                       # 可选择任何在我的世界中支持的语言 zh_CN / zh_TW / en_US\r\n"
                 + "renderdistance=medium              # 使用 tiny(超 近), short(近), medium(中), far(远), 或区块数值 [0 - 255,服务器默认最大限制:16]\r\n"
                 + "difficulty=normal                  # 使用 MC 1.7- 难度的英文. peaceful(和平), easy(简单), normal(普通), difficult(困难)\r\n"
                 + "chatmode=enabled                   # 可使用enabled无限制,commands让你只能执行命令,disable无法执行任何东西\r\n"
@@ -756,7 +756,7 @@ namespace MinecraftClient
                 + "autotpaccept=true\r\n"
                 + "tpaccepteveryone=false\r\n"
                 + "\r\n"
-                + "[AutoRespond] #自动回复 mcc最np的功能\r\n"
+                + "[AutoRespond] #自动回复 MCC最np的功能\r\n"
                 + "enabled=false\r\n"
                 + "matchesfile=matches.ini\r\n"
                 + "\r\n"
@@ -776,7 +776,7 @@ namespace MinecraftClient
                 + "enabled=false\r\n"
                 + "threshold=6\r\n"
                 + "\r\n"
-                + "[AutoCraft] #自动合成 mcc最复杂的功能\r\n"
+                + "[AutoCraft] #自动合成 MCC最复杂的功能\r\n"
                 + "# Inventory Handling 需要打开\r\n"
                 + "# 如果需要使用熔炉，请打开 terrainandmovements\r\n"
                 + "enabled=false\r\n"
@@ -792,7 +792,7 @@ namespace MinecraftClient
                 + "maxdatabasesize=10000\r\n"
                 + "retentiondays=30\r\n"
                 + "\r\n"
-                + "[AutoDrop] #自动丢弃,配合AutoCraft变成工具人!\r\n"
+                + "[AutoDrop] #自动丢弃,配合 AutoCraft 变成工具人!\r\n"
                 + "# Inventory Handling 需要打开\r\n"
                 + "enabled=false\r\n"
                 + "mode=include                      # include, exclude 或 everything. \r\n"
@@ -820,7 +820,7 @@ namespace MinecraftClient
                 return Convert.ToInt32(str.Trim());
             }
             catch {
-                ConsoleIO.WriteLogLine("配置文件 '" + str + "' 转换失败. 请检查你的设置.");
+                ConsoleIO.WriteLogLine("配置文件 '" + str + "' 转换失败. 请检查你的设置");
                 return 0;
             }
         }
