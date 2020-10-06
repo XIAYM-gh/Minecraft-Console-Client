@@ -24,17 +24,17 @@ namespace MinecraftClient.Commands
                 }
                 catch (FormatException)
                 {
-                    return "这不是一个有效的数字.";
+                    return "这不是一个有效的数字";
                 }
                 if (slot >= 1 && slot <= 9)
                 {
                     if (handler.ChangeSlot(slot-=1))
                     {
-                        return "切换至栏 " + (slot+=1);
+                        return "已将物品栏切换于 " + (slot+=1);
                     }
                     else
                     {
-                        return "不能切换栏";
+                        return "切换物品栏失败";
                     }
                 }
             }
