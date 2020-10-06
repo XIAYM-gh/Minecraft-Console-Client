@@ -691,7 +691,7 @@ namespace MinecraftClient
                 + "password=                          # 只支持密码保护的代理\r\n"
                 + "\r\n"
                 + "[ChatFormat]\r\n"
-                + "# 如果你要自定义请别忘了删除 "#" 符号\r\n"
+                + "# 如果你要自定义请别忘了删除 # 符号\r\n"
                 + "builtins=true                      # MCC built-in 模块支持自定义聊天样式\r\n"
                 + "# public=^<([a-zA-Z0-9_]+)> (.+)$\r\n"
                 + "# private=^([a-zA-Z0-9_]+) 悄悄的对你说: (.+)$\r\n"
