@@ -31,21 +31,21 @@ namespace MinecraftClient.Mapping
             get
             {
                 if (blockX < 0 || blockX >= SizeX)
-                    throw new ArgumentOutOfRangeException("blockX", "Must be between 0 and " + (SizeX - 1) + " (inclusive)");
+                    throw new ArgumentOutOfRangeException("blockX", "必须在 0 和 " + (SizeX - 1) + " 之间 (inclusive)");
                 if (blockY < 0 || blockY >= SizeY)
-                    throw new ArgumentOutOfRangeException("blockY", "Must be between 0 and " + (SizeY - 1) + " (inclusive)");
+                    throw new ArgumentOutOfRangeException("blockY", "必须在 0 和 " + (SizeY - 1) + " 之间 (inclusive)");
                 if (blockZ < 0 || blockZ >= SizeZ)
-                    throw new ArgumentOutOfRangeException("blockZ", "Must be between 0 and " + (SizeZ - 1) + " (inclusive)");
+                    throw new ArgumentOutOfRangeException("blockZ", "必须在 0 和 " + (SizeZ - 1) + " 之间 (inclusive)");
                 return blocks[blockX, blockY, blockZ];
             }
             set
             {
                 if (blockX < 0 || blockX >= SizeX)
-                    throw new ArgumentOutOfRangeException("blockX", "Must be between 0 and " + (SizeX - 1) + " (inclusive)");
+                    throw new ArgumentOutOfRangeException("blockX", "必须在 0 和 " + (SizeX - 1) + " 之间 (inclusive)");
                 if (blockY < 0 || blockY >= SizeY)
-                    throw new ArgumentOutOfRangeException("blockY", "Must be between 0 and " + (SizeY - 1) + " (inclusive)");
+                    throw new ArgumentOutOfRangeException("blockY", "必须在 0 和 " + (SizeY - 1) + " 之间 (inclusive)");
                 if (blockZ < 0 || blockZ >= SizeZ)
-                    throw new ArgumentOutOfRangeException("blockZ", "Must be between 0 and " + (SizeZ - 1) + " (inclusive)");
+                    throw new ArgumentOutOfRangeException("blockZ", "必须在 0 和 " + (SizeZ - 1) + " 之间 (inclusive)");
                 blocks[blockX, blockY, blockZ] = value;
             }
         }
