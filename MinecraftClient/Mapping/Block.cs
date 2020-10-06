@@ -42,13 +42,13 @@ namespace MinecraftClient.Mapping
                 if (Palette.IdHasMetadata)
                 {
                     if (value > (ushort.MaxValue >> 4) || value < 0)
-                        throw new ArgumentOutOfRangeException("value", "Invalid block ID. Accepted range: 0-4095");
+                        throw new ArgumentOutOfRangeException("value", "无效的方块 ID 接受的范围: 0-4095");
                     blockIdAndMeta = (ushort)(value << 4 | BlockMeta);
                 }
                 else
                 {
                     if (value > ushort.MaxValue || value < 0)
-                        throw new ArgumentOutOfRangeException("value", "Invalid block ID. Accepted range: 0-65535");
+                        throw new ArgumentOutOfRangeException("value", "无效的方块 ID 接受的范围: 0-65535");
                     blockIdAndMeta = (ushort)value;
                 }
             }
@@ -96,7 +96,7 @@ namespace MinecraftClient.Mapping
         public Block(short type, byte metadata)
         {
             if (!Palette.IdHasMetadata)
-                throw new InvalidOperationException("Current global Palette does not support block Metadata");
+                throw new InvalidOperationException("当前的全局Palette文件不支持方块元数据");
             this.blockIdAndMeta = 0;
             this.BlockId = type;
             this.BlockMeta = metadata;
