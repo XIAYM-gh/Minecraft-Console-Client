@@ -4,8 +4,9 @@ Translated(已翻译) : 约95%<br>
 正在汉化:`用户使用手册等`<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
 Change color of "feature not handled" from gray to red (#1265)<br>
-下载汉化版本请前往"[Releases](https://github.com/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate/releases)"页面<br>
-提交~bug~请去:<br>
+[![Appveyor build status](https://ci.appveyor.com/api/projects/status/github/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate?branch=master)](https://ci.appveyor.com/project/XIAYM-gh/minecraft-console-client-chinesetranslate/) <- **下载地址**<br>
+**Releases页面已弃用**<br>
+提交bug请去:<br>
 [Go To ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
 ## 编译方法
 1.找到C:\Windows\Microsoft.NET\Framework\v4.X.XXXXX\MsBuild.exe（前提：安装了.Net Framework)<br>
@@ -17,8 +18,6 @@ MinecraftClient/bin/Release 或 MinecraftClient/bin/Debug里。<br>
 
 我的世界控制台客户端(MCC)
 ========================
-
-[![Appveyor build status](https://ci.appveyor.com/api/projects/status/github/ORelio/Minecraft-Console-Client?branch=Indev)](https://ci.appveyor.com/project/ORelio/minecraft-console-client)
 
 我的世界控制台客户端(MCC)是一个轻量级的程序，它允许你连接至任何我的世界服务器，
 简单快速地发送指令和接收聊天信息而不需要开启游戏。它也提供了多种自动化管理服务器和进行其他操作的可能性。
@@ -59,8 +58,6 @@ CDDL-1.0许可证的主要条件基本上在列明于下列：
 ## English ver.
 Minecraft Console Client
 ========================
-
-[![Appveyor build status](https://ci.appveyor.com/api/projects/status/github/ORelio/Minecraft-Console-Client?branch=Indev)](https://ci.appveyor.com/project/ORelio/minecraft-console-client)
 
 Minecraft Console Client(MCC) is a lightweight app allowing you to connect to any Minecraft server,
 send commands and receive text messages in a fast and easy way without having to open the main Minecraft game. It also provides various automation for administration and other purposes.
