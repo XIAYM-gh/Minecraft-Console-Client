@@ -1,11 +1,13 @@
+## 下载地址
+[最新构建下载(Appveyor)](https://ci.appveyor.com/project/XIAYM-gh/minecraft-console-client-chinesetranslate/)<br>
+[最新源码下载(主分支)](https://github.com/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate/archive/master.zip)
 ## 状态
 **当前 Minecraft Console Client ChineseTranslate 并未完全汉化完成，所以如若发现翻译不准确等问题，欢迎提交Issuse哦！**<br>
 Translated(已翻译) : 约95%<br>
 正在汉化:`用户使用手册等`<br>
 已更新到官方Commit : 0c88c18ea060853b32d5b23684d9323bfd3840ae (正在更新..)<br>
 Change color of "feature not handled" from gray to red (#1265)<br>
-[![Appveyor build status](https://ci.appveyor.com/api/projects/status/github/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate?branch=master)](https://ci.appveyor.com/project/XIAYM-gh/minecraft-console-client-chinesetranslate/) <- **下载地址**<br>
-**Releases页面已弃用**<br>
+**Releases页面已弃用,如需下载请见README -> 下载地址**<br>
 提交bug请去:<br>
 [Go To ORelio issues](https://github.com/ORelio/Minecraft-Console-Client/issues)
 ## 编译方法
