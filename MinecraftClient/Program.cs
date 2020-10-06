@@ -386,7 +386,7 @@ namespace MinecraftClient
                     offlinePrompt = new Thread(new ThreadStart(delegate
                     {
                         string command = " ";
-                        ConsoleIO.WriteLineFormatted("§a没有加入任何服务器. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
+                        ConsoleIO.WriteLineFormatted("§e[信息]§a没有加入任何§b服务器§a. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
                         while (command.Length > 0)
                         {
                             if (!ConsoleIO.BasicIO)
@@ -416,13 +416,13 @@ namespace MinecraftClient
                                 }
                                 else if (command.StartsWith("help"))
                                 {
-                                    ConsoleIO.WriteLineFormatted("§8MCC: " + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + new Commands.Reco().CMDDesc);
-                                    ConsoleIO.WriteLineFormatted("§8MCC: " + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + new Commands.Connect().CMDDesc);
+                                    ConsoleIO.WriteLineFormatted("§e[信息]§8 " + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + new Commands.Reco().CMDDesc);
+                                    ConsoleIO.WriteLineFormatted("§e[信息]§8 " + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + new Commands.Connect().CMDDesc);
                                 }
                                 else ConsoleIO.WriteLineFormatted("§8未知命令: '" + command.Split(' ')[0] + "'.");
 
                                 if (message != "")
-                                    ConsoleIO.WriteLineFormatted("§8MCC: " + message);
+                                    ConsoleIO.WriteLineFormatted("§e[信息]§8 " + message);
                             }
                         }
                     }));
