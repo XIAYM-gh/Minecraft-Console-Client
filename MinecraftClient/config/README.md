@@ -9,7 +9,7 @@ MCC是一款可以进入离线/正版MC服务器的程序
 如何使用
 ------
 
-在Windows上，双击运行"MinecraftClientCN-gitxxx.exe"
+在Windows上，双击运行"MinecraftClientCN.exe"
 
 使用配置文件操作机器人
 ------
@@ -49,13 +49,13 @@ MCC是一款可以进入离线/正版MC服务器的程序
  - send <text> : 向服务器发送消息或命令
  - respawn : 死亡之后输入可以重生
  - log <text> : 向控制台发送信息(非服务端)
- - list : list players logged in to the server (uses tab list info sent by server)
- - set varname=value : set a value which can be used as %varname% in further commands
- - wait <time> : wait X ticks (10 ticks = ~1 second. Only for scripts)
- - move : used for moving when terrain and movements feature is enabled
- - look : used for looking at direction when terrain and movements is enabled
- - debug : toggle debug messages, useful for chatbot developers
- - help : show command help. Tip: Use "/send /help" for server help
+ - list : 显示服务器在线的玩家
+ - set varname=value : 设置一个变量
+ - wait <time> : 等待xxx tick (10tick=1s)
+ - move : 移动
+ - look : 摆头
+ - debug : 调试信息
+ - help : 查看帮助
 
 [account] is an account alias defined in accounts file, read more below.
 <server> is either a server IP or a server alias defined in servers file
