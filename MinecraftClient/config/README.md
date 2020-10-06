@@ -60,7 +60,7 @@ MCC是一款可以进入离线/正版MC服务器的程序
 [account] is an account alias defined in accounts file, read more below.
 <server> is either a server IP or a server alias defined in servers file
 
-Servers and Accounts file
+Servers和Accounts文件
 ------
 
 These two files can be used to store info about accounts and server, and give them aliases.
@@ -70,7 +70,7 @@ using aliases is really important for privacy and for safely switching between a
 To use these files, simply take a look at sample-accounts.txt and sample-servers.txt.
 Once you have created your files, fill the 'accountlist' and 'serverlist' fields in INI file.
 
-Interacting with the Minecraft world
+与Minecraft世界交互
 ------
 
 By default, Minecraft Console Client cannot interact with the world around you.
@@ -83,7 +83,7 @@ Please note that this requires much more RAM to store all the terrain data, a bi
 to process all of this, and slightly more bandwidth as locations updates are
 sent back to the server in a spammy way (that's how Minecraft works).
 
-How to write a script file
+如何写一个脚本文件
 ------
 
 A script file can be launched by using /script <filename> in the client's command prompt.
@@ -97,7 +97,7 @@ Allowed instructions are given in "Internal commands" section.
 Application variables defined using the 'set' command or [AppVars] INI section can be used.
 The following read-only variables can also be used: %username%, %login%, %serverip%, %serverport%
 
-How to write a C# script
+如何写一个c#脚本文件
 ------
 
 If you are experienced with C#, you may also write a C# script.
@@ -126,7 +126,7 @@ Everything between "//MCCScript 1.0" and "//MCCScript Extensions" comments will 
 You can include C# libraries/namespaces using the following syntax: //using <name>;
 Example: //using System.Net;
 
-Using HTTP/Socks proxies
+使用HTTP/Socks代理
 ------
 
 If you are on a restricted network you might want to use some HTTP or SOCKS proxies.
@@ -135,7 +135,7 @@ Proxies with username/password authentication are supported but have not been te
 Not every proxy will work for playing Minecraft, because of port 80/443 web browsing restrictions.
 However you can choose to use a proxy for login only, most proxies should work in this mode.
 
-Connecting to servers when ping is disabled
+连接一个禁Ping的服务器
 ------
 
 On some servers, the server list ping feature has been disabled, which prevents Minecraft Console Client
@@ -144,7 +144,7 @@ find out which Minecraft version is running on the server, and fill in the 'mcve
 This will disable the ping step while connecting, but requires you to manually provide the version to use.
 Recent versions of Minecraft Console Client may also prompt you for MC version in case of ping failure.
 
-About translation files
+关于MC语言文件
 ------
 
 When connecting to 1.6+ servers, you will need a translation file to display properly some chat messages.
@@ -152,7 +152,7 @@ These files describe how some messages should be printed depending on your prefe
 The client will automatically load en_GB.lang from your Minecraft folder if Minecraft is installed on your
 computer, or download it from Mojang's servers. You may choose another language in the configuration file.
 
-Detecting chat messages
+检测聊天信息
 ------
 
 Minecraft Console Client can parse messages from the server in order to detect private and public messages.
@@ -160,20 +160,20 @@ This is useful for reacting to messages eg when using the AutoRespond, Hangman g
 However, for unusual chat formats, so you may need to tinker with the ChatFormat section of the config file.
 Building regular expressions can be a bit tricky, so you might want to try them out eg on regex101.com
 
-About Replay Mod feature
+关于Replay模组的特性
 ------
 Replay Mod is _A Minecraft Mod to record, relive and share your experience._ You can see more at https://www.replaymod.com/
 
 MCC support recording and saving your game to a file which can be used by Replay Mod. You can simply enable ReplayMod in the `.ini` setting to use this feature. The only limitation is the client player (you) will not be shown in the replay. Please be reminded that you MUST exit MCC with `/quit` command or use `/replay stop` command before closing MCC. Your replay will be lost if you force-closed MCC (i.e. Ctrl+C).
 
-Using the Alerts bot
+使用Alert
 ------
 
 Write in alerts.txt the words you want the console to beep/alert you on.
 Write in alerts-exclude.txt the words you want NOT to be alerted on.
 For example write Yourname in alerts and <Yourname> in alerts-exclude.txt
 
-Using the AutoRelog bot
+使用AutoRelog
 ------
 
 Write in kickmessages.txt some words, such as "Restarting" for example.
@@ -184,14 +184,14 @@ A kick message "Failed to ping this IP." is generated when it failed to ping the
 You can use them for reconnecting when connection is lost or the login failed.
 If you want to always reconnect, set ignorekickmessage=true in MinecraftClient.ini. Use at own risk!
 
-Using the Script Scheduler
+使用Script Scheduler
 ------
 
 The script scheduler allows you to perform scripts on various events.
 Simply enable the ScriptScheduler bot and specify a tasks file in your INI file.
 Please read sample-tasks.ini for learning how to make your own task file.
 
-Using the hangman game
+使用 hangman game
 ------
 
 Use "/tell <bot username> start" to start the game.
@@ -199,7 +199,7 @@ Don't forget to add your username in botowners INI setting if you want it to obe
 Edit the provided configuration files to customize the words and the bot owners.
 If it doesn't respond to bot owners, read the "Detecting chat messages" section.
 
-Using the Remote Control
+使用 Remote Control
 ------
 
 When the remote control bot is enabled, you can send commands to your bot using whispers.
@@ -215,20 +215,20 @@ You can remotely send chat messages or commands using /tell <yourbot> send <thet
 Remote control system can by default auto-accept /tpa and /tpahere requests from the bot owners.
 Auto-accept can be disabled or extended to requests from anyone in remote control configuration.
 
-Using the AutoRespond feature
+使用AutoRespond的特性
 ------
 
 The AutoRespond bot allows you to automatically react on specific chat messages or server announcements.
 You can use either a string to detect in chat messages, or an advanced regular expression.
 For more information about how to define match rules, please refer to sample-matches.ini
 
-Using the Auto Attack
+使用Auto Attack
 ------
 
 The AutoAttack bot allows you to automatically attack mobs around you (precisely within radius of 4 block).
 To use this bot, you will need to enable **Entity Handling** in the config file first.
 
-Using the Auto Fishing
+使用Auto Fishing
 ------
 
 The AutoFish bot can automatically fish for you.
@@ -243,7 +243,7 @@ Steps for using this bot:
 4. Do `/useitem` and you should see "threw a fishing rod"
 5. To stop fishing, do `/useitem` again
 
-Using the Mailer
+使用Mailer
 ------
 
 The Mailer bot can store and relay mails much like Essential's /mail command.
@@ -267,7 +267,7 @@ Never write something to the bot you wouldn't say in the normal chat (You have b
 To set up a network of two or more bots, launch several instances with the bot activated and the same database.
 If you launch two instances from one .exe they should syncronize automatically to the same file.
 
-Using the AutoCraft bot
+使用Autocraft
 ------
 
 The AutoCraft bot can automatically craft items for you as long as you have defined the item recipe.
@@ -329,7 +329,7 @@ For the naming of items, please see [ItemType.cs](https://github.com/ORelio/Mine
 
 After you finished writing your config, you can use `/autocraft start <recipe name>` to start crafting. Make sure to provide materials for your bot.
 
-Disclaimer
+警告
 ------
 
 Even if everything should work, We are not responsible for any damage this app could cause to your computer or your server.
@@ -341,7 +341,7 @@ Use the script scheduler bot to send a teleport command after logging in.
 
 We remind you that **you may get banned** by your server for using this program. Use accordingly with server rules.
 
-License
+协议
 ------
 
 Minecraft Console Client is a totally free of charge, open source project.
