@@ -57,7 +57,7 @@ namespace MinecraftClient
             //Debug input ?
             if (args.Length == 1 && args[0] == "--keyboard-debug")
             {
-                Console.WriteLine("按下任意键显示debug信息..");
+                Console.WriteLine("按下任意键显示 Debug 信息...");
                 ConsoleIO.DebugReadInput();
             }
 
@@ -117,7 +117,7 @@ namespace MinecraftClient
 
             if (Settings.ConsoleTitle != "")
             {
-                Settings.Username = "新窗口 ";
+                Settings.Username = "未输入 ";
                 Console.Title = Settings.ExpandVars(Settings.ConsoleTitle);
             }
 
@@ -132,7 +132,7 @@ namespace MinecraftClient
             {
                 bool cacheLoaded = SessionCache.InitializeDiskCache();
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted(cacheLoaded ? "§e[信息]§8Session 数据已从硬盘加载!" : "§e[信息]§8没有 Session 数据从硬盘加载!");
+                    ConsoleIO.WriteLineFormatted(cacheLoaded ? "§e[信息]§8 Session 数据已从硬盘加载!" : "§e[信息]§8没有 Session 数据从硬盘加载!");
             }
 
             //Asking the user to type in missing data such as Username and Password
@@ -178,7 +178,7 @@ namespace MinecraftClient
 
             if (Settings.Password == "-")
             {
-                ConsoleIO.WriteLineFormatted("\n§e[信息]§8你选择使用离线模式.");
+                ConsoleIO.WriteLineFormatted("\n§e[信息]§8 你当前使用离线模式");
                 result = ProtocolHandler.LoginResult.Success;
                 session.PlayerID = "0";
                 session.PlayerName = Settings.Login;
@@ -192,16 +192,16 @@ namespace MinecraftClient
                     result = ProtocolHandler.GetTokenValidation(session);
                     if (result != ProtocolHandler.LoginResult.Success)
                     {
-                        ConsoleIO.WriteLineFormatted("§c[错误]§8Session 错误或过期.");
+                        ConsoleIO.WriteLineFormatted("§c[错误]§8 Session 错误或过期.");
                         if (Settings.Password == "")
                             RequestPassword();
                     }
-                    else ConsoleIO.WriteLineFormatted("§c[错误]§8Session 错误 " + session.PlayerName + '.');
+                    else ConsoleIO.WriteLineFormatted("§c[错误]§8 Session 错误 " + session.PlayerName + '.');
                 }
 
                 if (result != ProtocolHandler.LoginResult.Success)
                 {
-                    ConsoleIO.WriteLineFormatted("\n§e[信息]§8正在连接到验证服务器..");
+                    ConsoleIO.WriteLineFormatted("\n§e[信息]§8 正在连接到验证服务器..");
                     result = ProtocolHandler.GetLogin(Settings.Login, Settings.Password, out session);
 
                     if (result == ProtocolHandler.LoginResult.Success && Settings.SessionCaching != CacheType.None)
@@ -223,7 +223,7 @@ namespace MinecraftClient
                     ConsoleIcon.setPlayerIconAsync(Settings.Username);
 
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLineFormatted("§e[信息]§8成功! (获取的 session ID: " + session.ID + ')');
+                    ConsoleIO.WriteLineFormatted("§e[信息]§8 成功! (获取的 session ID: " + session.ID + ')');
 
                 //ProtocolHandler.RealmsListWorlds(Settings.Username, PlayerID, sessionID); //TODO REMOVE
 
@@ -243,9 +243,9 @@ namespace MinecraftClient
 
                     if (protocolversion != 0)
                     {
-                        ConsoleIO.WriteLineFormatted("§e[信息]§8使用MC版本: " + Settings.ServerVersion + " (protocol v" + protocolversion + ')');
+                        ConsoleIO.WriteLineFormatted("§e[信息]§8 使用MC版本: " + Settings.ServerVersion + " (protocol v" + protocolversion + ')');
                     }
-                    else ConsoleIO.WriteLineFormatted("§c[错误]§8未知或不支持的mc版本 '" + Settings.ServerVersion + "'.\n正在自动选择版本.");
+                    else ConsoleIO.WriteLineFormatted("§c[错误]§8 未知或不支持的mc版本 '" + Settings.ServerVersion + "'.\n正在自动选择版本.");
 
                     if (useMcVersionOnce)
                     {
@@ -257,8 +257,8 @@ namespace MinecraftClient
                 if (protocolversion == 0 || Settings.ServerMayHaveForge)
                 {
                     if (protocolversion != 0)
-                        ConsoleIO.WriteLineFormatted("§e[信息]§8正在检查服务器是否存在forge..");
-                    else ConsoleIO.WriteLineFormatted("§e[信息]§8正在检查版本....");
+                        ConsoleIO.WriteLineFormatted("§e[信息]§8 正在检查服务器是否存在 Forge..");
+                    else ConsoleIO.WriteLineFormatted("§e[信息]§8 正在检查版本....");
                     if (!ProtocolHandler.GetServerInfo(Settings.ServerIP, Settings.ServerPort, ref protocolversion, ref forgeInfo))
                     {
                         HandleFailure("无法找到这个服务器!", true, ChatBots.AutoRelog.DisconnectReason.ConnectionLost);
@@ -283,26 +283,26 @@ namespace MinecraftClient
                     }
                     catch (NotSupportedException) { HandleFailure("无法连接到服务器 : 不支持的版本!", true); }
                 }
-                else HandleFailure("无法侦测服务器版本.", true);
+                else HandleFailure("无法获取服务器版本", true);
             }
             else
             {
                 string failureMessage = "Minecraft 登录失败 : ";
                 switch (result)
                 {
-                    case ProtocolHandler.LoginResult.AccountMigrated: failureMessage += "未知邮箱."; break;
-                    case ProtocolHandler.LoginResult.ServiceUnavailable: failureMessage += "验证服务器目前离线."; break;
-                    case ProtocolHandler.LoginResult.WrongPassword: failureMessage += "密码错误或短时间登陆太多次被禁止登录."; break;
+                    case ProtocolHandler.LoginResult.AccountMigrated: failureMessage += "未知邮箱"; break;
+                    case ProtocolHandler.LoginResult.ServiceUnavailable: failureMessage += "验证服务器目前离线"; break;
+                    case ProtocolHandler.LoginResult.WrongPassword: failureMessage += "密码错误或短时间登陆太多次被禁止登录"; break;
                     case ProtocolHandler.LoginResult.InvalidResponse: failureMessage += "返回错误"; break;
                     case ProtocolHandler.LoginResult.NotPremium: failureMessage += "用户名错误"; break;
-                    case ProtocolHandler.LoginResult.OtherError: failureMessage += "网络错误."; break;
-                    case ProtocolHandler.LoginResult.SSLError: failureMessage += "SSL证书错误."; break;
-                    default: failureMessage += "未知错误."; break;
+                    case ProtocolHandler.LoginResult.OtherError: failureMessage += "网络错误"; break;
+                    case ProtocolHandler.LoginResult.SSLError: failureMessage += "SSL证书错误"; break;
+                    default: failureMessage += "未知错误"; break;
                 }
                 if (result == ProtocolHandler.LoginResult.SSLError && isUsingMono)
                 {
-                    ConsoleIO.WriteLineFormatted("§8It appears that you are using Mono to run this program."
-                        + '\n' + "The first time, you have to import HTTPS certificates using:"
+                    ConsoleIO.WriteLineFormatted("§8看起来你正在使用 Mono 来运行这个程序。"
+                        + '\n' + "第一次，您必须导入 HTTPS 证书使用:"
                         + '\n' + "mozroots --import --ask-remove");
                     return;
                 }
@@ -386,7 +386,7 @@ namespace MinecraftClient
                     offlinePrompt = new Thread(new ThreadStart(delegate
                     {
                         string command = " ";
-                        ConsoleIO.WriteLineFormatted("§e[信息]§a没有加入任何§b服务器§a. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
+                        ConsoleIO.WriteLineFormatted("§e[信息]§a 没有加入任何§b服务器§a. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
                         while (command.Length > 0)
                         {
                             if (!ConsoleIO.BasicIO)
