@@ -14,7 +14,7 @@ namespace MinecraftClient.Mapping
     /// </remarks>
     public enum EntityType
     {
-        药水云,
+        AreaEffectCloud,
         ArmorStand,
         Arrow,
         Bat,
