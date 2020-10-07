@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoTimeout.cs" />
-    <Compile Include="newoption\antibreak.cs" />
     <Compile Include="ChatBots\AutoDrop.cs" />
     <Compile Include="ChatBots\Mailer.cs" />
     <Compile Include="ChatBots\ReplayCapture.cs" />
