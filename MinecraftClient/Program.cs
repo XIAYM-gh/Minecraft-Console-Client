@@ -44,13 +44,13 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
-	    ConsoleIO.WriteLineFormatted("§e已更新到 (ORelio) §3Commit §1ID §d0c88c18ea060853b32d5b23684d9323bfd3840ae §eBy XIAYM §f& §eWindowX");
+	    ConsoleIO.WriteLineFormatted("§e已更新到 (ORelio) §3Commit §1ID §d0c88c18ea060853b32d5b23684d9323bfd3840ae §e汉化 By XIAYM §f& §eWindowX");
 	    //WindowX:劳资的名字捏！！！！
 		//XIAYM:好吧给你改了
             //Build information to facilitate processing of bug reports
             if (BuildInfo != null)
             {
-                ConsoleIO.WriteLineFormatted("§3构建信息: §8 " + BuildInfo);
+                ConsoleIO.WriteLineFormatted("§8 " + BuildInfo);
             }
             //已被禁用的信息(2020.10.6 17:30 启用)
 
