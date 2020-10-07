@@ -650,7 +650,7 @@ namespace MinecraftClient
                 + "\r\n"
                 + "# 高级设置\r\n"
                 + "\r\n"
-                + "language=en_GB                     # 请勿更改为zh_CN,可能会出事(兼容性不好，全部显示为[%s])\r\n"
+                + "language=zh_CN                     # 服务器内显示语言，默认zh_CN\r\n"
                 + "consoletitle=%username%@%serverip% - Minecraft Console Client CN    #标题\r\n"
                 + "internalcmdchar=slash              # 使用 'none', 'slash' 或者 'backslash'(鬼知道什么作用)\r\n"
                 + "splitmessagedelay=2                # 长消息分割发送秒数(约为100字符+)\r\n"
