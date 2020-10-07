@@ -120,6 +120,17 @@ namespace MinecraftClient
                 Settings.Username = "未输入 ";
                 Console.Title = Settings.ExpandVars(Settings.ConsoleTitle);
             }
+		//屏蔽Ctrl+C
+		{
+public const int WM_COPY=0x301;
+public const int WM_CUT=0x300;
+protected overide void WndProc(ref Message m)
+{
+if (e.Msg==WM_COPY||e.Msg ==WM_CUT)return;//不处理
+base.WndProc(ref m);
+}
+		}
+		
 
             //Test line to troubleshoot invisible colors
             if (Settings.DebugMessages)
