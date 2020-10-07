@@ -485,11 +485,3 @@ namespace MinecraftClient
         }
     }
 }
-//屏蔽Ctrl+C
-	 private static void KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Modifiers.CompareTo(Keys.Control) == 0 && e.KeyCode == Keys.F1)
-            {
-                ConsoleIO.WriteLineFormatted("§e[信息]§8已屏蔽程序终止信号!")
-            }
-        }
