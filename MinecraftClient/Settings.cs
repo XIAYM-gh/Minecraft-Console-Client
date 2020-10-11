@@ -675,7 +675,7 @@ namespace MinecraftClient
                 + "exitonfailure=false                # 禁用错误暂停，以便在非交互式脚本中使用MCC\r\n"
                 + "debugmessages=false                # 显示高级信息(请在反馈bug前打开此项)\r\n"
                 + "scriptcache=true                   # 在下一次执行同样的脚本时速度会变快\r\n"
-                + "timestamps=false                   # 计时发送信息(类似于1.16增加的聊天间隔功能)\r\n"
+                + "timestamps=false                   # 记录聊天时间戳 (翻译修正 By ReinforceZwei)\r\n"
                 + "autorespawn=false                  # 玩家死亡后自动重生(请确保重生点是安全的，并且可以像外挂一样直接无需等待重生，可能会被反作弊检测)\r\n"
                 + "\r\n"
                 + "[AppVars]\r\n"
