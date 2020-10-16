@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AntiCtrlCQuit.cs" />
     <Compile Include="AutoTimeout.cs" />
     <Compile Include="ChatBots\AutoDrop.cs" />
     <Compile Include="ChatBots\Mailer.cs" />
