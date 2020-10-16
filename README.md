@@ -1,6 +1,5 @@
-## 下载地址
-[最新构建下载(Appveyor)](https://ci.appveyor.com/project/XIAYM-gh/minecraft-console-client-chinesetranslate/)<br>
-[最新源码下载(主分支)](https://github.com/XIAYM-gh/Minecraft-Console-Client-ChineseTranslate/archive/master.zip)
+## 说明
+这里仅仅是TranslateSupportTest分支，将在未来实现支持翻译文件，请拭目以待!
 ## 状态
 **当前 Minecraft Console Client ChineseTranslate 并未完全汉化完成，所以如若发现翻译不准确等问题，欢迎提交Issuse哦！**<br>
 Translated(已翻译) : 约95%<br>
