@@ -251,7 +251,7 @@ namespace MinecraftClient
             catch (SocketException e)
             {
                 ConsoleIO.WriteLineFormatted("§8" + e.Message);
-                Console.WriteLine("无法登录到这个IP.");
+                ConsoleIO.WriteLineFormatted("§c[错误]§8无法登录到这个IP.");
                 retry = true;
             }
 
@@ -259,7 +259,7 @@ namespace MinecraftClient
             {
                 if (ReconnectionAttemptsLeft > 0)
                 {
-                    ConsoleIO.WriteLogLine("等待5秒后 (" + ReconnectionAttemptsLeft + " attempts left)...");
+                    ConsoleIO.WriteLogLine("等待5秒后 (" + ReconnectionAttemptsLeft + " )...");
                     Thread.Sleep(5000);
                     ReconnectionAttemptsLeft--;
                     Program.Restart();
