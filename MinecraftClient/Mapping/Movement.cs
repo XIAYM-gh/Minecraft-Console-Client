@@ -257,7 +257,7 @@ namespace MinecraftClient.Mapping
                     return !world.GetBlock(Move(location, direction)).Type.IsSolid()
                         && !world.GetBlock(Move(Move(location, direction), Direction.Up)).Type.IsSolid();
                 default:
-                    throw new ArgumentException("未知的方向", "方向");
+                    throw new ArgumentException("Unknown direction", "direction");
             }
         }
 
@@ -295,7 +295,7 @@ namespace MinecraftClient.Mapping
                 case Direction.North:
                     return new Location(0, 0, -1);
                 default:
-                    throw new ArgumentException("未知的方向", "方向");
+                    throw new ArgumentException("Unknown direction", "direction");
             }
         }
     }
