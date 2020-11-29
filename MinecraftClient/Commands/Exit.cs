@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MinecraftClient.Commands
+{
+    public class Exit : Command
+    {
+        public override string CMDName { get { return "exit"; } }
+        public override string CMDDesc { get { return "exit: 断开与服务器的连接"; } }
+
+        public override string Run(McClient handler, string command, Dictionary<string, object> localVars)
+        {
+            Program.Exit();
+            return "";
+        }
+
+        public override IEnumerable<string> getCMDAliases()
+        {
+            return new string[] { "quit" };
+        }
+    }
+}
