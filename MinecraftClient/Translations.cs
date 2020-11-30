@@ -132,7 +132,7 @@ namespace MinecraftClient
             else
             {
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLogLine("[Translations] No translation file found for " + language + ". (Looked '" + langFileConfigLanguage + "'");
+                    ConsoleIO.WriteLogLine("[Translations] 我没找到翻译文件 " + language + ". (检查 '" + langFileConfigLanguage + "'");
             }
 
             if (File.Exists(langFileSystemLanguage))
@@ -143,7 +143,7 @@ namespace MinecraftClient
             else
             {
                 if (Settings.DebugMessages)
-                    ConsoleIO.WriteLogLine("[Translations] No translation file found for system language (" + systemLanguage + "). (Looked '" + langFileSystemLanguage + "'");
+                    ConsoleIO.WriteLogLine("[Translations] 未发现系统语言翻译文件 (" + systemLanguage + "). (检查 '" + langFileSystemLanguage + "'");
             }
         }
 

@@ -44,7 +44,7 @@ namespace MinecraftClient
         static void Main(string[] args)
         {
             Console.WriteLine("Console Client for MC {0} to {1} - v{2} - By ORelio & Contributors", MCLowestVersion, MCHighestVersion, Version);
-	    ConsoleIO.WriteLineFormatted("§e已更新到 (ORelio) §3Commit §1ID §d0c88c18ea060853b32d5b23684d9323bfd3840ae §e汉化 By XIAYM §f& §eWindowX");
+	    ConsoleIO.WriteLineFormatted("§dMCC §e汉化 By XIAYM §f& §eWindowX");
 	    //WindowX:劳资的名字捏！！！！
 		//XIAYM:好吧给你改了
             //Build information to facilitate processing of bug reports
@@ -57,7 +57,7 @@ namespace MinecraftClient
             //Debug input ?
             if (args.Length == 1 && args[0] == "--keyboard-debug")
             {
-                Console.WriteLine("按下任意键显示 Debug 信息...");
+                ConsoleIO.WriteLine("按下任意键显示 Debug 信息...");
                 ConsoleIO.DebugReadInput();
             }
 
@@ -254,7 +254,8 @@ namespace MinecraftClient
                     }
                 }
 
-                if (protocolversion == 0 || Settings.ServerMayHaveForge)
+               //Retrieve server info if version is not manually set OR if need to retrieve Forge information
+                if (protocolversion == 0 || Settings.ServerAutodetectForge || (Settings.ServerForceForge && !ProtocolHandler.ProtocolMayForceForge(protocolversion)))
                 {
                     if (protocolversion != 0)
                         ConsoleIO.WriteLineFormatted("§e[信息]§8 正在检查服务器是否存在 Forge..");
@@ -266,6 +267,22 @@ namespace MinecraftClient
                     }
                 }
 
+ //Force-enable Forge support?
+                if (Settings.ServerForceForge && forgeInfo == null)
+                {
+                    if (ProtocolHandler.ProtocolMayForceForge(protocolversion))
+                    {
+                        Translations.WriteLine("mcc.forgeforce");
+                        forgeInfo = ProtocolHandler.ProtocolForceForge(protocolversion);
+                    }
+                    else
+                    {
+                        HandleFailure(Translations.Get("error.forgeforce"), true, ChatBots.AutoRelog.DisconnectReason.ConnectionLost);
+                        return;
+                    }
+                }
+
+                //Proceed to server login
                 if (protocolversion != 0)
                 {
                     try
