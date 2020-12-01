@@ -236,10 +236,10 @@ namespace MinecraftClient
         /// <returns>True if the text was sent with no error</returns>
         public bool SendText(object text)
         {
-            bool result = base.SendText(text is string ? (string)text : text.ToString());
+            base.SendText(text is string ? (string)text : text.ToString());
             tickHandler.WaitOne();
             Thread.Sleep(1000);
-            return result;
+            return true;
         }
 
         /// <summary>
