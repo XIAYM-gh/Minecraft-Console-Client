@@ -27,6 +27,9 @@ namespace MinecraftClient
         private readonly Dictionary<Guid, string> onlinePlayers = new Dictionary<Guid, string>();
         private static bool CommandLoaded = false;
 
+        private Queue<string> chatQueue = new Queue<string>();
+        private static DateTime nextMessageSendTime = DateTime.MinValue;
+
         private readonly List<ChatBot> bots = new List<ChatBot>();
         private static readonly List<ChatBot> botsOnHold = new List<ChatBot>();
         private static Dictionary<int, Container> inventories = new Dictionary<int, Container>();
@@ -546,7 +549,6 @@ namespace MinecraftClient
                 try
                 {
                     bot.Update();
-                    bot.ProcessQueuedText();
                 }
                 catch (Exception e)
                 {
@@ -555,8 +557,18 @@ namespace MinecraftClient
                         ConsoleIO.WriteLogLine("更新数据包时发生错误: " + bot.ToString() + ": " + e.ToString());
                     }
                     else throw; //ThreadAbortException should not be caught
+                } 
+            }
+			            lock (chatQueue)
+            {
+                if (chatQueue.Count > 0 && nextMessageSendTime < DateTime.Now)
+                {
+                    string text = chatQueue.Dequeue();
+                    handler.SendChatMessage(text);
+                    nextMessageSendTime = DateTime.Now + Settings.messageCooldown;
                 }
             }
+
 
             if (terrainAndMovementsEnabled && locationReceived)
             {
@@ -903,31 +915,32 @@ namespace MinecraftClient
         /// </summary>
         /// <param name="text">Text to send to the server</param>
         /// <returns>True if the text was sent with no error</returns>
-        public bool SendText(string text)
+        public void SendText(string text)
         {
-            int maxLength = handler.GetMaxChatMessageLength();
-            if (text.Length > maxLength) //Message is too long?
+            lock (chatQueue)
             {
-                if (text[0] == '/')
+                int maxLength = handler.GetMaxChatMessageLength();
+                if (text.Length > maxLength) //Message is too long?
                 {
-                    //Send the first 100/256 chars of the command
-                    text = text.Substring(0, maxLength);
-                    return handler.SendChatMessage(text);
-                }
-                else
-                {
-                    //Send the message splitted into several messages
-                    while (text.Length > maxLength)
+                    if (text[0] == '/')
                     {
-                        handler.SendChatMessage(text.Substring(0, maxLength));
-                        text = text.Substring(maxLength, text.Length - maxLength);
-                        if (Settings.splitMessageDelay.TotalSeconds > 0)
-                            Thread.Sleep(Settings.splitMessageDelay);
+                        //Send the first 100/256 chars of the command
+                        text = text.Substring(0, maxLength);
+                        chatQueue.Enqueue(text);
                     }
-                    return handler.SendChatMessage(text);
+                    else
+                    {
+                        //Split the message into several messages
+                        while (text.Length > maxLength)
+                        {
+                            chatQueue.Enqueue(text.Substring(0, maxLength));
+                            text = text.Substring(maxLength, text.Length - maxLength);
+                        }
+                        chatQueue.Enqueue(text);
+                    }
                 }
+                else chatQueue.Enqueue(text);
             }
-            else return handler.SendChatMessage(text);
         }
 
         /// <summary>
@@ -1694,7 +1707,7 @@ namespace MinecraftClient
 
             if (Settings.DisplayChatLinks)
                 foreach (string link in links)
-                    ConsoleIO.WriteLogLine("Link: " + link, false);
+                    ConsoleIO.WriteLogLine("链接: " + link, false);
 
             DispatchBotEvent(bot => bot.GetText(text));
             DispatchBotEvent(bot => bot.GetText(text, json));
@@ -1722,8 +1735,8 @@ namespace MinecraftClient
 
             if (inventoryID != 0)
             {
-                ConsoleIO.WriteLogLine("Inventory # " + inventoryID + " opened: " + inventory.Title);
-                ConsoleIO.WriteLogLine("Use /inventory to interact with it.");
+                ConsoleIO.WriteLogLine("物品栏 # " + inventoryID + " 已打开: " + inventory.Title);
+                ConsoleIO.WriteLogLine("使用 /inventory 与它交互");
                 DispatchBotEvent(bot => bot.OnInventoryOpen(inventoryID));
             }
         }
@@ -1739,7 +1752,7 @@ namespace MinecraftClient
 
             if (inventoryID != 0)
             {
-                ConsoleIO.WriteLogLine("Inventory # " + inventoryID + " closed.");
+                ConsoleIO.WriteLogLine("物品栏 # " + inventoryID + " 已关闭.");
                 DispatchBotEvent(bot => bot.OnInventoryClose(inventoryID));
             }
         }
@@ -1772,6 +1785,7 @@ namespace MinecraftClient
             // Handle cursor item
             if (inventoryID == 255 && slotID == -1)
             {
+				inventoryID = 0; // Prevent key not found for some bots relied to this event
                 if (inventories.ContainsKey(0))
                 {
                     if (item != null)

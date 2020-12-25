@@ -77,9 +77,9 @@ namespace MinecraftClient
         public static string TranslationsFile_FromMCDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\.minecraft\assets\objects\eb\ebf762c137bd91ab2496397f2504e250f3c5d1ba";
         public static string TranslationsFile_Website_Index = "https://launchermeta.mojang.com/v1/packages/bdb68de96a44ec1e9ed6d9cfcd2ee973be618c3a/1.16.json";
         public static string TranslationsFile_Website_Download = "http://resources.download.minecraft.net";
-        public static TimeSpan splitMessageDelay = TimeSpan.FromSeconds(2);
+		public static TimeSpan messageCooldown = TimeSpan.FromSeconds(2);
         public static List<string> Bots_Owners = new List<string>();
-        public static TimeSpan botMessageDelay = TimeSpan.FromSeconds(2);
+		
         public static string Language = "zh_CN";
         public static bool interactiveMode = true;
         public static char internalCmdChar = '/';
@@ -666,9 +666,8 @@ namespace MinecraftClient
                 + "language=zh_CN                     # 服务器内显示语言，默认zh_CN\r\n"
                 + "consoletitle=%username%@%serverip% - Minecraft Console Client CN    #标题\r\n"
                 + "internalcmdchar=slash              # 使用 'none', 'slash' 或者 'backslash'(输入命令时要不输入任何东西，输入'/'，还是输入'\')\r\n"
-                + "splitmessagedelay=2                # 长消息分割发送秒数(约为100字符+)\r\n"
                 + "botowners=Player1,Player2,Player3  # 设置机器人的主人(使用英文逗号分割，在使用match(AutoRespond)功能时可能有用.)\r\n"
-                + "botmessagedelay=2                  # 每条消息之间的间隔秒数，防止刷屏\r\n"
+				
                 + "mcversion=auto                     # 游戏版本 使用 'auto(自动匹配版本)' 或者 '1.X.X(手动设置版本，在连接禁Ping的服务器时有用)'\r\n"
                 + "mcforge=auto                       # 是否使用forge 使用 'auto' 'true'或者 'false'(选择true时mc版本必须在1.13以上)\r\n"
                 + "brandinfo=mcc                      # 使用 'mcc','vanilla', 或者 'none'(让服务器认识mcc的方式)\r\n"

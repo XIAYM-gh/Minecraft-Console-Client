@@ -40,8 +40,6 @@ namespace MinecraftClient
         private McClient _handler = null;
         private ChatBot master = null;
         private List<string> registeredPluginChannels = new List<String>();
-        private Queue<string> chatQueue = new Queue<string>();
-        private DateTime lastMessageSentTime = DateTime.MinValue;
         private McClient Handler
         {
             get
@@ -53,30 +51,6 @@ namespace MinecraftClient
                 throw new InvalidOperationException(
                     "不应该在构造函数中调用 ChatBot 方法，因为 API 处理程序还没有初始化"
                     + " 重写 Initialize() 或 aftergamejoin() 来执行初始化任务");
-            }
-        }
-        private bool MessageCooldownEnded
-        {
-            get
-            {
-                return DateTime.Now > lastMessageSentTime + Settings.botMessageDelay;
-            }
-        }
-
-        /// <summary>
-        /// Processes the current chat message queue, displaying a message after enough time passes.
-        /// </summary>
-        internal void ProcessQueuedText()
-        {
-            if (chatQueue.Count > 0)
-            {
-                if (MessageCooldownEnded)
-                {
-                    string text = chatQueue.Dequeue();
-                    LogToConsole("发送 '" + text + "'中");
-                    lastMessageSentTime = DateTime.Now;
-                    Handler.SendText(text);
-                }
             }
         }
 
@@ -380,20 +354,9 @@ namespace MinecraftClient
         /// <returns>True if the text was sent with no error</returns>
         protected bool SendText(string text, bool sendImmediately = false)
         {
-            if (Settings.botMessageDelay.TotalSeconds > 0 && !sendImmediately)
-            {
-                if (!MessageCooldownEnded)
-                {
-                    chatQueue.Enqueue(text);
-                    // TODO: We don't know whether there was an error at this point, so we assume there isn't.
-                    // Might not be the best idea.
-                    return true;
-                }
-            }
-
             LogToConsole("正在发送 '" + text + "'");
-            lastMessageSentTime = DateTime.Now;
-            return Handler.SendText(text);
+            Handler.SendText(text);
+            return true;
         }
 
         /// <summary>

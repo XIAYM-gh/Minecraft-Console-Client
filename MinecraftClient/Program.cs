@@ -408,7 +408,7 @@ namespace MinecraftClient
                     offlinePrompt = new Thread(new ThreadStart(delegate
                     {
                         string command = " ";
-                        ConsoleIO.WriteLineFormatted("§e[信息]§a 没有加入任何§b服务器§a. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
+                        ConsoleIO.WriteLineFormatted("§e[信息]§b 没有加入任何服务器. 使用 '" + (Settings.internalCmdChar == ' ' ? "" : "" + Settings.internalCmdChar) + "help' 查看帮助.");
                         while (command.Length > 0)
                         {
                             if (!ConsoleIO.BasicIO)

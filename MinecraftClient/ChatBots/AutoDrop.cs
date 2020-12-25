@@ -120,6 +120,31 @@ namespace MinecraftClient.ChatBots
                         {
                             return "列表中没有的项目";
                         }
+						case "mode":
+                        if (args.Length >= 2)
+                        {
+                            switch (args[1].ToLower())
+                            {
+                                case "include":
+                                    dropMode = Mode.Include;
+                                    break;
+                                case "exclude":
+                                    dropMode = Mode.Exclude;
+                                    break;
+                                case "everything":
+                                    dropMode = Mode.Everything;
+                                    break;
+                                default:
+                                    return Translations.Get("bot.autoDrop.unknown_mode"); // Unknwon mode. Available modes: Include, Exclude, Everything
+                            }
+                            inventoryUpdated = 0;
+                            OnUpdateFinish();
+                            return Translations.Get("bot.autoDrop.switched", dropMode.ToString()); // Switched to {0} mode.
+                        }
+                        else
+                        {
+                            return Translations.Get("bot.autoDrop.unknown_mode");
+                        }
                     default:
                         return GetHelp();
                 }
@@ -132,7 +157,7 @@ namespace MinecraftClient.ChatBots
 
         private string GetHelp()
         {
-            return "AutoDrop ChatBot 命令. 可用命令: on, off, add, remove, list";
+            return "AutoDrop ChatBot 命令. 可用命令: on, off, add, remove, list, mode";
         }
 
         public override void Initialize()
@@ -164,7 +189,9 @@ namespace MinecraftClient.ChatBots
             if (enable)
             {
                 updateDebounce = updateDebounceValue;
-                inventoryUpdated = inventoryId;
+                // Always interact container if available (larger ID) because they included player inventory (ID 0)
+                if (inventoryId >= inventoryUpdated)
+                    inventoryUpdated = inventoryId;
             }
         }
 
@@ -178,6 +205,9 @@ namespace MinecraftClient.ChatBots
                 {
                     foreach (var item in items)
                     {
+						// Ingore crafting result slot
+                        if (item.Key == 0)
+                            continue;
                         if (itemList.Contains(item.Value.Type))
                         {
                             // Drop it !!
@@ -189,6 +219,9 @@ namespace MinecraftClient.ChatBots
                 {
                     foreach (var item in items)
                     {
+						// Ingore crafting result slot
+                        if (item.Key == 0)
+                            continue;
                         if (!itemList.Contains(item.Value.Type))
                         {
                             // Drop it !!
@@ -200,6 +233,9 @@ namespace MinecraftClient.ChatBots
                 {
                     foreach (var item in items)
                     {
+						// Ingore crafting result slot
+                        if (item.Key == 0)
+                            continue;
                         // Drop it !!
                         WindowAction(inventoryUpdated, item.Key, WindowActionType.DropItemStack);
                     }
