@@ -1,9 +1,9 @@
 Sorry, but we decided to stop the project,<br>
 we won't update it anymore...<br>
 But we won't delete this repo, and I may go to write a new repo to add Chinese support for translation.cs.<br>
-See You next time.
-
-
+See You next time.<br>
+view it on: 
+https://github.com/XIAYM-gh/mcc-zhcn/tree/main
 
 ## 必要声明
 `此项目未弃坑 学业问题无法及时更新`<br>
