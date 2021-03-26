@@ -1,6 +1,6 @@
-Sorry,but we decided to stop the project,<br>
+Sorry, but we decided to stop the project,<br>
 we won't update it anymore...<br>
-But we won't delete this repo, and I may going to write a new repo to add Chinese support for translation.cs.<br>
+But we won't delete this repo, and I may go to write a new repo to add Chinese support for translation.cs.<br>
 See You next time.
 
 
