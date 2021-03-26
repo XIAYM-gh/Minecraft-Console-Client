@@ -1,3 +1,10 @@
+Sorry,but we decided to stop the project,<br>
+we won't update it anymore...<br>
+But we won't delete this repo, and I may going to write a new repo to add Chinese support for translation.cs.<br>
+See You next time.
+
+
+
 ## 必要声明
 `此项目未弃坑 学业问题无法及时更新`<br>
 此版本并非官方汉化，且不保证每次都没有错误<br>
