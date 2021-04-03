@@ -6,7 +6,7 @@ view it on:
 https://github.com/XIAYM-gh/mcc-zhcn/tree/main
 
 ## 必要声明
-`此项目未弃坑 学业问题无法及时更新`<br>
+已弃坑 2020.9-2021.3 R.I.P<br>
 此版本并非官方汉化，且不保证每次都没有错误<br>
 目前原作者正尝试实现Translation.cs (支持语言文件)<br>
 而这个程序与语言文件有`很大的区别`(这个程序是内核汉化，语言文件为外部文件)
